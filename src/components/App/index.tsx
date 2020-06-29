@@ -1,42 +1,47 @@
 import React, { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "../../themes";
+import lightTheme from "../../themes/Light";
+import darkTheme from "../../themes/Dark";
 import Switch from "../Switch";
-import styled from "styled-components";
-import DataPicker from "../Datapicker";
 
-const Form = styled.div`
-  position: relative;
-  max-width: 900px;
-  padding: 50px;
-  margin: 50px;
-  border-radius: 25px;
-  background-color: #fcfcfc;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
-`;
+const getTheme = () => {
+  const theme = localStorage.getItem("theme");
+  if (theme) return theme === "light" ? lightTheme : darkTheme;
+  else return lightTheme;
+};
 
-function App() {
-  const [state, setState] = useState({
-    switch: false,
-  });
+const getThemeSwitch = () => {
+  const theme = localStorage.getItem("theme");
+  if (theme) return theme !== "light";
+  else return false;
+};
+
+const App = () => {
+  const [theme, setTheme] = useState(getTheme);
+  const [themeSwitch, setThemeSwitch] = useState<boolean>(getThemeSwitch);
+  const handleChangeTheme = () => {
+    if (themeSwitch) {
+      setTheme(lightTheme);
+      setThemeSwitch(false);
+      localStorage.setItem("theme", "light");
+    } else {
+      setTheme(darkTheme);
+      setThemeSwitch(true);
+      localStorage.setItem("theme", "dark");
+    }
+  };
 
   return (
-    <>
-      <Form>
-        <h1>Delta UI</h1>
-        <div>
-          <Switch
-            title={state.switch.toString()}
-            value={state.switch}
-            handleChange={(value: boolean) =>
-              setState({ ...state, switch: value })
-            }
-          />
-        </div>
-        <div>
-          <DataPicker />
-        </div>
-      </Form>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Switch
+        title={themeSwitch ? "Dark" : "Light"}
+        handleChange={handleChangeTheme}
+        value={themeSwitch}
+      />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

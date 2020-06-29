@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { styled } from "../../theme";
+import styled from "styled-components";
 
 const getMonth = (
   year: number,
@@ -36,7 +36,7 @@ const Input = styled.div`
   line-height: 24px;
   padding: 0 0.5rem;
   border-radius: 1px;
-  background-color: ${(props) => props.theme.colors.color1};
+  background-color: ${(props) => props.theme.colors.main};
   cursor: pointer;
 `;
 

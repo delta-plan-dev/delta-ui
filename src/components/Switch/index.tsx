@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "../../theme";
+import styled from "styled-components";
 
 const Label = styled.label`
   display: inline-flex;
@@ -8,6 +8,7 @@ const Label = styled.label`
 
 const Title = styled.div`
   margin-left: 5px;
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const ButtonWrapper = styled.div<{ active: boolean }>`
@@ -15,8 +16,7 @@ const ButtonWrapper = styled.div<{ active: boolean }>`
   width: 48px;
   height: 24px;
   border-radius: 12px;
-  background-color: ${(props) =>
-    props.active ? props.theme.colors.color2 : props.theme.colors.color1};
+  background-color: ${(props) => props.theme.colors.secondary};
   transition-duration: 0.2s;
 `;
 
@@ -25,7 +25,7 @@ const Button = styled.div<{ active: boolean }>`
   height: 18px;
   margin: ${(props) => (props.active ? "3px 3px 3px 26px" : "3px")};
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.main};
   transition-duration: 0.2s;
 `;
 

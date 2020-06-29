@@ -36,6 +36,12 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Switch
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
         title={themeSwitch ? "Dark" : "Light"}
         handleChange={handleChangeTheme}
         value={themeSwitch}

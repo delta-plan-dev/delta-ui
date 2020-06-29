@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import styled from "styled-components";
 
 const Label = styled.label`
@@ -33,11 +33,13 @@ type Props = {
   title: string;
   handleChange: (value: boolean) => void;
   value: boolean;
+  style?: CSSProperties;
 };
 
-const Switch = ({ title, handleChange, value }: Props) => {
+const Switch = ({ title, handleChange, value, style = {} }: Props) => {
   return (
     <Label
+      style={style}
       onClick={() => {
         handleChange(!value);
       }}

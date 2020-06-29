@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../../themes";
 import lightTheme from "../../themes/Light";
 import darkTheme from "../../themes/Dark";
@@ -16,6 +16,13 @@ const getThemeSwitch = () => {
   if (theme) return theme !== "light";
   else return false;
 };
+
+const SwitchWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const App = () => {
   const [theme, setTheme] = useState(getTheme);
@@ -35,17 +42,13 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Switch
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-        title={themeSwitch ? "Dark" : "Light"}
-        handleChange={handleChangeTheme}
-        value={themeSwitch}
-      />
+      <SwitchWrapper>
+        <Switch
+          title={themeSwitch ? "Dark" : "Light"}
+          handleChange={handleChangeTheme}
+          value={themeSwitch}
+        />
+      </SwitchWrapper>
     </ThemeProvider>
   );
 };

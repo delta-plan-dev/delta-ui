@@ -7,8 +7,9 @@ const Label = styled.label`
 `;
 
 const Title = styled.div`
+  line-height: 24px;
   margin-left: 5px;
-  color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.color2};
 `;
 
 const ButtonWrapper = styled.div<{ active: boolean }>`
@@ -16,7 +17,7 @@ const ButtonWrapper = styled.div<{ active: boolean }>`
   width: 48px;
   height: 24px;
   border-radius: 12px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.color2};
   transition-duration: 0.2s;
 `;
 
@@ -25,7 +26,7 @@ const Button = styled.div<{ active: boolean }>`
   height: 18px;
   margin: ${(props) => (props.active ? "3px 3px 3px 26px" : "3px")};
   border-radius: 50%;
-  background-color: ${(props) => props.theme.colors.main};
+  background-color: ${(props) => props.theme.colors.color1};
   transition-duration: 0.2s;
 `;
 

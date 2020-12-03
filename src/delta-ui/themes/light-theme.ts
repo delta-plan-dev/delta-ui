@@ -2,8 +2,9 @@ import { DefaultTheme } from "styled-components";
 
 const lightTheme: DefaultTheme = {
   colors: {
-    main: "#fff",
-    secondary: "#222",
+    color1: "#fff",
+    color2: "#222",
+    color3: "",
   },
 };
 

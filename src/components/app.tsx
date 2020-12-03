@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "../../themes";
-import lightTheme from "../../themes/Light";
-import darkTheme from "../../themes/Dark";
-import Switch from "../Switch";
+import styled, { DefaultTheme, ThemeProvider } from "styled-components";
+import { GlobalStyle } from "../delta-ui";
+import lightTheme from "../delta-ui/themes/light-theme";
+import darkTheme from "../delta-ui/themes/datk-theme";
+import Switch from "../delta-ui/components/switch";
 
-const getTheme = () => {
-  const theme = localStorage.getItem("theme");
-  if (theme) return theme === "light" ? lightTheme : darkTheme;
-  else return lightTheme;
+const getTheme = (): DefaultTheme => {
+  return localStorage.getItem("theme") === "dark" ? darkTheme : lightTheme;
 };
 
-const getThemeSwitch = () => {
-  const theme = localStorage.getItem("theme");
-  if (theme) return theme !== "light";
-  else return false;
+const getThemeSwitch = (): boolean => {
+  return localStorage.getItem("theme") === "dark";
 };
 
 const SwitchWrapper = styled.div`
@@ -25,8 +21,9 @@ const SwitchWrapper = styled.div`
 `;
 
 const App = () => {
-  const [theme, setTheme] = useState(getTheme);
-  const [themeSwitch, setThemeSwitch] = useState<boolean>(getThemeSwitch);
+  const [theme, setTheme] = useState<DefaultTheme>(getTheme());
+  const [themeSwitch, setThemeSwitch] = useState<boolean>(getThemeSwitch());
+
   const handleChangeTheme = () => {
     if (themeSwitch) {
       setTheme(lightTheme);

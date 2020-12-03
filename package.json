@@ -2,7 +2,7 @@
   "name": "delta-ui",
   "description": "Delta-plan user interface library",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",

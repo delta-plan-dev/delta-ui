@@ -1,6 +1,6 @@
 {
   "name": "delta-ui",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -9,6 +9,9 @@
   "scripts": {
     "build": "tsc"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [ "./dist/**/*" ],
   "devDependencies": {
     "@types/react": "^16.9.38",
     "@types/styled-components": "^5.1.0",

@@ -1,9 +1,0 @@
-var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
-import "styled-components";
-import { createGlobalStyle } from "styled-components";
-export var GlobalStyle = createGlobalStyle(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  body {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 0;\n    top: 0;\n    margin: 0;\n    background-color: ", ";\n    font-family:\n      -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n  }\n  code {\n    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n      monospace;\n  }\n  #root {\n    position: absolute;\n    width: 100vw;\n    height: 100vh;\n  }\n  h1, h2, h3, h4, h5, h6 {\n    margin-top: 0;\n    margin-bottom: .75rem;\n  }\n"], ["\n  body {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    left: 0;\n    top: 0;\n    margin: 0;\n    background-color: ", ";\n    font-family:\n      -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n  }\n  code {\n    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',\n      monospace;\n  }\n  #root {\n    position: absolute;\n    width: 100vw;\n    height: 100vh;\n  }\n  h1, h2, h3, h4, h5, h6 {\n    margin-top: 0;\n    margin-bottom: .75rem;\n  }\n"])), function (props) { return props.theme.colors.color1; });
-var templateObject_1;
-//# sourceMappingURL=index.js.map

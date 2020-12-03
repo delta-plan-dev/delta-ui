@@ -37,7 +37,7 @@ type Props = {
   style?: CSSProperties;
 };
 
-const Switch = ({ title, handleChange, value, style = {} }: Props) => {
+export const Switch = ({ title, handleChange, value, style = {} }: Props) => {
   return (
     <Label
       style={style}
@@ -52,5 +52,3 @@ const Switch = ({ title, handleChange, value, style = {} }: Props) => {
     </Label>
   );
 };
-
-export default Switch;

@@ -1,5 +1,10 @@
 {
   "name": "delta-ui",
+  "description": "Delta-plan user interface library",
+  "repository": {
+    "url": "https://github.com/kawaii-snafy/delta-ui"
+  },
+  "license": "MIT",
   "version": "0.1.8",
   "private": false,
   "author": {
@@ -20,7 +25,7 @@
     "@types/styled-components": "^5.1.0",
     "typescript": "^3.7.5"
   },
-  "peerDependencies": {
+  "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.11.0",
     "styled-components": "^5.1.1"

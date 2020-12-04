@@ -11,4 +11,12 @@ export const darkTheme: DefaultTheme = {
     purple: '',
     primary: '',
   },
+  fonts: [
+    {
+      fontFamily: "'Montserrat Bold'",
+      fontStyle: 'bold',
+      fontWeight: 'bold',
+      src: './../assets/montserrat/Montserrat-Bold.ttf',
+    },
+  ],
 };

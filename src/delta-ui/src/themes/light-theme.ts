@@ -1,6 +1,6 @@
-import { DefaultTheme } from 'styled-components';
+import { ITheme } from '../types/theme';
 
-export const lightTheme: DefaultTheme = {
+export const lightTheme: ITheme = {
   colors: {
     main: '#FFFFFF',
     secondary: '#212121',

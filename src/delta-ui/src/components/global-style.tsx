@@ -1,6 +1,13 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProps } from 'styled-components';
+import { ITheme } from '../types/theme';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
+  ${(props) =>
+    props.theme.fonts?.map(
+      (font) =>
+        `@font-face{\n font-family: ${font.fontFamily}; \n font-style: ${font.fontStyle}; \n font-weight: ${font.fontWeight}; src: local(${font.fontFamily}), url(${font.src}) format('woff');}`,
+    )};
+        
   body {
     position: absolute;
     width: 100%;

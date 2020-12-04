@@ -1,44 +1,43 @@
 {
   "name": "delta-ui",
-  "description": "Delta-plan user interface library",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kawaii-snafy/delta-ui"
-  },
-  "license": "MIT",
-  "version": "0.2.3",
-  "private": false,
-  "author": {
-    "email": "ya.shirokov@icloud.com",
-    "name": "kawaii-snafy"
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "typescript": "^4.0.3",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "build": "tsc"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
-  "dependencies": {
-    "styled-components": "^5.1.1"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "devDependencies": {
-    "@types/react": "^16.9.38",
-    "@types/react-dom": "^17.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.11.0",
-    "@types/styled-components": "^5.1.0",
-    "typescript": "^3.7.5",
-    "@typescript-eslint/eslint-plugin": "^4.6.1",
-    "@typescript-eslint/parser": "^4.6.1",
-    "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-import": "^2.22.1",
-    "prettier": "^2.1.2"
-  },
-  "peerDependencies": {
-    "react": ">=16.13 <17",
-    "react-dom": ">=16.11 <17"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

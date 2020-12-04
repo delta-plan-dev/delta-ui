@@ -1,5 +1,5 @@
-import React, { CSSProperties } from "react";
-import styled from "styled-components";
+import React, { CSSProperties } from 'react';
+import styled from 'styled-components';
 
 const Label = styled.label`
   display: inline-flex;
@@ -24,7 +24,7 @@ const ButtonWrapper = styled.div<{ active: boolean }>`
 const Button = styled.div<{ active: boolean }>`
   width: 18px;
   height: 18px;
-  margin: ${(props) => (props.active ? "3px 3px 3px 26px" : "3px")};
+  margin: ${(props) => (props.active ? '3px 3px 3px 26px' : '3px')};
   border-radius: 50%;
   background-color: ${(props) => props.theme.colors.color1};
   transition-duration: 0.2s;

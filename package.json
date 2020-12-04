@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -20,15 +20,25 @@
   "files": [
     "dist/**/*"
   ],
+  "dependencies": {
+    "styled-components": "^5.1.1"
+  },
   "devDependencies": {
     "@types/react": "^16.9.38",
     "@types/react-dom": "^17.0.0",
-    "@types/styled-components": "^5.1.0",
-    "typescript": "^3.7.5"
-  },
-  "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.11.0",
-    "styled-components": "^5.1.1"
+    "@types/styled-components": "^5.1.0",
+    "typescript": "^3.7.5",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "^2.1.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.13 <17",
+    "react-dom": ">=16.11 <17"
   }
 }

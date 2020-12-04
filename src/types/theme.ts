@@ -1,7 +1,12 @@
 export interface ITheme {
   colors: {
-    color1: string;
-    color2: string;
-    color3: string;
+    main: string;
+    secondary: string;
+    black: string;
+    darkGray: string;
+    lightGray: string;
+    white: string;
+    purple: string;
+    primary: string;
   };
 }

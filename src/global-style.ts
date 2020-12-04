@@ -8,11 +8,12 @@ export const GlobalStyle = createGlobalStyle`
     left: 0;
     top: 0;
     margin: 0;
-    background-color: ${(props) => props.theme.colors.color1};
+    background-color: ${(props) => props.theme.colors.main};
     font-family:
       -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: ${(props) => props.theme.colors.secondary};
   }
   
   code {

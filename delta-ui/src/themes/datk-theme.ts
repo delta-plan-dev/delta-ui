@@ -1,9 +1,9 @@
 import { ITheme } from '../types/theme';
 
-export const lightTheme: ITheme = {
+export const darkTheme: ITheme = {
   colors: {
-    main: '#FFFFFF',
-    secondary: '#212121',
+    main: '#212121',
+    secondary: '#FCFCFC',
     black: '',
     darkGray: '',
     lightGray: '',
@@ -11,4 +11,5 @@ export const lightTheme: ITheme = {
     purple: '',
     primary: '',
   },
+  fontFamily: "'Montserrat', sans-serif",
 };

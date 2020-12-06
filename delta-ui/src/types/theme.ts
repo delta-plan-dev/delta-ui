@@ -9,10 +9,5 @@ export interface ITheme {
     purple: string;
     primary: string;
   };
-  fonts?: {
-    fontFamily: string;
-    fontStyle: string;
-    fontWeight: string;
-    src: string;
-  }[];
+  fontFamily: string;
 }

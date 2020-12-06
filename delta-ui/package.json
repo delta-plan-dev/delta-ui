@@ -13,21 +13,29 @@
     "name": "kawaii-snafy"
   },
   "scripts": {
+    "pre-build": "rimraf ./../src/delta-ui/assets",
+    "post-build": "copyfiles -u 1 ./src/assets/**/* ./../src/delta-ui/",
+    "build": "npm run pre-build && tsc --jsx react && npm run post-build",
+    "build-watch": "tsc -w --jsx react",
     "build-and-publish": "tsc && npm publish"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "/src/delta-ui/index.js",
+  "types": "/src/delta-ui/index.d.ts",
   "files": [
-    "dist/**/*"
+    "/src/delta-ui/**/*"
   ],
   "dependencies": {
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.53",
-    "react": "^17.0.1",
     "@types/styled-components": "^5.1.0",
-    "typescript": "^3.7.5",
-    "prettier": "^2.1.2"
+    "copyfiles": "^2.4.1",
+    "cpy-cli": "^3.1.1",
+    "del-cli": "^3.0.1",
+    "prettier": "^2.1.2",
+    "react": "^17.0.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.5"
   }
 }

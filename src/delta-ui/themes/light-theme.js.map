@@ -1,0 +1,1 @@
+{"version":3,"file":"light-theme.js","sourceRoot":"","sources":["../../../delta-ui/src/themes/light-theme.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,UAAU,GAAW;IAChC,MAAM,EAAE;QACN,IAAI,EAAE,SAAS;QACf,SAAS,EAAE,SAAS;QACpB,KAAK,EAAE,EAAE;QACT,QAAQ,EAAE,EAAE;QACZ,SAAS,EAAE,EAAE;QACb,KAAK,EAAE,EAAE;QACT,MAAM,EAAE,EAAE;QACV,OAAO,EAAE,EAAE;KACZ;IACD,UAAU,EAAE,0BAA0B;CACvC,CAAC"}

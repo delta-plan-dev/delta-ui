@@ -1,12 +1,15 @@
 import React from "react";
-import "./app.css";
-import DeltaUI from "./delta-ui/dist/";
+import { ThemeProvider } from "styled-components";
+import "./delta-ui/assets/styles/fonts.css"; // Delta-UI fonts
+import { GlobalStyle } from "./delta-ui"; // Delta-UI styles
+import { darkTheme } from "./delta-ui"; // Delta-UI theme
 
 const App = () => {
   return (
-    <DeltaUI>
-      <div className="App">D</div>
-    </DeltaUI>
+    <ThemeProvider theme={darkTheme}>
+      <GlobalStyle />
+      <div>Delta-UI</div>
+    </ThemeProvider>
   );
 };
 

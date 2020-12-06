@@ -2,12 +2,6 @@ import { createGlobalStyle, ThemeProps } from 'styled-components';
 import { ITheme } from '../types/theme';
 
 export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
-  ${(props) =>
-    props.theme.fonts?.map(
-      (font) =>
-        `@font-face{\n font-family: ${font.fontFamily}; \n font-style: ${font.fontStyle}; \n font-weight: ${font.fontWeight}; src: local(${font.fontFamily}), url(${font.src}) format('woff');}`,
-    )};
-        
   body {
     position: absolute;
     width: 100%;
@@ -16,11 +10,8 @@ export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
     top: 0;
     margin: 0;
     background-color: ${(props) => props.theme.colors.main};
-    font-family:
-      -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     color: ${(props) => props.theme.colors.secondary};
+    font-family: ${(props) => props.theme.fontFamily};
   }
   
   code {

@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.3.5",
+  "version": "0.5",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -24,10 +24,12 @@
     "dist/**/*"
   ],
   "dependencies": {
+    "react-router-dom": "^5.2.0",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.53",
+    "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.0",
     "copyfiles": "^2.4.1",
     "cpy-cli": "^3.1.1",

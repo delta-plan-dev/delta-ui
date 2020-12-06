@@ -17,7 +17,7 @@ const ButtonWrapper = styled.div<{ active: boolean }>`
   width: 48px;
   height: 24px;
   border-radius: 12px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: #3fd200;
   transition-duration: 0.2s;
 `;
 
@@ -30,14 +30,21 @@ const Button = styled.div<{ active: boolean }>`
   transition-duration: 0.2s;
 `;
 
-type Props = {
-  title: string;
-  handleChange: (value: boolean) => void;
+interface IProps {
+  title?: string;
+  titleSide?: 'left' | 'right';
   value: boolean;
+  handleChange: (value: boolean) => void;
   style?: CSSProperties;
-};
+}
 
-export const Switch = ({ title, handleChange, value, style = {} }: Props) => {
+export const DpSwitch: React.FunctionComponent<IProps> = ({
+  title,
+  titleSide = 'right',
+  value = false,
+  handleChange,
+  style = {},
+}) => {
   return (
     <Label
       style={style}
@@ -45,10 +52,11 @@ export const Switch = ({ title, handleChange, value, style = {} }: Props) => {
         handleChange(!value);
       }}
     >
+      {title && titleSide === 'left' && <Title>{title} </Title>}
       <ButtonWrapper active={value}>
         <Button active={value} />
       </ButtonWrapper>
-      <Title>{title}</Title>
+      {title && titleSide === 'right' && <Title> {title}</Title>}
     </Label>
   );
 };

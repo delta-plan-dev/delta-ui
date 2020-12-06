@@ -6,23 +6,23 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.3.2",
+  "version": "0.3.5",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
     "name": "kawaii-snafy"
   },
   "scripts": {
-    "pre-build": "rimraf ./../src/delta-ui/assets",
-    "post-build": "copyfiles -u 1 ./src/assets/**/* ./../src/delta-ui/",
+    "pre-build": "rimraf dist/assets",
+    "post-build": "copyfiles -u 1 src/assets/**/* dist",
     "build": "npm run pre-build && tsc --jsx react && npm run post-build",
     "build-watch": "tsc -w --jsx react",
     "build-and-publish": "tsc && npm publish"
   },
-  "main": "/src/delta-ui/index.js",
-  "types": "/src/delta-ui/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "/src/delta-ui/**/*"
+    "dist/**/*"
   ],
   "dependencies": {
     "styled-components": "^5.1.1"

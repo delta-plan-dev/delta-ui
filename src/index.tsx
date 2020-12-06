@@ -1,13 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import reportWebVitals from "./reportWebVitals";
-import App from "./app";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
-
-reportWebVitals();
+export type { ITheme } from './types/theme';
+export { GlobalStyle } from './components/global-style';
+export { darkTheme } from './themes/datk-theme';
+export { lightTheme } from './themes/light-theme';
+export { Switch } from './components/switch';

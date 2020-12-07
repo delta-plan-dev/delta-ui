@@ -16,6 +16,7 @@
     "pre-build": "rimraf dist/assets",
     "post-build": "copyfiles -u 1 src/assets/**/* dist",
     "build": "npm run pre-build && tsc --jsx react && npm run post-build",
+    "build-watch": "tsc --jsx react -w",
     "build-and-publish": "npm run build && npm publish"
   },
   "main": "dist/index.js",

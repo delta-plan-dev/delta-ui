@@ -1,7 +1,7 @@
 import { createGlobalStyle, ThemeProps } from 'styled-components';
 import { ITheme } from '../types/theme';
 
-export const DpGlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
+export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
   body {
     position: absolute;
     width: 100%;

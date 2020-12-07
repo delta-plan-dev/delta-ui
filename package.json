@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -17,7 +17,9 @@
     "post-build": "copyfiles -u 1 src/assets/**/* dist",
     "build": "npm run pre-build && tsc --jsx react && npm run post-build",
     "build-watch": "tsc --jsx react -w",
-    "build-and-publish": "npm run build && npm publish"
+    "build-and-publish": "npm run build && npm publish",
+    "storybook": "start-storybook -p 3000",
+    "build-storybook": "build-storybook"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,19 +31,22 @@
     "styled-components": ">=5"
   },
   "devDependencies": {
-    "@types/react": "^16.9.53",
+    "@storybook/addon-actions": "^6.1.10",
+    "@storybook/addon-essentials": "^6.1.10",
+    "@storybook/addon-links": "^6.1.10",
+    "@storybook/node-logger": "^6.1.10",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.10",
+    "@types/react": "^16.14.2",
     "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.0",
     "copyfiles": "^2.4.1",
-    "cpy-cli": "^3.1.1",
-    "del-cli": "^3.0.1",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
     "rimraf": "^3.0.2",
     "styled-components": "^5.2.1",
-    "typescript": "^3.7.5"
+    "typescript": "^4.1.2"
   }
 }

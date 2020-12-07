@@ -1,1 +1,1 @@
-# Delta-plan user interface library.
+# Delta-plan user interface library

@@ -23,12 +23,13 @@
   "files": [
     "dist/**/*"
   ],
-  "dependencies": {
-    "react-router-dom": "^5.2.0",
-    "styled-components": "^5.1.1"
+  "dependencies": {},
+  "peerDependencies": {
+    "styled-components": ">=5"
   },
   "devDependencies": {
     "@types/react": "^16.9.53",
+    "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.0",
     "copyfiles": "^2.4.1",
@@ -36,7 +37,10 @@
     "del-cli": "^3.0.1",
     "prettier": "^2.1.2",
     "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "rimraf": "^3.0.2",
+    "styled-components": "^5.2.1",
     "typescript": "^3.7.5"
   }
 }

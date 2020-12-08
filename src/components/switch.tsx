@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Label = styled.label`
+const SwitchComponent = styled.label`
   display: inline-flex;
   cursor: pointer;
 `;
@@ -122,7 +122,7 @@ export const Switch: React.FC<IProps> = (props) => {
   } = props;
 
   return (
-    <Label
+    <SwitchComponent
       onClick={() => {
         handleChange(!value);
       }}
@@ -132,6 +132,6 @@ export const Switch: React.FC<IProps> = (props) => {
         <Button active={value} size={size} />
       </ButtonWrapper>
       {title && titleSide === 'right' && <Title> {title}</Title>}
-    </Label>
+    </SwitchComponent>
   );
 };

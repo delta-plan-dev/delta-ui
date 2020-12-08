@@ -11,29 +11,50 @@ Default.args = {};
 
 export const Primary = Template.bind({});
 Primary.args = {
-  btnType: 'primary',
+  buttonType: 'primary',
 };
 
 export const Negative = Template.bind({});
 Negative.args = {
-  btnType: 'negative',
+  buttonType: 'negative',
 };
 
 export const OutlinePrimary = Template.bind({});
 OutlinePrimary.args = {
-  btnType: 'outline-primary',
+  buttonType: 'outline-primary',
 };
 
 export const OutlineNegative = Template.bind({});
 OutlineNegative.args = {
-  btnType: 'outline-negative',
+  buttonType: 'outline-negative',
 };
 
 export default {
   title: 'Button',
   component: Button,
-  args: {
-    disabled: false,
-    size: 'medium',
+  argTypes: {
+    label: {
+      defaultValue: 'BUTTON',
+      control: {
+        type: 'text',
+      },
+    },
+    buttonType: {
+      control: {
+        type: 'select',
+        options: ['primary', 'negative', 'outline-primary', 'outline-negative'],
+      },
+    },
+    size: {
+      defaultValue: 'medium',
+      control: {
+        type: 'select',
+        options: ['small', 'medium', 'large'],
+      },
+    },
+    disabled: {
+      defaultValue: false,
+      type: 'boolean',
+    },
   },
 };

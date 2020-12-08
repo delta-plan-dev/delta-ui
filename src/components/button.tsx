@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
-const Btn = styled.button<{ btnType: types, size: sizes }>`
+interface IButton {
+  buttonType: types;
+  size: sizes;
+}
+
+const ButtonComponent = styled.button<IButton>`
   margin: 0;
   border: 0;
   outline: 0;
@@ -21,10 +26,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
   color: ${(props) => {
     if (!props.disabled) {
       if (
-        props.btnType == 'outline-primary' ||
-        props.btnType == 'outline-negative'
+        props.buttonType == 'outline-primary' ||
+        props.buttonType == 'outline-negative'
       ) {
-        switch (props.btnType) {
+        switch (props.buttonType) {
           case 'outline-negative':
             return props.theme?.colors?.negative ?? lightTheme.colors.negative;
           case 'outline-primary':
@@ -65,10 +70,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
   background: ${(props) => {
     if (!props.disabled) {
       if (
-        props.btnType !== 'outline-primary' &&
-        props.btnType !== 'outline-negative'
+        props.buttonType !== 'outline-primary' &&
+        props.buttonType !== 'outline-negative'
       ) {
-        switch (props.btnType) {
+        switch (props.buttonType) {
           case 'negative':
             return props.theme?.colors?.negative ?? lightTheme.colors.negative;
           case 'primary':
@@ -85,10 +90,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
   border: ${(props) => {
     if (!props.disabled) {
       if (
-        props.btnType == 'outline-primary' ||
-        props.btnType == 'outline-negative'
+        props.buttonType == 'outline-primary' ||
+        props.buttonType == 'outline-negative'
       ) {
-        switch (props.btnType) {
+        switch (props.buttonType) {
           case 'outline-negative':
             return `2px solid ${
               props.theme?.colors?.negative ?? lightTheme.colors.negative
@@ -100,7 +105,7 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
             }`;
         }
       } else {
-        switch (props.btnType) {
+        switch (props.buttonType) {
           case 'negative':
             return `2px solid ${
               props.theme?.colors?.negative ?? lightTheme.colors.negative
@@ -124,10 +129,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
     background: ${(props) => {
       if (!props.disabled) {
         if (
-          props.btnType !== 'outline-primary' &&
-          props.btnType !== 'outline-negative'
+          props.buttonType !== 'outline-primary' &&
+          props.buttonType !== 'outline-negative'
         ) {
-          switch (props.btnType) {
+          switch (props.buttonType) {
             case 'negative':
               return (
                 props.theme?.colors?.hoverNegative ??
@@ -150,10 +155,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
     border: ${(props) => {
       if (!props.disabled) {
         if (
-          props.btnType == 'outline-primary' ||
-          props.btnType == 'outline-negative'
+          props.buttonType == 'outline-primary' ||
+          props.buttonType == 'outline-negative'
         ) {
-          switch (props.btnType) {
+          switch (props.buttonType) {
             case 'outline-negative':
               return `2px solid ${
                 props.theme?.colors?.hoverNegative ??
@@ -167,7 +172,7 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
               }`;
           }
         } else {
-          switch (props.btnType) {
+          switch (props.buttonType) {
             case 'negative':
               return `2px solid ${
                 props.theme?.colors?.hoverNegative ??
@@ -190,10 +195,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
     color: ${(props) => {
       if (!props.disabled) {
         if (
-          props.btnType == 'outline-primary' ||
-          props.btnType == 'outline-negative'
+          props.buttonType == 'outline-primary' ||
+          props.buttonType == 'outline-negative'
         ) {
-          switch (props.btnType) {
+          switch (props.buttonType) {
             case 'outline-negative':
               return (
                 props.theme?.colors?.hoverNegative ??
@@ -217,7 +222,7 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
 
   :active {
     background: ${(props) => {
-      switch (props.btnType) {
+      switch (props.buttonType) {
         case 'outline-primary':
         case 'outline-negative':
           return 'none';
@@ -236,7 +241,7 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
     }};
     border: ${(props) => {
       if (!props.disabled) {
-        switch (props.btnType) {
+        switch (props.buttonType) {
           case 'outline-negative':
           case 'negative':
             return `2px solid ${
@@ -260,10 +265,10 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
     color: ${(props) => {
       if (!props.disabled) {
         if (
-          props.btnType == 'outline-primary' ||
-          props.btnType == 'outline-negative'
+          props.buttonType == 'outline-primary' ||
+          props.buttonType == 'outline-negative'
         ) {
-          switch (props.btnType) {
+          switch (props.buttonType) {
             case 'outline-negative':
               return (
                 props.theme?.colors?.activeNegative ??
@@ -288,17 +293,18 @@ const Btn = styled.button<{ btnType: types, size: sizes }>`
 `;
 
 export interface IProps {
-  btnType?: types;
+  buttonType?: types;
+  label?: string;
   size?: sizes;
 }
 
 export const Button: React.FC<IProps> = (props) => {
-  const { children, btnType = 'primary', size = 'medium' } = props;
+  const { children, buttonType = 'primary', label = 'BUTTON', size = 'medium' } = props;
 
   return (
-    <Btn btnType={btnType} size={size}>
-      {children ?? 'BUTTON'}
-    </Btn>
+    <ButtonComponent {...props} buttonType={buttonType} size={size}>
+      {children ?? label}
+    </ButtonComponent>
   );
 };
 

@@ -61,11 +61,11 @@ const Button = styled.div<{ active: boolean, size: 'small' | 'medium' | 'large' 
   width: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '14px';
+        return '12px';
       case 'medium':
-        return '20px';
+        return '18px';
       case 'large':
-        return '26px';
+        return '24px';
       default:
         return '0';
     }
@@ -73,30 +73,34 @@ const Button = styled.div<{ active: boolean, size: 'small' | 'medium' | 'large' 
   height: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '14px';
+        return '12px';
       case 'medium':
-        return '20px';
+        return '18px';
       case 'large':
-        return '26px';
+        return '24px';
       default:
         return '0';
     }
   }};
-  margin: ${(props) => {
-    switch (props.size) {
-      case 'small':
-        return props.active ? '2px' : '2px 2px 2px 14px';
-      case 'medium':
-        return props.active ? '2px' : '2px 2px 2px 18px';
-      case 'large':
-        return props.active ? '2px' : '2px 2px 2px 22px';
-      default:
-        return '0';
-    }
-  }};
+  margin: 3px;
+  transform: translateX(
+    ${(props) => {
+      switch (props.size) {
+        case 'small':
+          return props.active ? '12px' : '0';
+        case 'medium':
+          return props.active ? '16px' : '0';
+        case 'large':
+          return props.active ? '20px' : '0';
+        default:
+          return '0';
+      }
+    }}
+  );
   border-radius: 50%;
   background-color: ${(props) =>
     !!props.theme?.colors?.main ? props.theme.colors.main : '#fcfcfc'};
+  box-shadow: 0 0 3px rgba(0, 0, 0, .25);
   transition-duration: 0.2s;
 `;
 

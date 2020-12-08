@@ -2,7 +2,7 @@ import { ITheme } from '../types/theme';
 
 export const darkTheme: ITheme = {
   colors: {
-    main: '#212121',
+    main: '#2C2C2C',
     secondary: '#FCFCFC',
     black: '',
     darkGray: '',

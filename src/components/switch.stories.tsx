@@ -26,7 +26,7 @@ export const Default = Template.bind({});
 Default.args = {
   title: '',
   titleSide: 'right',
-  value: true,
+  value: false,
   size: 'medium',
 };
 

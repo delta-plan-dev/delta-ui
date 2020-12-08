@@ -2,12 +2,17 @@ export interface ITheme {
   colors: {
     main: string;
     secondary: string;
-    black: string;
-    darkGray: string;
-    lightGray: string;
-    white: string;
-    purple: string;
     primary: string;
+    hoverPrimary: string;
+    activePrimary: string;
+    negative: string;
+    hoverNegative: string;
+    activeNegative: string;
+    disabled: string;
   };
   fontFamily: string;
+}
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends ITheme {}
 }

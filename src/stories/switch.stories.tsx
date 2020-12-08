@@ -1,6 +1,6 @@
 import React, { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react';
-import { Switch } from './switch';
+import { Switch } from '../components/switch';
 import { lightTheme } from '../themes/light-theme';
 import { darkTheme } from '../themes/datk-theme';
 import { ThemeProvider } from 'styled-components';

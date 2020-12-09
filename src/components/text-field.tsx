@@ -7,11 +7,7 @@ const TextFieldComponent = styled.div`
   height: 30px;
 
   :focus-within .text-field-title {
-    transform: translate(10px, -24px) scale(.9,.9);
-  }
-  
-  :focus-within input {
-    outline: 0;
+    transform: translate(10px, -24px) scale(0.9, 0.9);
   }
 
   :focus-within legend {
@@ -21,17 +17,19 @@ const TextFieldComponent = styled.div`
 
 const Label = styled.label``;
 
-const Input = styled.input`
+const Input = styled.input<{ value: string }>`
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 8px;
   border: 0;
+  outline: 0;
   border-radius: 5px;
   background: none;
+  box-sizing: border-box;
 `;
 
 const Fieldset = styled.fieldset`
@@ -50,16 +48,22 @@ const Fieldset = styled.fieldset`
   box-sizing: inherit;
 `;
 
-const Legend = styled.legend`
+const Legend = styled.legend<{ value: string }>`
   width: auto;
-  max-width: 0.01px;
+  max-width: ${(props) => {
+    if (props.value !== '') {
+      return '1000px';
+    }
+
+    return '0.01px';
+  }};
   height: 11px;
   display: block;
   padding: 0;
   visibility: hidden;
   text-align: left;
   box-sizing: inherit;
-        
+
   span {
     display: inline-block;
     padding-left: 5px;
@@ -67,30 +71,47 @@ const Legend = styled.legend`
   }
 `;
 
-const Title = styled.div`
+const Title = styled.div<{ value: string }>`
   position: absolute;
   left: 5px;
   top: 50%;
   transition-duration: 0.2s;
-  transform: translate(10px, -50%);
+  transform: ${(props) => {
+    if (props.value !== '') {
+      return 'translate(10px, -24px) scale(0.9, 0.9)';
+    }
+
+    return 'translate(10px, -50%)';
+  }};
   cursor: text;
 `;
 
-export interface IProps {}
+export interface IProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
 export const TextField: React.FC<IProps> = (props) => {
-  const {} = props;
+  const { value = '', onChange } = props;
 
   return (
     <TextFieldComponent>
       <Label>
-        <Input type="text" />
+        <Input
+          type={'text'}
+          value={value}
+          onChange={(event) => {
+            onChange(event.target.value);
+          }}
+        />
         <Fieldset aria-hidden="true">
-          <Legend>
+          <Legend value={value}>
             <span>Label</span>
           </Legend>
         </Fieldset>
-        <Title className="text-field-title">Label</Title>
+        <Title className="text-field-title" value={value}>
+          Label
+        </Title>
       </Label>
     </TextFieldComponent>
   );

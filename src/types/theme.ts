@@ -10,7 +10,6 @@ export interface ITheme {
     activeNegative: string;
     disabled: string;
   };
-  fontFamily: string;
 }
 
 declare module 'styled-components' {

@@ -12,5 +12,4 @@ export const darkTheme: ITheme = {
     activeNegative: '#BC4545',
     disabled: '#CFD8DC',
   },
-  fontFamily: "'Montserrat', sans-serif",
 };

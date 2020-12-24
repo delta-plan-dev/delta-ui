@@ -10,6 +10,6 @@ export const lightTheme: ITheme = {
     negative: '#EB5757',
     hoverNegative: '#EC7D7D',
     activeNegative: '#BC4545',
-    disabled: '#CFD8DC',
+    gray: '#CFD8DC',
   },
 };

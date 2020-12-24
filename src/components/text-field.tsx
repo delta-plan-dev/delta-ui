@@ -39,8 +39,15 @@ const Fieldset = styled.fieldset`
   border-style: solid;
   border-width: 2px;
   border-radius: 8px;
+  border-color: ${(props) => props.theme.colors.gray ?? lightTheme.colors.gray};
   pointer-events: none;
   box-sizing: inherit;
+  transition-duration: 100ms;
+
+  ${Input}:focus ~ & {
+    border-color: ${(props) =>
+      props.theme.colors.primary ?? lightTheme.colors.primary};
+  }
 `;
 
 const Legend = styled.legend`
@@ -74,7 +81,7 @@ const Title = styled.div`
   position: absolute;
   left: 5px;
   top: 50%;
-  transition-duration: 0.3s;
+  transition-duration: 100ms;
   transform: translate(12px, -50%) scale(1);
   font: normal 600 14px Montserrat, sans-serif;
   color: ${(props) =>

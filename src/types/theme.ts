@@ -8,8 +8,7 @@ export interface ITheme {
     negative: string;
     hoverNegative: string;
     activeNegative: string;
-    disabled: string;
-    size: string;
+    gray: string;
   };
 }
 

@@ -9,6 +9,7 @@ export interface ITheme {
     hoverNegative: string;
     activeNegative: string;
     disabled: string;
+    size: string;
   };
   fontFamily: string;
 }

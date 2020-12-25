@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
 interface IButton {
-  buttonType: types;
-  size: sizes;
+  buttonType: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
+  size: 'small' | 'medium' | 'large';
 }
 
 const ButtonComponent = styled.button<IButton>`
@@ -23,26 +23,7 @@ const ButtonComponent = styled.button<IButton>`
     }
   }};
   border-radius: 30px;
-  color: ${(props) => {
-    if (!props.disabled) {
-      if (
-        props.buttonType == 'outline-primary' ||
-        props.buttonType == 'outline-negative'
-      ) {
-        switch (props.buttonType) {
-          case 'outline-negative':
-            return props.theme?.colors?.negative ?? lightTheme.colors.negative;
-          case 'outline-primary':
-          default:
-            return props.theme?.colors?.primary ?? lightTheme.colors.primary;
-        }
-      } else {
-        return '#FFFFFF';
-      }
-    }
-
-    return '#FFFFFF';
-  }};
+  font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: ${(props) => {
@@ -67,6 +48,31 @@ const ButtonComponent = styled.button<IButton>`
         return '12px';
     }
   }};
+  color: ${(props) => {
+    if (!props.disabled) {
+      if (
+        props.buttonType == 'outline-primary' ||
+        props.buttonType == 'outline-negative'
+      ) {
+        switch (props.buttonType) {
+          case 'outline-negative':
+            return (
+              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
+            );
+          case 'outline-primary':
+          default:
+            return (
+              props.theme?.colors?.primary.main ??
+              lightTheme.colors.primary.main
+            );
+        }
+      } else {
+        return '#FFFFFF';
+      }
+    }
+
+    return '#FFFFFF';
+  }};
   background: ${(props) => {
     if (!props.disabled) {
       if (
@@ -75,16 +81,21 @@ const ButtonComponent = styled.button<IButton>`
       ) {
         switch (props.buttonType) {
           case 'negative':
-            return props.theme?.colors?.negative ?? lightTheme.colors.negative;
+            return (
+              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
+            );
           case 'primary':
           default:
-            return props.theme?.colors?.primary ?? lightTheme.colors.primary;
+            return (
+              props.theme?.colors?.primary.main ??
+              lightTheme.colors.primary.main
+            );
         }
       } else {
         return 'none';
       }
     } else {
-      return props.theme?.colors?.disabled ?? lightTheme.colors.disabled;
+      return props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main;
     }
   }};
   border: ${(props) => {
@@ -96,30 +107,32 @@ const ButtonComponent = styled.button<IButton>`
         switch (props.buttonType) {
           case 'outline-negative':
             return `2px solid ${
-              props.theme?.colors?.negative ?? lightTheme.colors.negative
+              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
             }`;
           case 'outline-primary':
           default:
             return `2px solid ${
-              props.theme?.colors?.primary ?? lightTheme.colors.primary
+              props.theme?.colors?.primary.main ??
+              lightTheme.colors.primary.main
             }`;
         }
       } else {
         switch (props.buttonType) {
           case 'negative':
             return `2px solid ${
-              props.theme?.colors?.negative ?? lightTheme.colors.negative
+              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
             }`;
           case 'primary':
           default:
             return `2px solid ${
-              props.theme?.colors?.primary ?? lightTheme.colors.primary
+              props.theme?.colors?.primary.main ??
+              lightTheme.colors.primary.main
             }`;
         }
       }
     } else {
       return `2px solid ${
-        props.theme?.colors?.disabled ?? lightTheme.colors.disabled
+        props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
       }`;
     }
   }};
@@ -135,21 +148,21 @@ const ButtonComponent = styled.button<IButton>`
           switch (props.buttonType) {
             case 'negative':
               return (
-                props.theme?.colors?.hoverNegative ??
-                lightTheme.colors.hoverNegative
+                props.theme?.colors?.error.hover ??
+                lightTheme.colors.error.hover
               );
             case 'primary':
             default:
               return (
-                props.theme?.colors?.hoverPrimary ??
-                lightTheme.colors.hoverPrimary
+                props.theme?.colors?.primary.hover ??
+                lightTheme.colors.primary.hover
               );
           }
         } else {
           return 'none';
         }
       } else {
-        return props.theme?.colors?.disabled ?? lightTheme.colors.disabled;
+        return props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main;
       }
     }};
     border: ${(props) => {
@@ -161,34 +174,34 @@ const ButtonComponent = styled.button<IButton>`
           switch (props.buttonType) {
             case 'outline-negative':
               return `2px solid ${
-                props.theme?.colors?.hoverNegative ??
-                lightTheme.colors.hoverNegative
+                props.theme?.colors?.error.hover ??
+                lightTheme.colors.error.hover
               }`;
             case 'outline-primary':
             default:
               return `2px solid ${
-                props.theme?.colors?.hoverPrimary ??
-                lightTheme.colors.hoverPrimary
+                props.theme?.colors?.primary.hover ??
+                lightTheme.colors.primary.hover
               }`;
           }
         } else {
           switch (props.buttonType) {
             case 'negative':
               return `2px solid ${
-                props.theme?.colors?.hoverNegative ??
-                lightTheme.colors.hoverNegative
+                props.theme?.colors?.error.hover ??
+                lightTheme.colors.error.hover
               }`;
             case 'primary':
             default:
               return `2px solid ${
-                props.theme?.colors?.hoverPrimary ??
-                lightTheme.colors.hoverPrimary
+                props.theme?.colors?.primary.hover ??
+                lightTheme.colors.primary.hover
               }`;
           }
         }
       } else {
         return `2px solid ${
-          props.theme?.colors?.disabled ?? lightTheme.colors.disabled
+          props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
         }`;
       }
     }};
@@ -201,14 +214,14 @@ const ButtonComponent = styled.button<IButton>`
           switch (props.buttonType) {
             case 'outline-negative':
               return (
-                props.theme?.colors?.hoverNegative ??
-                lightTheme.colors.hoverNegative
+                props.theme?.colors?.error.hover ??
+                lightTheme.colors.error.hover
               );
             case 'outline-primary':
             default:
               return (
-                props.theme?.colors?.hoverPrimary ??
-                lightTheme.colors.hoverPrimary
+                props.theme?.colors?.primary.hover ??
+                lightTheme.colors.primary.hover
               );
           }
         } else {
@@ -228,14 +241,13 @@ const ButtonComponent = styled.button<IButton>`
           return 'none';
         case 'negative':
           return (
-            props.theme?.colors?.activeNegative ??
-            lightTheme.colors.activeNegative
+            props.theme?.colors?.error.active ?? lightTheme.colors.error.active
           );
         case 'primary':
         default:
           return (
-            props.theme?.colors?.activePrimary ??
-            lightTheme.colors.activePrimary
+            props.theme?.colors?.primary.active ??
+            lightTheme.colors.primary.active
           );
       }
     }};
@@ -245,20 +257,20 @@ const ButtonComponent = styled.button<IButton>`
           case 'outline-negative':
           case 'negative':
             return `2px solid ${
-              props.theme?.colors?.activeNegative ??
-              lightTheme.colors.activeNegative
+              props.theme?.colors?.error.active ??
+              lightTheme.colors.error.active
             }`;
           case 'primary':
           case 'outline-primary':
           default:
             return `2px solid ${
-              props.theme?.colors?.activePrimary ??
-              lightTheme.colors.activePrimary
+              props.theme?.colors?.primary.active ??
+              lightTheme.colors.primary.active
             }`;
         }
       } else {
         return `2px solid ${
-          props.theme?.colors?.disabled ?? lightTheme.colors.disabled
+          props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
         }`;
       }
     }};
@@ -271,14 +283,14 @@ const ButtonComponent = styled.button<IButton>`
           switch (props.buttonType) {
             case 'outline-negative':
               return (
-                props.theme?.colors?.activeNegative ??
-                lightTheme.colors.activeNegative
+                props.theme?.colors?.error.active ??
+                lightTheme.colors.error.active
               );
             case 'outline-primary':
             default:
               return (
-                props.theme?.colors?.activePrimary ??
-                lightTheme.colors.activePrimary
+                props.theme?.colors?.primary.active ??
+                lightTheme.colors.primary.active
               );
           }
         } else {
@@ -299,7 +311,12 @@ export interface IProps {
 }
 
 export const Button: React.FC<IProps> = (props) => {
-  const { children, buttonType = 'primary', label = 'BUTTON', size = 'medium' } = props;
+  const {
+    children,
+    buttonType = 'primary',
+    label = 'BUTTON',
+    size = 'medium',
+  } = props;
 
   return (
     <ButtonComponent {...props} buttonType={buttonType} size={size}>
@@ -307,6 +324,3 @@ export const Button: React.FC<IProps> = (props) => {
     </ButtonComponent>
   );
 };
-
-type types = 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
-type sizes = 'small' | 'medium' | 'large';

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { lightTheme } from '../themes/light-theme';
 
 const SwitchComponent = styled.label`
   display: inline-flex;
@@ -10,12 +11,14 @@ const Title = styled.div`
   line-height: 24px;
   margin-left: 5px;
   color: ${(props) =>
-    !!props.theme?.colors?.secondary
-      ? props.theme.colors.secondary
-      : '#212121'};
+    props.theme?.colors?.secondary.main ?? lightTheme.colors.secondary.main};
 `;
 
-const ButtonWrapper = styled.div<{ active: boolean, size: 'small' | 'medium' | 'large' }>`
+interface IButton {
+  active: boolean;
+  size: 'small' | 'medium' | 'large';
+}
+const ButtonWrapper = styled.div<IButton>`
   display: inline-block;
   width: ${(props) => {
     switch (props.size) {
@@ -57,7 +60,7 @@ const ButtonWrapper = styled.div<{ active: boolean, size: 'small' | 'medium' | '
   transition-duration: 0.2s;
 `;
 
-const Button = styled.div<{ active: boolean, size: 'small' | 'medium' | 'large' }>`
+const Button = styled.div<IButton>`
   width: ${(props) => {
     switch (props.size) {
       case 'small':
@@ -99,8 +102,8 @@ const Button = styled.div<{ active: boolean, size: 'small' | 'medium' | 'large' 
   );
   border-radius: 50%;
   background-color: ${(props) =>
-    !!props.theme?.colors?.main ? props.theme.colors.main : '#fcfcfc'};
-  box-shadow: 0 0 3px rgba(0, 0, 0, .25);
+    props.theme?.colors?.white.main ?? lightTheme.colors.white.main};
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   transition-duration: 0.2s;
 `;
 

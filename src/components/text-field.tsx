@@ -24,7 +24,7 @@ const Input = styled.input<{ value: string }>`
   box-sizing: border-box;
   font: normal 400 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary ?? lightTheme?.colors?.secondary};
+    props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;
 
 const Fieldset = styled.fieldset`
@@ -39,14 +39,21 @@ const Fieldset = styled.fieldset`
   border-style: solid;
   border-width: 2px;
   border-radius: 8px;
-  border-color: ${(props) => props.theme.colors.gray ?? lightTheme.colors.gray};
+  border-color: ${(props) =>
+    props.theme.colors.gray.main ?? lightTheme.colors.gray.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
 
   ${Input}:focus ~ & {
     border-color: ${(props) =>
-      props.theme.colors.primary ?? lightTheme.colors.primary};
+      props.theme.colors.primary.main ??
+      lightTheme.colors.primary.main} !important;
+  }
+
+  ${Input}:hover ~ & {
+    border-color: ${(props) =>
+      props.theme.colors.gray.hover ?? lightTheme.colors.gray.hover};
   }
 `;
 
@@ -85,7 +92,7 @@ const Title = styled.div`
   transform: translate(12px, -50%) scale(1);
   font: normal 600 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary ?? lightTheme?.colors?.secondary};
+    props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
   cursor: text;
 
   &.active {
@@ -101,7 +108,7 @@ export interface IProps {
   value?: string;
   onChange: (value: string) => void;
   label?: string;
-  isDisable: boolean;
+  isDisable?: boolean;
 }
 
 export const TextField: React.FC<IProps> = (props) => {

@@ -1,14 +1,22 @@
+import StatusColorType from './status.color';
+
 export interface ITheme {
   colors: {
-    main: string;
-    secondary: string;
-    primary: string;
-    hoverPrimary: string;
-    activePrimary: string;
-    negative: string;
-    hoverNegative: string;
-    activeNegative: string;
-    gray: string;
+    // Main colors
+    main: StatusColorType;
+    secondary: StatusColorType;
+
+    // Status colors
+    primary: StatusColorType;
+    success: StatusColorType;
+    warning: StatusColorType;
+    error: StatusColorType;
+    info: StatusColorType;
+
+    // Other colors
+    white: StatusColorType;
+    black: StatusColorType;
+    gray: StatusColorType;
   };
 }
 

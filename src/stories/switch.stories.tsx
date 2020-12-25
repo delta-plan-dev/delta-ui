@@ -8,7 +8,7 @@ const Template: Story<ComponentProps<typeof Switch> & { theme: number }> = (
   const [value, setValue] = useState<boolean>(args.value);
 
   return (
-    <Switch {...args} value={value} handleChange={(value) => setValue(value)} />
+    <Switch {...args} value={value} onChange={(value) => setValue(value)} />
   );
 };
 

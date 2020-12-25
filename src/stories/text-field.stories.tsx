@@ -12,7 +12,4 @@ Default.args = {};
 export default {
   title: 'Text field',
   component: TextField,
-  argTypes: {
-    onChange: { action: 'changed' },
-  },
 };

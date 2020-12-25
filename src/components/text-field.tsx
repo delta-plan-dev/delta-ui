@@ -105,10 +105,10 @@ const Title = styled.div`
 `;
 
 export interface IProps {
-  value?: string;
-  onChange: (value: string) => void;
   label?: string;
   isDisable?: boolean;
+  value?: string;
+  onChange: (value: string) => void;
 }
 
 export const TextField: React.FC<IProps> = (props) => {

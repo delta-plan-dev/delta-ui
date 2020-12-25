@@ -111,7 +111,7 @@ export interface IProps {
   title?: string;
   titleSide?: 'left' | 'right';
   value: boolean;
-  handleChange: (value: boolean) => void;
+  onChange: (value: boolean) => void;
   size?: 'small' | 'medium' | 'large';
 }
 
@@ -120,14 +120,14 @@ export const Switch: React.FC<IProps> = (props) => {
     title,
     titleSide = 'right',
     value = false,
-    handleChange,
+    onChange,
     size = 'medium',
   } = props;
 
   return (
     <SwitchComponent
       onClick={() => {
-        handleChange(!value);
+        onChange(!value);
       }}
     >
       {title && titleSide === 'left' && <Title>{title} </Title>}

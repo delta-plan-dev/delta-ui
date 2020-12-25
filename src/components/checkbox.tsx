@@ -1,137 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
-import imgSelected from '../assets/img/select.svg';
-import imgSelectedActive from '../assets/img/selectActive.svg';
+import imgSelected from '../assets/images/select.svg';
 
-const CheckBoxComponent = styled.span<{ size: 'md' | 'lg', disabled: 'on' | 'off' | 'onActive', active: boolean }>`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    width: ${(props) => {
-        switch (props.size) {
-            case 'md':
-                return '30px';
-                break;
-            case 'lg':
-                return '40px';
-                break;        
-            default:
-                return '30px';    
-        }
-    }};
-    height: ${(props) => {
-        switch (props.size) {
-            case 'md':
-                return '30px';
-                break;
-            case 'lg':
-                return '40px';
-                break;        
-            default:
-                return '30px';    
-        }
-    }};
-    border: ${(props) => {
-        switch (props.disabled) {
-            case 'onActive':
-                return `1px solid transparent;`;
-                break;    
-            default:
-                return '1px solid #797979;';   
-        }
-    }};
-    border-radius: 7px;
-    cursor: pointer;
-    transition: all 300ms;
-    :hover {
-        border: ${(props) => {
-            switch (props.disabled) {
-                case 'on':
-                    return '1px solid #797979;';
-                    break;
-                case 'off':
-                    return '1px solid #CFD8DC;';
-                    break;
-                case 'onActive':
-                    return `1px solid transparent;`;    
-                default:
-                    return '1px solid #797979;';   
-            }
-        }};
-    }
-    background-color: ${(props) => {
-        switch (props.disabled) {
-            case 'on':
-                return '#CFD8DC;';
-                break;
-            case 'off':
-                return 'transparent;';
-                break;
-            default:
-                return 'transparent;';   
-        }
-    }};
-    background-image: ${(props) => {
-        switch (props.disabled) {
-            case 'on':
-                return '';
-                break;
-            case 'onActive':
-                return `url(${imgSelectedActive})`;
-                break;    
-            case 'off':
-                return(props.active ? `url(${imgSelected}) !important;` : '');
-                break;
-            default:
-                return '';   
-        }
-    }};
-    background-size: 110%;
+interface ICheckBox {
+  size: 'small' | 'medium' | 'large';
+  isDisable: boolean;
+}
+const CheckBoxComponent = styled.label<ICheckBox>`
+  display: inline-flex;
+  cursor: pointer;
+`;
+
+const CheckBoxComponentValue = styled.div`
+  width: 18px;
+  height: 18px;
+  border: 1px solid ${(props) => props.theme.colors.gray.main};
+  border-radius: 4px;
+  background-color: ${(props) => props.theme.colors.white.main};
+
+  &.active {
+    width: 20px;
+    height: 20px;
+    border: 0 solid ${(props) => props.theme.colors.gray.main};
+    background-image: url(${imgSelected});
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+  }
 `;
 
-const CheckBoxComponentLabel = styled.span`
-    display: block;
-    position: absolute;
-    width: 80px;
-    height: auto;
-    border-radius: 3px;
-    left: 100%;
-    margin-left: 14px;
-    line-height: 20px;
+const CheckBoxComponentLabel = styled.div`
+  margin-left: 5px;
+  font: normal bold 14px/20px Montserrat, sans-serif;
+  color: ${(props) =>
+    props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;
-
-const changeActive = () => {
-    //
-}
 
 export interface IProps {
-    label: string;
-    size: 'md' | 'lg';
-    disabled: 'on' | 'off' | 'onActive';
-    active: boolean;
+  label?: string;
+  size?: 'small' | 'medium' | 'large';
+  isDisable?: boolean;
+  value: boolean;
+  onClick: () => void;
 }
 
 export const CheckBox: React.FC<IProps> = (props) => {
-    const {
-        label = 'checkbox это короч',
-        size = 'md',
-        disabled = 'off',
-        active = false,
-    } = props;
+  const {
+    label,
+    size = 'medium',
+    isDisable = false,
+    value = false,
+    onClick,
+  } = props;
 
-    return(
-        <CheckBoxComponent 
-            size={size} 
-            disabled={disabled}
-            active={active}
-            onClick = {changeActive}
-        >
-            <CheckBoxComponentLabel>{ label.length != 0 && label.length < 20 ? label : 'checkbox это короч' }</CheckBoxComponentLabel>
-        </CheckBoxComponent>
-    );
-}
+  const [checked, setChecked] = useState<boolean>(value);
+
+  const handleChange = () => {
+    setChecked(!checked);
+    onClick();
+  };
+
+  return (
+    <CheckBoxComponent size={size} isDisable={isDisable} onClick={handleChange}>
+      <CheckBoxComponentValue className={checked ? 'active' : ''} />
+      {label && <CheckBoxComponentLabel>{label}</CheckBoxComponentLabel>}
+    </CheckBoxComponent>
+  );
+};

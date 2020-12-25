@@ -11,22 +11,22 @@ Default.args = {};
 
 export const Primary = Template.bind({});
 Primary.args = {
-  buttonType: 'primary',
+  variant: 'primary',
 };
 
 export const Negative = Template.bind({});
 Negative.args = {
-  buttonType: 'negative',
+  variant: 'negative',
 };
 
 export const OutlinePrimary = Template.bind({});
 OutlinePrimary.args = {
-  buttonType: 'outline-primary',
+  variant: 'outline-primary',
 };
 
 export const OutlineNegative = Template.bind({});
 OutlineNegative.args = {
-  buttonType: 'outline-negative',
+  variant: 'outline-negative',
 };
 
 export default {
@@ -39,7 +39,7 @@ export default {
         type: 'text',
       },
     },
-    buttonType: {
+    variant: {
       control: {
         type: 'select',
         options: ['primary', 'negative', 'outline-primary', 'outline-negative'],
@@ -52,7 +52,7 @@ export default {
         options: ['small', 'medium', 'large'],
       },
     },
-    disabled: {
+    isDisable: {
       defaultValue: false,
       type: 'boolean',
     },

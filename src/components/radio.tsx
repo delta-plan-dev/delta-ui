@@ -1,131 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
-const RadioComponent = styled.span<{ size: 'md' | 'lg', disabled: 'on' | 'off' | 'onActive', active: boolean }>`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    width: ${(props) => {
-        switch (props.size) {
-            case 'md':
-                return '30px';
-                break;
-            case 'lg':
-                return '40px';
-                break;        
-            default:
-                return '30px';    
-        }
-    }};
-    height: ${(props) => {
-        switch (props.size) {
-            case 'md':
-                return '30px';
-                break;
-            case 'lg':
-                return '40px';
-                break;        
-            default:
-                return '30px';    
-        }
-    }};
-    border: ${(props) => {
-        switch (props.disabled) {
-            case 'onActive':
-                return `1px solid #797979;`;
-                break;    
-            default:
-                return '1px solid #797979;';   
-        }
-    }};
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 300ms;
-    :hover {
-        border: ${(props) => {
-            switch (props.disabled) {
-                case 'on':
-                    return '1px solid #797979;';
-                    break;
-                case 'off':
-                    return '1px solid #CFD8DC;';
-                    break;
-                case 'onActive':
-                    return `1px solid transparent;`;    
-                default:
-                    return '1px solid #797979;';   
-            }
-        }};
-    }
-    background-color: ${(props) => {
-        switch (props.disabled) {
-            case 'on':
-                return '#CFD8DC;';
-                break;
-            case 'off':
-                return 'transparent;';
-                break;
-            default:
-                return 'transparent;';   
-        }
-    }};
-    background-size: 110%;
-    background-repeat: no-repeat;
-    background-position: center;
-`;
-
-const RadioComponentLabel = styled.span`
-    display: block;
-    position: absolute;
-    width: 80px;
-    height: auto;
-    border-radius: 3px;
-    left: 100%;
-    margin-left: 14px;
-    line-height: 20px;
-`;
-
-const RadioComponentActive = styled.span`
-    display: block;
-    position: relative;
-    width: 45%;
-    height: 45%;
-    border-radius: 50%;
-    background-color: #137FE2;
-`;
-
-const changeActive = () => {
-    //
+interface IRadio {
+  size: 'small' | 'medium' | 'large';
+  isDisable: boolean;
 }
+const RadioComponent = styled.label<IRadio>`
+  display: inline-flex;
+  cursor: pointer;
+`;
+
+const RadioComponentValue = styled.div`
+  width: 12px;
+  height: 12px;
+  background-color: ${(props) => props.theme.colors.white.main};
+  border-radius: 50%;
+  border: 4px solid ${(props) => props.theme.colors.white.main};
+
+  &.active {
+    background-color: ${(props) => props.theme.colors.primary.main};
+  }
+`;
+
+const RadioComponentLabel = styled.div`
+  margin-left: 5px;
+  font: normal bold 14px/20px Montserrat, sans-serif;
+  color: ${(props) =>
+    props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
+`;
 
 export interface IProps {
-    label: string;
-    size: 'md' | 'lg';
-    disabled: 'on' | 'off' | 'onActive';
-    active: boolean;
-    value: boolean;
+  label?: string;
+  size?: 'small' | 'medium' | 'large';
+  isDisable?: boolean;
+  value: boolean;
+  onClick: () => void;
 }
 
 export const Radio: React.FC<IProps> = (props) => {
-    const {
-        label = 'checkbox это короч',
-        size = 'md',
-        disabled = 'off',
-        active = false
-    } = props;
+  const {
+    label,
+    size = 'medium',
+    isDisable = false,
+    value = false,
+    onClick,
+  } = props;
 
-    return(
-        <RadioComponent 
-            size={size} 
-            disabled={disabled}
-            active={active}
-            onClick = {changeActive}
-        >   
-            <RadioComponentActive />
-            <RadioComponentLabel>{ label.length != 0 && label.length < 20 ? label : 'checkbox это короч' }</RadioComponentLabel>
-        </RadioComponent>
-    );
-}
+  const [checked, setChecked] = useState<boolean>(value);
+
+  const handleChange = () => {
+    setChecked(!checked);
+    onClick();
+  };
+
+  return (
+    <RadioComponent size={size} isDisable={isDisable} onClick={handleChange}>
+      <RadioComponentValue className={checked ? 'active' : ''} />
+      {label && <RadioComponentLabel>{label}</RadioComponentLabel>}
+    </RadioComponent>
+  );
+};

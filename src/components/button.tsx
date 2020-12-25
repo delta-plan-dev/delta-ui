@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
 interface IButton {
-  buttonType: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
+  variant: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   size: 'small' | 'medium' | 'large';
 }
 
@@ -51,10 +51,10 @@ const ButtonComponent = styled.button<IButton>`
   color: ${(props) => {
     if (!props.disabled) {
       if (
-        props.buttonType == 'outline-primary' ||
-        props.buttonType == 'outline-negative'
+        props.variant == 'outline-primary' ||
+        props.variant == 'outline-negative'
       ) {
-        switch (props.buttonType) {
+        switch (props.variant) {
           case 'outline-negative':
             return (
               props.theme?.colors?.error.main ?? lightTheme.colors.error.main
@@ -76,10 +76,10 @@ const ButtonComponent = styled.button<IButton>`
   background: ${(props) => {
     if (!props.disabled) {
       if (
-        props.buttonType !== 'outline-primary' &&
-        props.buttonType !== 'outline-negative'
+        props.variant !== 'outline-primary' &&
+        props.variant !== 'outline-negative'
       ) {
-        switch (props.buttonType) {
+        switch (props.variant) {
           case 'negative':
             return (
               props.theme?.colors?.error.main ?? lightTheme.colors.error.main
@@ -101,10 +101,10 @@ const ButtonComponent = styled.button<IButton>`
   border: ${(props) => {
     if (!props.disabled) {
       if (
-        props.buttonType == 'outline-primary' ||
-        props.buttonType == 'outline-negative'
+        props.variant == 'outline-primary' ||
+        props.variant == 'outline-negative'
       ) {
-        switch (props.buttonType) {
+        switch (props.variant) {
           case 'outline-negative':
             return `2px solid ${
               props.theme?.colors?.error.main ?? lightTheme.colors.error.main
@@ -117,7 +117,7 @@ const ButtonComponent = styled.button<IButton>`
             }`;
         }
       } else {
-        switch (props.buttonType) {
+        switch (props.variant) {
           case 'negative':
             return `2px solid ${
               props.theme?.colors?.error.main ?? lightTheme.colors.error.main
@@ -142,10 +142,10 @@ const ButtonComponent = styled.button<IButton>`
     background: ${(props) => {
       if (!props.disabled) {
         if (
-          props.buttonType !== 'outline-primary' &&
-          props.buttonType !== 'outline-negative'
+          props.variant !== 'outline-primary' &&
+          props.variant !== 'outline-negative'
         ) {
-          switch (props.buttonType) {
+          switch (props.variant) {
             case 'negative':
               return (
                 props.theme?.colors?.error.hover ??
@@ -168,10 +168,10 @@ const ButtonComponent = styled.button<IButton>`
     border: ${(props) => {
       if (!props.disabled) {
         if (
-          props.buttonType == 'outline-primary' ||
-          props.buttonType == 'outline-negative'
+          props.variant == 'outline-primary' ||
+          props.variant == 'outline-negative'
         ) {
-          switch (props.buttonType) {
+          switch (props.variant) {
             case 'outline-negative':
               return `2px solid ${
                 props.theme?.colors?.error.hover ??
@@ -185,7 +185,7 @@ const ButtonComponent = styled.button<IButton>`
               }`;
           }
         } else {
-          switch (props.buttonType) {
+          switch (props.variant) {
             case 'negative':
               return `2px solid ${
                 props.theme?.colors?.error.hover ??
@@ -208,10 +208,10 @@ const ButtonComponent = styled.button<IButton>`
     color: ${(props) => {
       if (!props.disabled) {
         if (
-          props.buttonType == 'outline-primary' ||
-          props.buttonType == 'outline-negative'
+          props.variant == 'outline-primary' ||
+          props.variant == 'outline-negative'
         ) {
-          switch (props.buttonType) {
+          switch (props.variant) {
             case 'outline-negative':
               return (
                 props.theme?.colors?.error.hover ??
@@ -235,7 +235,7 @@ const ButtonComponent = styled.button<IButton>`
 
   :active {
     background: ${(props) => {
-      switch (props.buttonType) {
+      switch (props.variant) {
         case 'outline-primary':
         case 'outline-negative':
           return 'none';
@@ -253,7 +253,7 @@ const ButtonComponent = styled.button<IButton>`
     }};
     border: ${(props) => {
       if (!props.disabled) {
-        switch (props.buttonType) {
+        switch (props.variant) {
           case 'outline-negative':
           case 'negative':
             return `2px solid ${
@@ -277,10 +277,10 @@ const ButtonComponent = styled.button<IButton>`
     color: ${(props) => {
       if (!props.disabled) {
         if (
-          props.buttonType == 'outline-primary' ||
-          props.buttonType == 'outline-negative'
+          props.variant == 'outline-primary' ||
+          props.variant == 'outline-negative'
         ) {
-          switch (props.buttonType) {
+          switch (props.variant) {
             case 'outline-negative':
               return (
                 props.theme?.colors?.error.active ??
@@ -305,21 +305,30 @@ const ButtonComponent = styled.button<IButton>`
 `;
 
 export interface IProps {
-  buttonType?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   label?: string;
+  variant?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   size?: 'small' | 'medium' | 'large';
+  isDisable?: boolean;
+  onClick: () => void;
 }
 
 export const Button: React.FC<IProps> = (props) => {
   const {
     children,
-    buttonType = 'primary',
+    variant = 'primary',
     label = 'BUTTON',
     size = 'medium',
+    isDisable = false,
+    onClick,
   } = props;
 
   return (
-    <ButtonComponent {...props} buttonType={buttonType} size={size}>
+    <ButtonComponent
+      variant={variant}
+      size={size}
+      onClick={onClick}
+      disabled={isDisable}
+    >
       {children ?? label}
     </ButtonComponent>
   );

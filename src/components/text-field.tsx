@@ -90,7 +90,7 @@ const Title = styled.div`
   top: 50%;
   transition-duration: 100ms;
   transform: translate(12px, -50%) scale(1);
-  font: normal 600 14px Montserrat, sans-serif;
+  font: normal bold 14px Montserrat, sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
   cursor: text;

@@ -11,9 +11,14 @@ const RadioComponent = styled.label<IRadio>`
   cursor: pointer;
 `;
 
+const RadioComponentValueWrapper = styled.div`
+  border-radius: 50%;
+  border: 1px solid ${(props) => props.theme.colors.gray.main};
+`;
+
 const RadioComponentValue = styled.div`
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   background-color: ${(props) => props.theme.colors.white.main};
   border-radius: 50%;
   border: 4px solid ${(props) => props.theme.colors.white.main};
@@ -56,7 +61,9 @@ export const Radio: React.FC<IProps> = (props) => {
 
   return (
     <RadioComponent size={size} isDisable={isDisable} onClick={handleChange}>
-      <RadioComponentValue className={checked ? 'active' : ''} />
+      <RadioComponentValueWrapper className={checked ? 'active' : ''}>
+        <RadioComponentValue className={checked ? 'active' : ''} />
+      </RadioComponentValueWrapper>
       {label && <RadioComponentLabel>{label}</RadioComponentLabel>}
     </RadioComponent>
   );

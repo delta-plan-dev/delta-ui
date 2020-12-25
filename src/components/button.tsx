@@ -305,9 +305,9 @@ const ButtonComponent = styled.button<IButton>`
 `;
 
 export interface IProps {
-  buttonType?: types;
+  buttonType?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   label?: string;
-  size?: sizes;
+  size?: 'small' | 'medium' | 'large';
 }
 
 export const Button: React.FC<IProps> = (props) => {

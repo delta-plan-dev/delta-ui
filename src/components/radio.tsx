@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
-import imgSelected from '../assets/img/select.svg';
-import imgSelectedActive from '../assets/img/selectActive.svg';
 
-const CheckBoxComponent = styled.span<{ size: 'md' | 'lg', disabled: 'on' | 'off' | 'onActive', active: boolean }>`
+const RadioComponent = styled.span<{ size: 'md' | 'lg', disabled: 'on' | 'off' | 'onActive', active: boolean }>`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -37,13 +35,13 @@ const CheckBoxComponent = styled.span<{ size: 'md' | 'lg', disabled: 'on' | 'off
     border: ${(props) => {
         switch (props.disabled) {
             case 'onActive':
-                return `1px solid transparent;`;
+                return `1px solid #797979;`;
                 break;    
             default:
                 return '1px solid #797979;';   
         }
     }};
-    border-radius: 7px;
+    border-radius: 50%;
     cursor: pointer;
     transition: all 300ms;
     :hover {
@@ -74,27 +72,12 @@ const CheckBoxComponent = styled.span<{ size: 'md' | 'lg', disabled: 'on' | 'off
                 return 'transparent;';   
         }
     }};
-    background-image: ${(props) => {
-        switch (props.disabled) {
-            case 'on':
-                return '';
-                break;
-            case 'onActive':
-                return `url(${imgSelectedActive})`;
-                break;    
-            case 'off':
-                return(props.active ? `url(${imgSelected}) !important;` : '');
-                break;
-            default:
-                return '';   
-        }
-    }};
     background-size: 110%;
     background-repeat: no-repeat;
     background-position: center;
 `;
 
-const CheckBoxComponentLabel = styled.span`
+const RadioComponentLabel = styled.span`
     display: block;
     position: absolute;
     width: 80px;
@@ -103,6 +86,15 @@ const CheckBoxComponentLabel = styled.span`
     left: 100%;
     margin-left: 14px;
     line-height: 20px;
+`;
+
+const RadioComponentActive = styled.span`
+    display: block;
+    position: relative;
+    width: 45%;
+    height: 45%;
+    border-radius: 50%;
+    background-color: #137FE2;
 `;
 
 const changeActive = () => {
@@ -114,24 +106,26 @@ export interface IProps {
     size: 'md' | 'lg';
     disabled: 'on' | 'off' | 'onActive';
     active: boolean;
+    value: boolean;
 }
 
-export const CheckBox: React.FC<IProps> = (props) => {
+export const Radio: React.FC<IProps> = (props) => {
     const {
         label = 'checkbox это короч',
         size = 'md',
         disabled = 'off',
-        active = false,
+        active = false
     } = props;
 
     return(
-        <CheckBoxComponent 
+        <RadioComponent 
             size={size} 
             disabled={disabled}
             active={active}
             onClick = {changeActive}
-        >
-            <CheckBoxComponentLabel>{ label.length != 0 && label.length < 20 ? label : 'checkbox это короч' }</CheckBoxComponentLabel>
-        </CheckBoxComponent>
+        >   
+            <RadioComponentActive />
+            <RadioComponentLabel>{ label.length != 0 && label.length < 20 ? label : 'checkbox это короч' }</RadioComponentLabel>
+        </RadioComponent>
     );
 }

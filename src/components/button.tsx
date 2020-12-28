@@ -8,7 +8,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   variant?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   size?: 'small' | 'medium' | 'large';
   isDisable?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   as?: React.ElementType;
 }
 
@@ -27,6 +27,7 @@ export const BaseButton: ButtonType = React.forwardRef(
 interface IButton {
   variant: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   size: 'small' | 'medium' | 'large';
+  isDisable: boolean;
 }
 
 const ButtonComponent = styled(BaseButton)<IButton>`
@@ -71,7 +72,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
     }
   }};
   color: ${(props) => {
-    if (!props.disabled) {
+    if (!props.isDisable) {
       if (
         props.variant == 'outline-primary' ||
         props.variant == 'outline-negative'
@@ -97,7 +98,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
   }};
   text-decoration: none;
   background: ${(props) => {
-    if (!props.disabled) {
+    if (!props.isDisable) {
       if (
         props.variant !== 'outline-primary' &&
         props.variant !== 'outline-negative'
@@ -122,7 +123,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
     }
   }};
   border: ${(props) => {
-    if (!props.disabled) {
+    if (!props.isDisable) {
       if (
         props.variant == 'outline-primary' ||
         props.variant == 'outline-negative'
@@ -163,7 +164,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
 
   :hover {
     background: ${(props) => {
-      if (!props.disabled) {
+      if (!props.isDisable) {
         if (
           props.variant !== 'outline-primary' &&
           props.variant !== 'outline-negative'
@@ -189,7 +190,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
       }
     }};
     border: ${(props) => {
-      if (!props.disabled) {
+      if (!props.isDisable) {
         if (
           props.variant == 'outline-primary' ||
           props.variant == 'outline-negative'
@@ -229,7 +230,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
       }
     }};
     color: ${(props) => {
-      if (!props.disabled) {
+      if (!props.isDisable) {
         if (
           props.variant == 'outline-primary' ||
           props.variant == 'outline-negative'
@@ -258,24 +259,31 @@ const ButtonComponent = styled(BaseButton)<IButton>`
 
   :active {
     background: ${(props) => {
-      switch (props.variant) {
-        case 'outline-primary':
-        case 'outline-negative':
-          return 'none';
-        case 'negative':
-          return (
-            props.theme?.colors?.error.active ?? lightTheme.colors.error.active
-          );
-        case 'primary':
-        default:
-          return (
-            props.theme?.colors?.primary.active ??
-            lightTheme.colors.primary.active
-          );
+      if (!props.isDisable) {
+        switch (props.variant) {
+          case 'outline-primary':
+          case 'outline-negative':
+            return 'none';
+          case 'negative':
+            return (
+              props.theme?.colors?.error.active ??
+              lightTheme.colors.error.active
+            );
+          case 'primary':
+          default:
+            return (
+              props.theme?.colors?.primary.active ??
+              lightTheme.colors.primary.active
+            );
+        }
+      } else {
+        return `${
+          props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
+        }`;
       }
     }};
     border: ${(props) => {
-      if (!props.disabled) {
+      if (!props.isDisable) {
         switch (props.variant) {
           case 'outline-negative':
           case 'negative':
@@ -298,7 +306,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
       }
     }};
     color: ${(props) => {
-      if (!props.disabled) {
+      if (!props.isDisable) {
         if (
           props.variant == 'outline-primary' ||
           props.variant == 'outline-negative'
@@ -342,7 +350,7 @@ export const Button: ButtonType = React.forwardRef(
       <ButtonComponent
         variant={variant}
         size={size}
-        disabled={isDisable}
+        isDisable={isDisable}
         {...other}
         ref={ref}
       >

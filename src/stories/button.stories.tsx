@@ -1,15 +1,9 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
 import { Button } from '../components/button';
-import { Link, Switch, BrowserRouter, Route } from 'react-router-dom';
 
 const Template: Story<ComponentProps<typeof Button>> = (args) => (
-  <BrowserRouter>
-    <Switch>
-      <Route path="/"></Route>
-    </Switch>
-    <Button {...args} />
-  </BrowserRouter>
+  <Button {...args} />
 );
 
 export const Default = Template.bind({});

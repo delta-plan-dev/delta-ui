@@ -163,6 +163,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
   cursor: pointer;
 
   :hover {
+    text-decoration: none;
     background: ${(props) => {
       if (!props.isDisable) {
         if (
@@ -258,6 +259,7 @@ const ButtonComponent = styled(BaseButton)<IButton>`
   }
 
   :active {
+    text-decoration: none;
     background: ${(props) => {
       if (!props.isDisable) {
         switch (props.variant) {

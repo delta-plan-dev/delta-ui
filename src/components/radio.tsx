@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
@@ -41,6 +41,7 @@ export interface IProps {
   isDisable?: boolean;
   value: boolean;
   onClick: () => void;
+  style?: CSSProperties;
 }
 
 export const Radio: React.FC<IProps> = (props) => {
@@ -50,6 +51,8 @@ export const Radio: React.FC<IProps> = (props) => {
     isDisable = false,
     value = false,
     onClick,
+    style,
+    ...other
   } = props;
 
   const [checked, setChecked] = useState<boolean>(value);
@@ -60,7 +63,13 @@ export const Radio: React.FC<IProps> = (props) => {
   };
 
   return (
-    <RadioComponent size={size} isDisable={isDisable} onClick={handleChange}>
+    <RadioComponent
+      size={size}
+      isDisable={isDisable}
+      onClick={handleChange}
+      style={style}
+      {...other}
+    >
       <RadioComponentValueWrapper className={checked ? 'active' : ''}>
         <RadioComponentValue className={checked ? 'active' : ''} />
       </RadioComponentValueWrapper>

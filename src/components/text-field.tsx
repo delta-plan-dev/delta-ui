@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
-const TextFieldComponent = styled.div`
+const TextFieldComponent = styled.div<{ width: number | null }>`
   position: relative;
-  width: 300px;
+  ${(props) => (!!props.width ? `width: ${props.width}px` : ``)};
   height: 50px;
 `;
 
@@ -81,6 +81,7 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
+    font: normal bold 14px Montserrat, sans-serif;
   }
 `;
 
@@ -89,18 +90,18 @@ const Title = styled.div`
   left: 5px;
   top: 50%;
   transition-duration: 100ms;
-  transform: translate(12px, -50%) scale(1);
+  transform: translate(10px, -50%) scale(1);
   font: normal bold 14px Montserrat, sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
   cursor: text;
 
   &.active {
-    transform: translate(12px, -33px) scale(0.75);
+    transform: translate(10px, -33px) scale(0.75);
   }
 
   ${Input}:focus ~ & {
-    transform: translate(12px, -33px) scale(0.75);
+    transform: translate(10px, -33px) scale(0.75);
   }
 `;
 
@@ -109,10 +110,20 @@ export interface IProps {
   isDisable?: boolean;
   value?: string;
   onChange: (value: string) => void;
+  style?: CSSProperties;
+  width?: number | null;
 }
 
 export const TextField: React.FC<IProps> = (props) => {
-  const { value = '', onChange, label = 'Label', isDisable = false } = props;
+  const {
+    value = '',
+    onChange,
+    label = 'Label',
+    isDisable = false,
+    style,
+    width = null,
+    ...other
+  } = props;
 
   const [textValue, setTextValue] = useState<string>(value);
 
@@ -122,7 +133,7 @@ export const TextField: React.FC<IProps> = (props) => {
   };
 
   return (
-    <TextFieldComponent>
+    <TextFieldComponent style={style} width={width} {...other}>
       <Label>
         <Input
           type={'text'}

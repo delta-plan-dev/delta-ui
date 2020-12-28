@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
@@ -9,9 +9,16 @@ const SwitchComponent = styled.label`
 
 const Title = styled.div`
   line-height: 24px;
-  margin-left: 5px;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme.colors.secondary.main};
+
+  &.switch-title-left {
+    margin-right: 5px;
+  }
+
+  &.switch-title-right {
+    margin-left: 5px;
+  }
 `;
 
 interface IButton {
@@ -113,6 +120,7 @@ export interface IProps {
   value: boolean;
   onChange: (value: boolean) => void;
   size?: 'small' | 'medium' | 'large';
+  style?: CSSProperties;
 }
 
 export const Switch: React.FC<IProps> = (props) => {
@@ -122,6 +130,8 @@ export const Switch: React.FC<IProps> = (props) => {
     value = false,
     onChange,
     size = 'medium',
+    style,
+    ...other
   } = props;
 
   return (
@@ -129,12 +139,18 @@ export const Switch: React.FC<IProps> = (props) => {
       onClick={() => {
         onChange(!value);
       }}
+      style={style}
+      {...other}
     >
-      {title && titleSide === 'left' && <Title>{title} </Title>}
+      {title && titleSide === 'left' && (
+        <Title className="switch-title-left">{title} </Title>
+      )}
       <ButtonWrapper active={value} size={size}>
         <Button active={value} size={size} />
       </ButtonWrapper>
-      {title && titleSide === 'right' && <Title> {title}</Title>}
+      {title && titleSide === 'right' && (
+        <Title className="switch-title-right"> {title}</Title>
+      )}
     </SwitchComponent>
   );
 };

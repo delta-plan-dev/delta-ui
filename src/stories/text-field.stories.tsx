@@ -12,4 +12,7 @@ Default.args = {};
 export default {
   title: 'Text field',
   component: TextField,
+  args: {
+    width: 300,
+  },
 };

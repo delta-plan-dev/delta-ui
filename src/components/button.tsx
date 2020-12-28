@@ -1,15 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DeltaPrefixRefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';
+
+export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
+  label?: string;
+  variant?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
+  size?: 'small' | 'medium' | 'large';
+  isDisable?: boolean;
+  onClick: () => void;
+  as?: React.ElementType;
+}
+
+type ButtonType = DeltaPrefixRefForwardingComponent<'button', ButtonProps>;
+
+export const BaseButton: ButtonType = React.forwardRef(
+  (props: ButtonProps, ref) => {
+    const { as = 'button', ...other } = props;
+
+    const Component = as;
+
+    return <Component {...other} ref={ref} />;
+  },
+);
 
 interface IButton {
   variant: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
   size: 'small' | 'medium' | 'large';
 }
 
-const ButtonComponent = styled.button<IButton>`
+const ButtonComponent = styled(BaseButton)<IButton>`
+  display: inline-block;    
   margin: 0;
-  border: 0;
   outline: 0;
   padding: ${(props) => {
     switch (props.size) {
@@ -73,6 +95,7 @@ const ButtonComponent = styled.button<IButton>`
 
     return '#FFFFFF';
   }};
+  text-decoration: none;
   background: ${(props) => {
     if (!props.disabled) {
       if (
@@ -304,32 +327,27 @@ const ButtonComponent = styled.button<IButton>`
 }
 `;
 
-export interface IProps {
-  label?: string;
-  variant?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
-  size?: 'small' | 'medium' | 'large';
-  isDisable?: boolean;
-  onClick: () => void;
-}
+export const Button: ButtonType = React.forwardRef(
+  (props: ButtonProps, ref) => {
+    const {
+      children,
+      variant = 'primary',
+      label = 'BUTTON',
+      size = 'medium',
+      isDisable = false,
+      ...other
+    } = props;
 
-export const Button: React.FC<IProps> = (props) => {
-  const {
-    children,
-    variant = 'primary',
-    label = 'BUTTON',
-    size = 'medium',
-    isDisable = false,
-    onClick,
-  } = props;
-
-  return (
-    <ButtonComponent
-      variant={variant}
-      size={size}
-      onClick={onClick}
-      disabled={isDisable}
-    >
-      {children ?? label}
-    </ButtonComponent>
-  );
-};
+    return (
+      <ButtonComponent
+        variant={variant}
+        size={size}
+        disabled={isDisable}
+        {...other}
+        ref={ref}
+      >
+        {children ?? label}
+      </ButtonComponent>
+    );
+  },
+);

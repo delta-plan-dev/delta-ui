@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 import imgSelected from '../assets/images/select.svg';
@@ -43,6 +43,7 @@ export interface IProps {
   isDisable?: boolean;
   value: boolean;
   onClick: () => void;
+  style?: CSSProperties;
 }
 
 export const CheckBox: React.FC<IProps> = (props) => {
@@ -52,6 +53,8 @@ export const CheckBox: React.FC<IProps> = (props) => {
     isDisable = false,
     value = false,
     onClick,
+    style,
+    ...other
   } = props;
 
   const [checked, setChecked] = useState<boolean>(value);
@@ -62,7 +65,13 @@ export const CheckBox: React.FC<IProps> = (props) => {
   };
 
   return (
-    <CheckBoxComponent size={size} isDisable={isDisable} onClick={handleChange}>
+    <CheckBoxComponent
+      size={size}
+      isDisable={isDisable}
+      onClick={handleChange}
+      style={style}
+      {...other}
+    >
       <CheckBoxComponentValue className={checked ? 'active' : ''} />
       {label && <CheckBoxComponentLabel>{label}</CheckBoxComponentLabel>}
     </CheckBoxComponent>

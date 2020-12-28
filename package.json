@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.5.8",
+  "version": "0.6.8",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "pre-build": "rimraf dist/assets",
-    "post-build": "copyfiles -u 1 src/assets/**/* dist",
+    "post-build": "copyfiles -u 1 src/assets/**/** dist && copyfiles -u 1 src/declarations/**/* dist",
     "build": "npm run pre-build && tsc --jsx react && npm run post-build",
     "build-and-publish": "npm run build && npm publish",
     "storybook": "start-storybook -p 3000",
@@ -47,6 +47,7 @@
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "rimraf": "^3.0.2",
     "styled-components": "^5.2.1",

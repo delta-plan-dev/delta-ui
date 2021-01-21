@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type Omit<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
 export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
@@ -7,7 +9,7 @@ export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
   P;
 
 export interface DeltaPrefixAndClassNameOnlyProps {
-  bsPrefix?: string;
+  dPrefix?: string;
   className?: string;
 }
 

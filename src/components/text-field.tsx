@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
@@ -105,48 +105,23 @@ const Title = styled.div`
   }
 `;
 
-export interface IProps {
+export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  isDisable?: boolean;
-  value?: string;
-  onChange: (value: string) => void;
-  style?: CSSProperties;
-  width?: number | null;
 }
 
-export const TextField: React.FC<IProps> = (props) => {
-  const {
-    value = '',
-    onChange,
-    label = 'Label',
-    isDisable = false,
-    style,
-    width = null,
-    ...other
-  } = props;
-
-  const [textValue, setTextValue] = useState<string>(value);
-
-  const handleChange = (event: React.BaseSyntheticEvent) => {
-    setTextValue(event.target.value);
-    onChange(event.target.value);
-  };
+export const TextField: React.FC<TextFieldProps> = (props) => {
+  const { label, ...other } = props;
 
   return (
-    <TextFieldComponent style={style} width={width} {...other}>
+    <TextFieldComponent style={other} width={null}>
       <Label>
-        <Input
-          type={'text'}
-          value={textValue}
-          onChange={handleChange}
-          disabled={isDisable}
-        />
+        <Input {...other} value={!!other.value ? String(other.value) : ''} />
         <Fieldset>
-          <Legend className={textValue != '' ? 'active' : ''}>
-            <span>{label}</span>
+          <Legend className={!!other.value ? 'active' : ''}>
+            {label && <span>{label}</span>}
           </Legend>
         </Fieldset>
-        <Title className={textValue != '' ? 'active' : ''}>{label}</Title>
+        <Title className={!!other.value ? 'active' : ''}>{label}</Title>
       </Label>
     </TextFieldComponent>
   );

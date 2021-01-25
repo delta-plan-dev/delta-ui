@@ -50,6 +50,10 @@ const Component = styled.div`
     color: ${() => lightTheme.colors.primary.main};
   }
 
+  & .react-datepicker__day:hover {
+    background-color: ${() => lightTheme.colors.primary.hover};
+  }
+
   & .react-datepicker__day--outside-month {
     color: ${() => lightTheme.colors.gray.main};
   }
@@ -75,6 +79,12 @@ const Component = styled.div`
   & .react-datepicker__year-text--keyboard-selected {
     color: ${() => lightTheme.colors.white.main};
   }
+
+  & .react-datepicker__day--today,
+  & .react-datepicker__day--selected {
+    background-color: ${() => lightTheme.colors.primary.main};
+    color: ${() => lightTheme.colors.white.main};
+  }
 `;
 
 export interface IProps {
@@ -87,6 +97,7 @@ export const DeltaDatePicker: React.FC<IProps & ReactDatePickerProps> = (
   const {
     label = 'Label',
     locale = 'ru',
+    dateFormat = 'dd.MM.yyyy',
     customInput = <TextField width={300} label={label} />,
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
     ...other
@@ -96,6 +107,7 @@ export const DeltaDatePicker: React.FC<IProps & ReactDatePickerProps> = (
     <Component>
       <DatePicker
         locale={locale}
+        dateFormat={dateFormat}
         customInput={customInput}
         renderCustomHeader={renderCustomHeader}
         {...other}

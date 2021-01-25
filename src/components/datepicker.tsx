@@ -17,6 +17,7 @@ const Component = styled.div`
     background-color: ${() => lightTheme.colors.main.main};
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
+    border: unset;
   }
 
   & .react-datepicker__month-container {
@@ -52,6 +53,10 @@ const Component = styled.div`
 
   & .react-datepicker__day:hover {
     background-color: ${() => lightTheme.colors.primary.hover};
+  }
+
+  & .react-datepicker__day:focus {
+    outline: unset;
   }
 
   & .react-datepicker__day--outside-month {

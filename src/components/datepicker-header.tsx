@@ -15,6 +15,10 @@ const Button = styled.button`
   background: none;
   width: 24px;
   cursor: pointer;
+
+  &:focus {
+    outline: unset;
+  }
 `;
 const Value = styled.div`
   flex-grow: 1;

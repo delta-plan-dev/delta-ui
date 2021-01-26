@@ -12,7 +12,7 @@ import { DatePickerHeader } from './datepicker-header';
 
 registerLocale('ru', ru);
 
-const Component = styled.div`
+const Component = styled.div<{ isHideToday: boolean }>`
   & .react-datepicker {
     background-color: ${() => lightTheme.colors.main.main};
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
@@ -85,7 +85,16 @@ const Component = styled.div`
     color: ${() => lightTheme.colors.white.main};
   }
 
-  & .react-datepicker__day--today,
+  & .react-datepicker__day--today {
+    ${(props) =>
+      props.isHideToday ? 'background-color: unset !important;' : ''}
+    ${(props) =>
+      props.isHideToday
+        ? `color: ${lightTheme.colors.primary.main} !important;`
+        : ''}
+  }
+
+  & .react-datepicker__day--in-range,
   & .react-datepicker__day--selected {
     background-color: ${() => lightTheme.colors.primary.main};
     color: ${() => lightTheme.colors.white.main};
@@ -106,17 +115,19 @@ export const DatePicker = React.forwardRef<
     dateFormat = 'dd.MM.yyyy',
     customInput = <TextField width={300} label={label} />,
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
+    selectsRange = false,
     ...other
   } = props;
 
   return (
-    <Component>
+    <Component isHideToday={selectsRange}>
       <ReactDatePicker
         ref={ref}
         locale={locale}
         dateFormat={dateFormat}
         customInput={customInput}
         renderCustomHeader={renderCustomHeader}
+        selectsRange={selectsRange}
         {...other}
       />
     </Component>

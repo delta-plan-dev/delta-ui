@@ -21,6 +21,34 @@ const Template: Story<ComponentProps<typeof DatePicker>> = (args) => {
 export const Default = Template.bind({});
 Default.args = {};
 
+const RangeTemplate: Story<ComponentProps<typeof DatePicker>> = (args) => {
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+  return (
+    <DatePicker
+      {...args}
+      value={`${startDate ? startDate.toLocaleDateString('ru') : '...'} - ${
+        endDate ? endDate.toLocaleDateString('ru') : '...'
+      }`}
+      onChange={(dates) => {
+        if (Array.isArray(dates)) {
+          const [start, end] = dates;
+          setStartDate(start);
+          setEndDate(end);
+        }
+      }}
+      startDate={startDate}
+      endDate={endDate}
+      selectsRange
+      // inline
+    />
+  );
+};
+
+export const Range = RangeTemplate.bind({});
+Range.args = {};
+
 export default {
   title: 'DatePicker',
   component: DatePicker,

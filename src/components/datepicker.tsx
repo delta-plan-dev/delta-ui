@@ -12,7 +12,7 @@ import { DatePickerHeader } from './datepicker-header';
 
 registerLocale('ru', ru);
 
-const Component = styled.div<{ isHideToday: boolean }>`
+const Component = styled.div`
   & .react-datepicker {
     background-color: ${() => lightTheme.colors.main.main};
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
@@ -53,6 +53,7 @@ const Component = styled.div<{ isHideToday: boolean }>`
 
   & .react-datepicker__day:hover {
     background-color: ${() => lightTheme.colors.primary.hover};
+    color: ${() => lightTheme.colors.white.main};
   }
 
   & .react-datepicker__day:focus {
@@ -85,18 +86,16 @@ const Component = styled.div<{ isHideToday: boolean }>`
     color: ${() => lightTheme.colors.white.main};
   }
 
-  & .react-datepicker__day--today {
-    ${(props) =>
-      props.isHideToday ? 'background-color: unset !important;' : ''}
-    ${(props) =>
-      props.isHideToday
-        ? `color: ${lightTheme.colors.primary.main} !important;`
-        : ''}
-  }
-
+  & .react-datepicker__day--range-start,
+  & .react-datepicker__day--range-end,
   & .react-datepicker__day--in-range,
   & .react-datepicker__day--selected {
     background-color: ${() => lightTheme.colors.primary.main};
+    color: ${() => lightTheme.colors.white.main};
+  }
+
+  & .react-datepicker__day--in-selecting-range {
+    background-color: ${() => lightTheme.colors.primary.hover};
     color: ${() => lightTheme.colors.white.main};
   }
 `;
@@ -115,19 +114,17 @@ export const DatePicker = React.forwardRef<
     dateFormat = 'dd.MM.yyyy',
     customInput = <TextField width={300} label={label} />,
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
-    selectsRange = false,
     ...other
   } = props;
 
   return (
-    <Component isHideToday={selectsRange}>
+    <Component>
       <ReactDatePicker
         ref={ref}
         locale={locale}
         dateFormat={dateFormat}
         customInput={customInput}
         renderCustomHeader={renderCustomHeader}
-        selectsRange={selectsRange}
         {...other}
       />
     </Component>

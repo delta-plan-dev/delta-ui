@@ -67,6 +67,6 @@ export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
   
   // focus fix
   *:focus {
-    outline: none;
+    outline: none !important;
   }
 `;

@@ -8,23 +8,17 @@ export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
 > &
   P;
 
-export interface DeltaPrefixAndClassNameOnlyProps {
-  dPrefix?: string;
+export interface Props<As extends React.ElementType = React.ElementType> {
+  as?: As;
   className?: string;
 }
 
-export interface DeltaPrefixProps<
-  As extends React.ElementType = React.ElementType
-> extends DeltaPrefixAndClassNameOnlyProps {
-  as?: As;
-}
-
-export interface DeltaPrefixRefForwardingComponent<
+export interface RefForwardingComponent<
   TInitial extends React.ElementType,
   P = unknown
 > {
   <As extends React.ElementType = TInitial>(
-    props: React.PropsWithChildren<ReplaceProps<As, DeltaPrefixProps<As> & P>>,
+    props: React.PropsWithChildren<ReplaceProps<As, Props<As> & P>>,
     context?: any,
   ): React.ReactElement | null;
   propTypes?: any;

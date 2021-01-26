@@ -1,363 +1,187 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DeltaPrefixRefForwardingComponent } from '../helpers';
+import { RefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
-  label?: string;
-  variant?: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
-  size?: 'small' | 'medium' | 'large';
-  isDisable?: boolean;
-  onClick?: () => void;
+type variants =
+  | 'primary'
+  | 'negative'
+  | 'outline-primary'
+  | 'outline-negative'
+  | 'link';
+type sizes = 'small' | 'medium' | 'large';
+
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  variant?: variants;
+  size?: sizes;
   as?: React.ElementType;
 }
 
-type ButtonType = DeltaPrefixRefForwardingComponent<'button', ButtonProps>;
+type ButtonType = RefForwardingComponent<'button', ButtonProps>;
 
-export const BaseButton: ButtonType = React.forwardRef(
-  (props: ButtonProps, ref) => {
-    const { as = 'button', ...other } = props;
+export const BaseButton: ButtonType = React.forwardRef((props, ref) => {
+  const { as = 'button', ...other } = props;
 
-    const Component = as;
+  const Component = as;
 
-    return <Component {...other} ref={ref} />;
-  },
-);
+  return <Component ref={ref} {...other} />;
+});
 
-interface IButton {
-  variant: 'primary' | 'negative' | 'outline-primary' | 'outline-negative';
-  size: 'small' | 'medium' | 'large';
-  isDisable: boolean;
-}
+export const Component = styled(BaseButton)`
+  display: inline-block;
+  box-sizing: border-box;
 
-const ButtonComponent = styled(BaseButton)<IButton>`
-  display: inline-block;    
   margin: 0;
   outline: 0;
-  padding: ${(props) => {
-    switch (props.size) {
-      case 'small':
-        return '6px 12px';
-      case 'large':
-        return '12px 24px';
-      case 'medium':
-      default:
-        return '8px 16px';
-    }
-  }};
+  padding: 8px 16px;
+
   border-radius: 30px;
+
   font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: ${(props) => {
-    switch (props.size) {
-      case 'small':
-        return '10px';
-      case 'large':
-        return '16px';
-      case 'medium':
-      default:
-        return '12px';
-    }
-  }};
-  line-height: ${(props) => {
-    switch (props.size) {
-      case 'small':
-        return '10px';
-      case 'large':
-        return '16px';
-      case 'medium':
-      default:
-        return '12px';
-    }
-  }};
-  color: ${(props) => {
-    if (!props.isDisable) {
-      if (
-        props.variant == 'outline-primary' ||
-        props.variant == 'outline-negative'
-      ) {
-        switch (props.variant) {
-          case 'outline-negative':
-            return (
-              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
-            );
-          case 'outline-primary':
-          default:
-            return (
-              props.theme?.colors?.primary.main ??
-              lightTheme.colors.primary.main
-            );
-        }
-      } else {
-        return '#FFFFFF';
-      }
-    }
-
-    return '#FFFFFF';
-  }};
   text-decoration: none;
-  background: ${(props) => {
-    if (!props.isDisable) {
-      if (
-        props.variant !== 'outline-primary' &&
-        props.variant !== 'outline-negative'
-      ) {
-        switch (props.variant) {
-          case 'negative':
-            return (
-              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
-            );
-          case 'primary':
-          default:
-            return (
-              props.theme?.colors?.primary.main ??
-              lightTheme.colors.primary.main
-            );
-        }
-      } else {
-        return 'none';
-      }
-    } else {
-      return props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main;
-    }
-  }};
-  border: ${(props) => {
-    if (!props.isDisable) {
-      if (
-        props.variant == 'outline-primary' ||
-        props.variant == 'outline-negative'
-      ) {
-        switch (props.variant) {
-          case 'outline-negative':
-            return `2px solid ${
-              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
-            }`;
-          case 'outline-primary':
-          default:
-            return `2px solid ${
-              props.theme?.colors?.primary.main ??
-              lightTheme.colors.primary.main
-            }`;
-        }
-      } else {
-        switch (props.variant) {
-          case 'negative':
-            return `2px solid ${
-              props.theme?.colors?.error.main ?? lightTheme.colors.error.main
-            }`;
-          case 'primary':
-          default:
-            return `2px solid ${
-              props.theme?.colors?.primary.main ??
-              lightTheme.colors.primary.main
-            }`;
-        }
-      }
-    } else {
-      return `2px solid ${
-        props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
-      }`;
-    }
-  }};
+
   cursor: pointer;
 
-  :hover {
-    text-decoration: none;
-    background: ${(props) => {
-      if (!props.isDisable) {
-        if (
-          props.variant !== 'outline-primary' &&
-          props.variant !== 'outline-negative'
-        ) {
-          switch (props.variant) {
-            case 'negative':
-              return (
-                props.theme?.colors?.error.hover ??
-                lightTheme.colors.error.hover
-              );
-            case 'primary':
-            default:
-              return (
-                props.theme?.colors?.primary.hover ??
-                lightTheme.colors.primary.hover
-              );
-          }
-        } else {
-          return 'none';
-        }
-      } else {
-        return props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main;
-      }
-    }};
-    border: ${(props) => {
-      if (!props.isDisable) {
-        if (
-          props.variant == 'outline-primary' ||
-          props.variant == 'outline-negative'
-        ) {
-          switch (props.variant) {
-            case 'outline-negative':
-              return `2px solid ${
-                props.theme?.colors?.error.hover ??
-                lightTheme.colors.error.hover
-              }`;
-            case 'outline-primary':
-            default:
-              return `2px solid ${
-                props.theme?.colors?.primary.hover ??
-                lightTheme.colors.primary.hover
-              }`;
-          }
-        } else {
-          switch (props.variant) {
-            case 'negative':
-              return `2px solid ${
-                props.theme?.colors?.error.hover ??
-                lightTheme.colors.error.hover
-              }`;
-            case 'primary':
-            default:
-              return `2px solid ${
-                props.theme?.colors?.primary.hover ??
-                lightTheme.colors.primary.hover
-              }`;
-          }
-        }
-      } else {
-        return `2px solid ${
-          props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
-        }`;
-      }
-    }};
-    color: ${(props) => {
-      if (!props.isDisable) {
-        if (
-          props.variant == 'outline-primary' ||
-          props.variant == 'outline-negative'
-        ) {
-          switch (props.variant) {
-            case 'outline-negative':
-              return (
-                props.theme?.colors?.error.hover ??
-                lightTheme.colors.error.hover
-              );
-            case 'outline-primary':
-            default:
-              return (
-                props.theme?.colors?.primary.hover ??
-                lightTheme.colors.primary.hover
-              );
-          }
-        } else {
-          return '#FFFFFF';
-        }
-      }
-
-      return '#FFFFFF';
-    }};
+  &.small-button {
+    font-size: 10px;
+    line-height: 12px;
+  }
+  &.medium-button {
+    font-size: 12px;
+    line-height: 14px;
+  }
+  &.large-button {
+    font-size: 16px;
+    line-height: 18px;
   }
 
-  :active {
-    text-decoration: none;
-    background: ${(props) => {
-      if (!props.isDisable) {
-        switch (props.variant) {
-          case 'outline-primary':
-          case 'outline-negative':
-            return 'none';
-          case 'negative':
-            return (
-              props.theme?.colors?.error.active ??
-              lightTheme.colors.error.active
-            );
-          case 'primary':
-          default:
-            return (
-              props.theme?.colors?.primary.active ??
-              lightTheme.colors.primary.active
-            );
-        }
-      } else {
-        return `${
-          props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
-        }`;
-      }
-    }};
-    border: ${(props) => {
-      if (!props.isDisable) {
-        switch (props.variant) {
-          case 'outline-negative':
-          case 'negative':
-            return `2px solid ${
-              props.theme?.colors?.error.active ??
-              lightTheme.colors.error.active
-            }`;
-          case 'primary':
-          case 'outline-primary':
-          default:
-            return `2px solid ${
-              props.theme?.colors?.primary.active ??
-              lightTheme.colors.primary.active
-            }`;
-        }
-      } else {
-        return `2px solid ${
-          props.theme?.colors?.gray.main ?? lightTheme.colors.gray.main
-        }`;
-      }
-    }};
-    color: ${(props) => {
-      if (!props.isDisable) {
-        if (
-          props.variant == 'outline-primary' ||
-          props.variant == 'outline-negative'
-        ) {
-          switch (props.variant) {
-            case 'outline-negative':
-              return (
-                props.theme?.colors?.error.active ??
-                lightTheme.colors.error.active
-              );
-            case 'outline-primary':
-            default:
-              return (
-                props.theme?.colors?.primary.active ??
-                lightTheme.colors.primary.active
-              );
-          }
-        } else {
-          return '#FFFFFF';
-        }
-      }
-
-      return '#FFFFFF';
-    }};
+  &.primary-button {
+    background-color: ${(props) =>
+      props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+    color: ${(props) =>
+      props.theme.colors.white.main ?? lightTheme.colors.white.main};
   }
-}
+  &.primary-button:hover {
+    background-color: ${(props) =>
+      props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+  }
+  &.primary-button:active {
+    background-color: ${(props) =>
+      props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+  }
+
+  &.negative-button {
+    background-color: ${(props) =>
+      props.theme.colors.error.main ?? lightTheme.colors.error.main};
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.error.main ?? lightTheme.colors.error.main};
+    color: ${(props) =>
+      props.theme.colors.white.main ?? lightTheme.colors.white.main};
+  }
+  &.negative-button:hover {
+    background-color: ${(props) =>
+      props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
+  }
+  &.negative-button:active {
+    background-color: ${(props) =>
+      props.theme.colors.error.active ?? lightTheme.colors.error.active};
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.error.active ?? lightTheme.colors.error.active};
+  }
+
+  &.outline-primary-button {
+    background: none;
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+    color: ${(props) =>
+      props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+  }
+  &.outline-primary-button:hover {
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+    color: ${(props) =>
+      props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+  }
+  &.outline-primary-button:active {
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+    color: ${(props) =>
+      props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+  }
+
+  &.outline-negative-button {
+    background: none;
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.error.main ?? lightTheme.colors.error.main};
+    color: ${(props) =>
+      props.theme.colors.error.main ?? lightTheme.colors.error.main};
+  }
+  &.outline-negative-button:hover {
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
+    color: ${(props) =>
+      props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
+  }
+  &.outline-negative-button:active {
+    border: 2px solid
+      ${(props) =>
+        props.theme.colors.error.active ?? lightTheme.colors.error.active};
+    color: ${(props) =>
+      props.theme.colors.error.active ?? lightTheme.colors.error.active};
+  }
+
+  &.link-button {
+    background: none;
+    padding: 10px 18px;
+    border: none;
+    color: ${(props) =>
+      props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+  }
+  &.link-button:hover {
+    color: ${(props) =>
+      props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+    text-decoration: underline;
+  }
+  &.link-button:active {
+    color: ${(props) =>
+      props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+    text-decoration: underline;
+  }
 `;
 
 export const Button: ButtonType = React.forwardRef(
   (props: ButtonProps, ref) => {
-    const {
-      children,
-      variant = 'primary',
-      label = 'BUTTON',
-      size = 'medium',
-      isDisable = false,
-      ...other
-    } = props;
+    const { variant = 'primary', size = 'medium', className, ...other } = props;
 
     return (
-      <ButtonComponent
-        variant={variant}
-        size={size}
-        isDisable={isDisable}
-        {...other}
+      <Component
         ref={ref}
-      >
-        {children ?? label}
-      </ButtonComponent>
+        className={`${
+          className ? `${className} ` : ''
+        }${variant}-button ${size}-button`}
+        {...other}
+      />
     );
   },
 );

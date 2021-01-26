@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePicker, {
+import ReactDatePicker, {
   ReactDatePickerProps,
   registerLocale,
 } from 'react-datepicker';
@@ -96,9 +96,7 @@ export interface IProps {
   label?: string;
 }
 
-export const DeltaDatePicker: React.FC<IProps & ReactDatePickerProps> = (
-  props,
-) => {
+export const DatePicker: React.FC<IProps & ReactDatePickerProps> = (props) => {
   const {
     label = 'Label',
     locale = 'ru',
@@ -110,7 +108,7 @@ export const DeltaDatePicker: React.FC<IProps & ReactDatePickerProps> = (
 
   return (
     <Component>
-      <DatePicker
+      <ReactDatePicker
         locale={locale}
         dateFormat={dateFormat}
         customInput={customInput}

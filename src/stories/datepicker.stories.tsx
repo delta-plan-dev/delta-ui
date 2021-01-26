@@ -1,12 +1,12 @@
 import React, { ComponentProps, useState } from 'react';
-import { DeltaDatePicker } from '../components/datepicker';
+import { DatePicker } from '../components/datepicker';
 import { Story } from '@storybook/react';
 
-const Template: Story<ComponentProps<typeof DeltaDatePicker>> = (args) => {
+const Template: Story<ComponentProps<typeof DatePicker>> = (args) => {
   const [startDate, setStartDate] = useState<Date>(new Date());
 
   return (
-    <DeltaDatePicker
+    <DatePicker
       {...args}
       selected={startDate}
       onChange={(date) => {
@@ -23,5 +23,5 @@ Default.args = {};
 
 export default {
   title: 'DatePicker',
-  component: DeltaDatePicker,
+  component: DatePicker,
 };

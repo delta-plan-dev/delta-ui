@@ -1,10 +1,8 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 import { Story } from '@storybook/react';
 import { Button } from '../components/button';
 
-const Template: Story<ComponentProps<typeof Button>> = (args) => (
-  <Button {...args} />
-);
+const Template: Story = (args) => <Button {...args}>BUTTON</Button>;
 
 export const Default = Template.bind({});
 Default.args = {};
@@ -29,20 +27,25 @@ OutlineNegative.args = {
   variant: 'outline-negative',
 };
 
+export const Link = Template.bind({});
+Link.args = {
+  variant: 'link',
+};
+
 export default {
   title: 'Button',
   component: Button,
   argTypes: {
-    label: {
-      defaultValue: 'BUTTON',
-      control: {
-        type: 'text',
-      },
-    },
     variant: {
       control: {
         type: 'select',
-        options: ['primary', 'negative', 'outline-primary', 'outline-negative'],
+        options: [
+          'primary',
+          'negative',
+          'outline-primary',
+          'outline-negative',
+          'link',
+        ],
       },
     },
     size: {
@@ -52,7 +55,7 @@ export default {
         options: ['small', 'medium', 'large'],
       },
     },
-    isDisable: {
+    disabled: {
       defaultValue: false,
       type: 'boolean',
     },

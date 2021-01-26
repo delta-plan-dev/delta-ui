@@ -12,6 +12,6 @@ export { GlobalStyle } from './components/global-style';
 export { Button } from './components/button';
 export { Switch } from './components/switch';
 export { TextField } from './components/text-field';
-export { DeltaDatePicker as DatePicker } from './components/datepicker';
+export { DatePicker } from './components/datepicker';
 export { CheckBox } from './components/checkbox';
 export { Radio } from './components/radio';

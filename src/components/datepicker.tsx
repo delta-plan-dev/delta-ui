@@ -96,7 +96,10 @@ export interface IProps {
   label?: string;
 }
 
-export const DatePicker: React.FC<IProps & ReactDatePickerProps> = (props) => {
+export const DatePicker = React.forwardRef<
+  ReactDatePicker,
+  ReactDatePickerProps & IProps
+>((props, ref) => {
   const {
     label = 'Label',
     locale = 'ru',
@@ -109,6 +112,7 @@ export const DatePicker: React.FC<IProps & ReactDatePickerProps> = (props) => {
   return (
     <Component>
       <ReactDatePicker
+        ref={ref}
         locale={locale}
         dateFormat={dateFormat}
         customInput={customInput}
@@ -117,4 +121,4 @@ export const DatePicker: React.FC<IProps & ReactDatePickerProps> = (props) => {
       />
     </Component>
   );
-};
+});

@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
@@ -105,24 +105,27 @@ const Title = styled.div`
   }
 `;
 
-export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextFieldProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export const TextField: React.FC<TextFieldProps> = (props) => {
-  const { label, ...other } = props;
+export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
+  (props, ref) => {
+    const { label, width, value, ...other } = props;
 
-  return (
-    <TextFieldComponent style={other} width={null}>
-      <Label>
-        <Input {...other} value={!!other.value ? String(other.value) : ''} />
-        <Fieldset>
-          <Legend className={!!other.value ? 'active' : ''}>
-            {label && <span>{label}</span>}
-          </Legend>
-        </Fieldset>
-        <Title className={!!other.value ? 'active' : ''}>{label}</Title>
-      </Label>
-    </TextFieldComponent>
-  );
-};
+    return (
+      <TextFieldComponent width={!!width ? Number(width) : null}>
+        <Label>
+          <Input {...other} ref={ref} value={!!value ? String(value) : ''} />
+          <Fieldset>
+            <Legend className={!!value ? 'active' : ''}>
+              {label && <span>{label}</span>}
+            </Legend>
+          </Fieldset>
+          <Title className={!!value ? 'active' : ''}>{label}</Title>
+        </Label>
+      </TextFieldComponent>
+    );
+  },
+);

@@ -40,7 +40,6 @@ export const Component = styled(BaseButton)`
   font-family: Montserrat, sans-serif;
   font-style: normal;
   font-weight: 600;
-  text-decoration: none;
 
   cursor: pointer;
 
@@ -65,6 +64,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
     color: ${(props) =>
       props.theme.colors.white.main ?? lightTheme.colors.white.main};
+    text-decoration: none !important;
   }
   &.primary-button:hover {
     background-color: ${(props) =>
@@ -72,6 +72,7 @@ export const Component = styled(BaseButton)`
     border: 2px solid
       ${(props) =>
         props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+    text-decoration: none !important;
   }
   &.primary-button:active {
     background-color: ${(props) =>
@@ -79,6 +80,7 @@ export const Component = styled(BaseButton)`
     border: 2px solid
       ${(props) =>
         props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+    text-decoration: none !important;
   }
 
   &.negative-button {
@@ -89,6 +91,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.error.main ?? lightTheme.colors.error.main};
     color: ${(props) =>
       props.theme.colors.white.main ?? lightTheme.colors.white.main};
+    text-decoration: none !important;
   }
   &.negative-button:hover {
     background-color: ${(props) =>
@@ -96,6 +99,7 @@ export const Component = styled(BaseButton)`
     border: 2px solid
       ${(props) =>
         props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
+    text-decoration: none !important;
   }
   &.negative-button:active {
     background-color: ${(props) =>
@@ -103,6 +107,7 @@ export const Component = styled(BaseButton)`
     border: 2px solid
       ${(props) =>
         props.theme.colors.error.active ?? lightTheme.colors.error.active};
+    text-decoration: none !important;
   }
 
   &.outline-primary-button {
@@ -112,6 +117,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
     color: ${(props) =>
       props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+    text-decoration: none !important;
   }
   &.outline-primary-button:hover {
     border: 2px solid
@@ -119,6 +125,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
     color: ${(props) =>
       props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+    text-decoration: none !important;
   }
   &.outline-primary-button:active {
     border: 2px solid
@@ -126,6 +133,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
     color: ${(props) =>
       props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
+    text-decoration: none !important;
   }
 
   &.outline-negative-button {
@@ -135,6 +143,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.error.main ?? lightTheme.colors.error.main};
     color: ${(props) =>
       props.theme.colors.error.main ?? lightTheme.colors.error.main};
+    text-decoration: none !important;
   }
   &.outline-negative-button:hover {
     border: 2px solid
@@ -142,6 +151,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
     color: ${(props) =>
       props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
+    text-decoration: none !important;
   }
   &.outline-negative-button:active {
     border: 2px solid
@@ -149,6 +159,7 @@ export const Component = styled(BaseButton)`
         props.theme.colors.error.active ?? lightTheme.colors.error.active};
     color: ${(props) =>
       props.theme.colors.error.active ?? lightTheme.colors.error.active};
+    text-decoration: none !important;
   }
 
   &.link-button {
@@ -157,16 +168,17 @@ export const Component = styled(BaseButton)`
     border: none;
     color: ${(props) =>
       props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
+    text-decoration: underline !important;
   }
   &.link-button:hover {
     color: ${(props) =>
       props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
-    text-decoration: underline;
+    text-decoration: none !important;
   }
   &.link-button:active {
     color: ${(props) =>
       props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
-    text-decoration: underline;
+    text-decoration: none !important;
   }
 `;
 

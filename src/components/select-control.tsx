@@ -1,11 +1,55 @@
 import React from 'react';
-import type { ControlProps } from 'react-select';
+import type { ControlProps, GroupTypeBase } from 'react-select';
 
-export const SelectControl: React.FC<ControlProps<any, boolean>> = (props) => {
+export interface IProps
+  extends ControlProps<
+    {
+      label: string;
+      value: string;
+    },
+    false,
+    GroupTypeBase<{
+      label: string;
+      value: string;
+    }>
+  > {}
+
+export const css = ({
+  isDisabled,
+  isFocused,
+  theme: { colors, borderRadius, spacing },
+}: IProps) => ({
+  label: 'control',
+  alignItems: 'center',
+  backgroundColor: isDisabled ? colors.neutral5 : colors.neutral0,
+  borderColor: isDisabled
+    ? colors.neutral10
+    : isFocused
+    ? colors.primary
+    : colors.neutral20,
+  borderRadius: borderRadius,
+  borderStyle: 'solid',
+  borderWidth: 1,
+  boxShadow: isFocused ? `0 0 0 1px ${colors.primary}` : null,
+  cursor: 'default',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  minHeight: spacing.controlHeight,
+  outline: '0 !important',
+  position: 'relative',
+  transition: 'all 100ms',
+
+  '&:hover': {
+    borderColor: isFocused ? colors.primary : colors.neutral30,
+  },
+});
+
+export const SelectControl: React.FC<IProps> = (props) => {
   const {
     children,
     cx,
-    // getStyles,
+    getStyles,
     className,
     isDisabled,
     isFocused,
@@ -17,7 +61,7 @@ export const SelectControl: React.FC<ControlProps<any, boolean>> = (props) => {
   return (
     <div
       ref={innerRef}
-      // css={getStyles('control', props)}
+      style={getStyles('control', props)}
       className={cx(
         {
           control: true,

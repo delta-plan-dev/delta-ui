@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
-const Header = styled.div``;
+const Header = styled.div`
+  margin: 0.4rem;
+`;
 const HeaderRow = styled.div`
   display: flex;
   margin: 5px 0;
@@ -23,6 +25,12 @@ const Button = styled.button`
 const Value = styled.div`
   flex-grow: 1;
   font: normal normal 13px/18px Montserrat, sans-serif;
+  color: ${lightTheme.colors.black.main};
+`;
+const Day = styled.div`
+  flex-grow: 1;
+  margin: 0 3px;
+  font: normal normal 13px/16px Montserrat, sans-serif;
   color: ${lightTheme.colors.black.main};
 `;
 
@@ -157,6 +165,15 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
             />
           </svg>
         </Button>
+      </HeaderRow>
+      <HeaderRow>
+        <Day>пн</Day>
+        <Day>вт</Day>
+        <Day>ср</Day>
+        <Day>чт</Day>
+        <Day>пт</Day>
+        <Day>сб</Day>
+        <Day>вс</Day>
       </HeaderRow>
     </Header>
   );

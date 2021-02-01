@@ -18,7 +18,7 @@ export const Default = Template.bind({});
 Default.args = {};
 
 export default {
-  title: 'Text field',
+  title: 'TextField',
   component: TextField,
   args: {
     width: 300,

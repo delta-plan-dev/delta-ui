@@ -10,9 +10,11 @@ export { GlobalStyle } from './components/global-style';
 
 // Components
 export { Button } from './components/button';
-export { Switch } from './components/switch';
 export { TextField } from './components/text-field';
 export { DatePicker } from './components/datepicker';
 export { Select } from './components/select';
+export { AsyncSelect } from './components/async-select';
+export { CreatableSelect } from './components/creatable-select';
+export { Switch } from './components/switch';
 export { CheckBox } from './components/checkbox';
 export { Radio } from './components/radio';

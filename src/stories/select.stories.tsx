@@ -27,5 +27,7 @@ export default {
         value: 3,
       },
     ],
+    width: 300,
+    isClearable: true,
   },
 };

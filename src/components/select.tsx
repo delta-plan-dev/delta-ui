@@ -1,11 +1,28 @@
 import React from 'react';
 import ReactSelect, { Props } from 'react-select';
-import { SelectControl } from './select-control';
 
-export interface IProps extends Props {}
+export interface IProps extends Props {
+  label: string;
+  width: number;
+}
 
 export const Select = React.forwardRef<ReactSelect, IProps>((props, ref) => {
-  const { components = { Control: SelectControl }, ...other } = props;
+  const {
+    width,
+    styles = {
+      container: (provided) => {
+        if (!!width) {
+          return {
+            ...provided,
+            width: `${width}px`,
+          };
+        }
 
-  return <ReactSelect ref={ref} components={components} {...other} />;
+        return { ...provided };
+      },
+    },
+    ...other
+  } = props;
+
+  return <ReactSelect ref={ref} styles={styles} {...other} />;
 });

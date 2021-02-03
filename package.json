@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -17,6 +17,7 @@
     "post-build": "copyfiles -u 1 src/assets/**/** dist && copyfiles -u 1 src/declarations/**/* dist",
     "build": "npm run pre-build && tsc --jsx react && npm run post-build",
     "build-and-publish": "npm run build && npm publish",
+    "just-build-and-publish": "tsc --jsx react && npm publish",
     "storybook": "start-storybook -p 3000",
     "build-storybook": "build-storybook"
   },
@@ -32,15 +33,15 @@
     "react-select": ">=4"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.1.11",
-    "@storybook/addon-essentials": "^6.1.11",
-    "@storybook/addon-links": "^6.1.11",
-    "@storybook/addons": "^6.1.11",
-    "@storybook/node-logger": "^6.1.11",
+    "@storybook/addon-actions": "^6.1.16",
+    "@storybook/addon-essentials": "^6.1.16",
+    "@storybook/addon-links": "^6.1.16",
+    "@storybook/addons": "^6.1.16",
+    "@storybook/node-logger": "^6.1.16",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/preset-typescript": "^3.0.0",
-    "@storybook/react": "^6.1.11",
-    "@storybook/theming": "^6.1.11",
+    "@storybook/react": "^6.1.16",
+    "@storybook/theming": "^6.1.16",
     "@types/react": "^16.14.2",
     "@types/react-datepicker": "^3.1.3",
     "@types/react-dom": "^17.0.0",

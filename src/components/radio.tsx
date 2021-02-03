@@ -1,13 +1,13 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
 interface IRadio {
   size: 'small' | 'medium' | 'large';
-  isDisable: boolean;
+  disabled: boolean;
 }
 const RadioComponent = styled.label<IRadio>`
-  display: inline-flex;
+  display: flex;
   cursor: pointer;
 `;
 
@@ -30,50 +30,48 @@ const RadioComponentValue = styled.div`
 
 const RadioComponentLabel = styled.div`
   margin-left: 5px;
-  font: normal bold 14px/20px Montserrat, sans-serif;
+  font: normal normal 13px/20px Montserrat, sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;
 
 export interface IProps {
-  label?: string;
+  option: { value: any; label: any };
+  onClick?: (option: { value: any; label: any }) => void;
   size?: 'small' | 'medium' | 'large';
-  isDisable?: boolean;
-  value: boolean;
-  onClick: () => void;
+  disabled?: boolean;
+  checked?: boolean;
   style?: CSSProperties;
 }
 
 export const Radio: React.FC<IProps> = (props) => {
   const {
-    label,
+    option,
+    checked = false,
     size = 'medium',
-    isDisable = false,
-    value = false,
-    onClick,
+    disabled = false,
+    onClick = () => {},
     style,
     ...other
   } = props;
 
-  const [checked, setChecked] = useState<boolean>(value);
-
-  const handleChange = () => {
-    setChecked(!checked);
-    onClick();
-  };
-
   return (
     <RadioComponent
+      className={'radio-button'}
       size={size}
-      isDisable={isDisable}
-      onClick={handleChange}
+      disabled={disabled}
+      onClick={() => {
+        onClick(option);
+      }}
       style={style}
       {...other}
     >
       <RadioComponentValueWrapper className={checked ? 'active' : ''}>
         <RadioComponentValue className={checked ? 'active' : ''} />
       </RadioComponentValueWrapper>
-      {label && <RadioComponentLabel>{label}</RadioComponentLabel>}
+      {option.label && (
+        <RadioComponentLabel>{option.label}</RadioComponentLabel>
+      )}
     </RadioComponent>
   );
 };

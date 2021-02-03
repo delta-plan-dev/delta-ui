@@ -1,7 +1,7 @@
-import React, { ComponentProps, useEffect, useState } from 'react';
+import React from 'react';
 import { Story } from '@storybook/react';
 
-const Template: Story = (args) => {
+const Template: Story = () => {
   return (
     <>
       <div>

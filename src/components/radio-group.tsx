@@ -3,7 +3,7 @@ import { Radio } from './radio';
 import styled from 'styled-components';
 
 const Component = styled.div`
-  display: inline-flex;
+  display: flex;
 
   &.vertical {
     flex-direction: column;
@@ -22,7 +22,8 @@ const Component = styled.div`
   }
 
   &.horizontal .radio-button {
-    margin-right: 5px;
+    margin-right: 15px;
+    margin-bottom: 0;
   }
 
   &.horizontal .radio-button:last-child {

@@ -22,6 +22,7 @@ const RadioComponentValue = styled.div`
   background-color: ${(props) => props.theme.colors.white.main};
   border-radius: 50%;
   border: 4px solid ${(props) => props.theme.colors.white.main};
+  box-sizing: initial;
 
   &.active {
     background-color: ${(props) => props.theme.colors.primary.main};

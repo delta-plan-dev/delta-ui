@@ -31,7 +31,7 @@ const CheckBoxComponentValue = styled.div`
 
 const CheckBoxComponentLabel = styled.div`
   margin-left: 5px;
-  font: normal bold 14px/20px Montserrat, sans-serif;
+  font: normal normal 13px/20px Montserrat, sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;

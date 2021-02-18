@@ -13,15 +13,14 @@ const CheckBoxComponent = styled.label<ICheckBox>`
 `;
 
 const CheckBoxComponentValue = styled.div`
-  width: 18px;
-  height: 18px;
+  box-sizing: border-box !important;
+  width: 21px;
+  height: 21px;
   border: 1px solid ${(props) => props.theme.colors.gray.main};
   border-radius: 4px;
   background-color: ${(props) => props.theme.colors.white.main};
 
   &.active {
-    width: 20px;
-    height: 20px;
     border: 0 solid ${(props) => props.theme.colors.gray.main};
     background-image: url(${imgSelected});
     background-size: cover;
@@ -53,7 +52,6 @@ export const CheckBox: React.FC<IProps> = (props) => {
     isDisable = false,
     value = false,
     onClick,
-    style,
     ...other
   } = props;
 
@@ -69,7 +67,6 @@ export const CheckBox: React.FC<IProps> = (props) => {
       size={size}
       isDisable={isDisable}
       onClick={handleChange}
-      style={style}
       {...other}
     >
       <CheckBoxComponentValue className={checked ? 'active' : ''} />

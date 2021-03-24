@@ -5,6 +5,7 @@ import InputMask, {
   BeforeMaskedStateChangeStates,
   InputState,
 } from 'react-input-mask';
+import { Utils } from '../Utils';
 
 // @ts-ignore
 const TextFieldComponent = styled.div<{ width: number | string | null }>`
@@ -13,7 +14,7 @@ const TextFieldComponent = styled.div<{ width: number | string | null }>`
     typeof props.width == 'number'
       ? `width: ${props.width}px`
       : typeof props.width == 'string'
-      ? `width: ${props.width}px`
+      ? `width: ${props.width}`
       : ``};
   height: 50px;
 `;
@@ -154,7 +155,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const validValue = !!value ? String(value) : '';
 
     return (
-      <TextFieldComponent width={!!width ? width : null}>
+      <TextFieldComponent width={!!width ? Utils.tryParse(width) : null}>
         <Label>
           {!!mask ? (
             <MaskedInput value={validValue} mask={mask} {...other} />

@@ -30,7 +30,8 @@ Default.argTypes = {
 Default.args = {
   width: '50%',
   label: 'Label',
-  value: '',
+  value: 'Test',
+  maxLength: 10,
 };
 
 export const Masked = DefaultTemplate.bind({});

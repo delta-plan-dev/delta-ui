@@ -155,7 +155,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const validValue = !!value ? String(value) : '';
 
     return (
-      <TextFieldComponent width={!!width ? Utils.tryParse(width) : null}>
+      <TextFieldComponent width={Utils.tryParse(width)}>
         <Label>
           {!!mask ? (
             <MaskedInput

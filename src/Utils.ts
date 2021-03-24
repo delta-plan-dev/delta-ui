@@ -1,5 +1,9 @@
 export class Utils {
-  static tryParse(value: any): string | number {
+  static tryParse(value: any): string | number | null {
+    if (value == null) {
+      return null;
+    }
+
     const number = Number(value);
 
     if (!isNaN(number)) {

@@ -1,6 +1,7 @@
 import { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react';
 import { TextField } from '../components/text-field';
+import React from 'react';
 
 const DefaultTemplate: Story<ComponentProps<typeof TextField>> = (args) => {
   const [value, setValue] = useState(args.value);
@@ -27,14 +28,14 @@ Default.argTypes = {
   },
 };
 Default.args = {
-  width: 300,
+  width: '50%',
   label: 'Label',
   value: '',
 };
 
 export const Masked = DefaultTemplate.bind({});
 Masked.args = {
-  width: 300,
+  width: '50%',
   label: 'Masked input',
   value: '912',
   mask: '+7 (999) 999-99-99',

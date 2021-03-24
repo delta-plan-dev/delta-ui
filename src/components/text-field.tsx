@@ -158,7 +158,12 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       <TextFieldComponent width={!!width ? Utils.tryParse(width) : null}>
         <Label>
           {!!mask ? (
-            <MaskedInput value={validValue} mask={mask} {...other} />
+            <MaskedInput
+              value={validValue}
+              mask={mask}
+              inputRef={ref}
+              {...other}
+            />
           ) : (
             <Input {...other} ref={ref} value={validValue} />
           )}

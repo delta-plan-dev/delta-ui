@@ -6,6 +6,6 @@ export class Utils {
       return value;
     }
 
-    return String(value);
+    return value?.toString();
   }
 }

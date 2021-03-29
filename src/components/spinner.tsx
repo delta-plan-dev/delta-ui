@@ -14,7 +14,7 @@ const StyledSpinner = styled('span')<IProps>`
   }
 
   display: inline-block;
-  vertical-align: text-bottom;
+
   border: ${(props: IProps) => {
     const beam = props.beam;
     const sizeUnit = typeof beam == 'number' ? `${beam}px` : beam;

@@ -138,7 +138,7 @@ export interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface IMaskedProps {
-  mask?: string | Array<string | RegExp>;
+  mask?: string | Array<string | RegExp> | null;
   maskPlaceholder?: string | null;
   // maskChar?: string | null; // на версии 3 - maskPlaceholder
   alwaysShowMask?: boolean;

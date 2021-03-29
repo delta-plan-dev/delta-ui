@@ -30,9 +30,9 @@ const StyledSpinner = styled('span')<IProps>`
   }}
 `;
 
-const Spinner: React.FC<IProps> = React.memo((props) => {
+const Spinner: React.FC<IProps> =(props) => {
   const { size = 25, beam = 4 } = props;
   return <StyledSpinner size={size} beam={beam} {...props} />;
-});
+};
 
-export default Spinner
+export default React.memo(Spinner)

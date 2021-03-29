@@ -5,7 +5,7 @@ import InputMask, {
   BeforeMaskedStateChangeStates,
   InputState,
 } from 'react-input-mask';
-import { Utils } from '../Utils';
+import { Utils } from '../utils';
 
 // @ts-ignore
 const TextFieldComponent = styled.div<{ width: number | string | null }>`

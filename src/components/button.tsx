@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { RefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';

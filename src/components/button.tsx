@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';
 import Spinner from './spinner';
-
 
 type variants =
   | 'primary'

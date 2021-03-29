@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
-import Spinner from '../components/spinner';
+import { Spinner } from '../components/spinner';
 
 
 const Template: Story<ComponentProps<typeof Spinner>> = (props) => {
@@ -13,6 +13,6 @@ const Template: Story<ComponentProps<typeof Spinner>> = (props) => {
 };
 
 export const Default = Template.bind({});
-Default.args = { size: 30, beam: 4 };
+Default.args = { size: 'large', beam: 4 };
 
 export default { title: 'Spinner', component: Spinner };

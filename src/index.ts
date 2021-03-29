@@ -18,3 +18,5 @@ export { CreatableSelect } from './components/creatable-select';
 export { Switch } from './components/switch';
 export { CheckBox } from './components/checkbox';
 export { Radio } from './components/radio';
+export { RadioGroup } from './components/radio-group';
+export { Spinner } from './components/spinner';

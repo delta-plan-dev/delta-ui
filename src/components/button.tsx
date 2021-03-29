@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';
-import Spinner from './spinner';
+import { Spinner } from './spinner';
 
 type variants =
   | 'primary'
@@ -227,17 +227,6 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
       (size ? `${size}-button` : null),
     ].filter(value => value).join(' ');
 
-    const loadingSize = useMemo(() => {
-      switch (size) {
-        case 'small':
-          return 4
-        case 'medium':
-          return 6
-        case 'large':
-          return 9
-      }
-    }, [size])
-
     return (
       <Component
         ref={ref}
@@ -250,7 +239,7 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
         }}
         {...other}
       >
-        {loading && <Loading beam={'3.5px'} size={loadingSize}/>}
+        {loading && <Loading beam={'3.5px'} size={size}/>}
         {children}
       </Component>
 

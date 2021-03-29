@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { RefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';
+import Spinner from './spinner';
+
 
 type variants =
   | 'primary'
@@ -16,6 +18,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   size?: sizes;
   as?: React.ElementType;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 type ButtonType = RefForwardingComponent<'button', ButtonProps>;
@@ -191,7 +194,11 @@ export const Component = styled(BaseButton)`
     color: #FFFFFF !important;
     background-color: #bdbdbd;
     border-color: #bdbdbd !important;
-    cursor: not-allowed;
+    cursor: no-drop;
+  }
+  
+  &.loading:hover {
+    cursor: progress;
   }
   
   &.outline-primary-button.disabled, &.outline-negative-button.disabled {
@@ -200,19 +207,37 @@ export const Component = styled(BaseButton)`
 
 `;
 
+const Loading = styled(Spinner)`
+  margin-right: 5px;
+  vertical-align: top;
+`
+
 export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
   (props, ref) => {
     const {
+      loading = false,
       variant = 'primary', size = 'medium', disabled = false, onClick = () => {
-      }, className, ...other
+      }, className, children, ...other
     } = props;
 
     const classes = [
       className,
       (disabled ? 'disabled' : null),
+      (loading ? 'loading' : null),
       (variant ? `${variant}-button` : null),
       (size ? `${size}-button` : null),
     ].filter(value => value).join(' ');
+
+    const loadingSize = useMemo(() => {
+      switch (size) {
+        case 'small':
+          return 4
+        case 'medium':
+          return 6
+        case 'large':
+          return 9
+      }
+    }, [size])
 
     return (
       <Component
@@ -220,12 +245,16 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
         className={classes}
         onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           event?.preventDefault();
-          if (!disabled) {
+          if (!disabled && !loading) {
             onClick(event);
           }
         }}
         {...other}
-      />
+      >
+        {loading && <Loading beam={'3.5px'} size={loadingSize}/>}
+        {children}
+      </Component>
+
     );
   },
 );

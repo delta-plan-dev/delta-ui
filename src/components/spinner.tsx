@@ -1,7 +1,7 @@
-import React from 'react';
+import React  from 'react';
 import styled from 'styled-components';
 
-interface IProps {
+export interface IProps {
   size?: string | number;
   beam?: string | number;
 }
@@ -30,7 +30,9 @@ const StyledSpinner = styled('span')<IProps>`
   }}
 `;
 
-export const Spinner: React.FC<IProps> = (props) => {
+const Spinner: React.FC<IProps> = React.memo((props) => {
   const { size = 25, beam = 4 } = props;
   return <StyledSpinner size={size} beam={beam} {...props} />;
-};
+});
+
+export default Spinner

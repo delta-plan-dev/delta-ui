@@ -221,7 +221,7 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
       variant = 'primary',
       size = 'medium',
       disabled = false,
-      onClick = () => {},
+      onClick,
       className,
       children,
       ...other
@@ -237,15 +237,19 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
       .filter((value) => value)
       .join(' ');
 
+    const onClickHandler = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    ) => {
+      if (onClick && !disabled && !loading) {
+        onClick(event);
+      }
+    };
+
     return (
       <Component
         ref={ref}
         className={classes}
-        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-          if (!disabled && !loading) {
-            onClick(event);
-          }
-        }}
+        onClick={onClickHandler}
         {...other}
       >
         {loading && <Loading beam={'3.5px'} size={size} />}

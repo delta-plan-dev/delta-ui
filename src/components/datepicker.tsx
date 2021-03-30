@@ -102,6 +102,7 @@ const Component = styled.div`
 
 export interface IProps {
   label?: string;
+  width?: number;
 }
 
 export const DatePicker = React.forwardRef<
@@ -112,7 +113,8 @@ export const DatePicker = React.forwardRef<
     label = 'Label',
     locale = 'ru',
     dateFormat = 'dd.MM.yyyy',
-    customInput = <TextField width={300} label={label} />,
+    width = 300,
+    customInput = <TextField width={width} label={label} />,
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
     ...other
   } = props;

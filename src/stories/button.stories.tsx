@@ -27,8 +27,14 @@ OutlineNegative.args = {
   variant: 'outline-negative',
 };
 
-export const Link = Template.bind({});
-Link.args = {
+const TemplateLink: Story = (args) => (
+  <Button as={'a'} href={'http://google.com/'} target={'_blank'} {...args}>
+    BUTTON TO BACK
+  </Button>
+);
+
+export const LinkQ = TemplateLink.bind({});
+LinkQ.args = {
   variant: 'link',
 };
 

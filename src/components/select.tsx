@@ -1,12 +1,130 @@
 import React from 'react';
-import ReactSelect, { Props } from 'react-select';
+import ReactSelect, { ControlProps, Props } from 'react-select';
+import styled from 'styled-components';
+import { lightTheme } from '../themes/light-theme';
+import { RefForwardingComponent } from '../helpers';
 
 export interface IProps extends Props {
-  label: string;
-  width: number;
+  as?: React.ElementType;
+  label?: string;
+  width?: number;
 }
 
-export const Select = React.forwardRef<ReactSelect, IProps>((props, ref) => {
+const Wrapper = styled.div`
+  width: 100%;
+`;
+const ContentOfControl = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 7px 0;
+`;
+
+const Fieldset = styled.fieldset`
+  top: -5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0 8px;
+  overflow: hidden;
+  position: absolute;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: ${(props) =>
+    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+  pointer-events: none;
+  box-sizing: inherit;
+  transition-duration: 100ms;
+
+  ${ContentOfControl}:focus ~ & {
+    border-color: ${(props) =>
+      props.theme?.colors?.primary?.main ??
+      lightTheme.colors.primary.main} !important;
+  }
+
+  ${ContentOfControl}:hover ~ & {
+    border-color: ${(props) =>
+      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+  }
+`;
+
+const Legend = styled.legend`
+  width: auto;
+  max-width: 0.01px;
+  height: 11px;
+  display: block;
+  padding: 0;
+  visibility: hidden;
+  text-align: left;
+  box-sizing: inherit;
+  transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+
+  ${ContentOfControl}:focus ~ ${Fieldset} & {
+    max-width: 1000px;
+    transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
+  }
+
+  &.active {
+    max-width: 1000px;
+  }
+
+  span {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+    font: normal bold 14px Montserrat, sans-serif;
+  }
+`;
+
+const Title = styled.div`
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transition-duration: 100ms;
+  transform: translate(10px, -50%) scale(1);
+  font: normal bold 14px Montserrat, sans-serif;
+  color: ${(props) =>
+    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  cursor: text;
+
+  ${ContentOfControl}:focus ~ &, &.active {
+    transform: translate(10px, -50%) scale(0.75);
+    top: 0;
+  }
+`;
+
+const Control: React.FC<ControlProps<any, any>> = ({ ...props }) => {
+  const { children, hasValue, innerProps, innerRef } = props;
+  const { placeholder } = props.selectProps;
+
+  return (
+    <Wrapper>
+      <ContentOfControl ref={innerRef} {...innerProps}>
+        {children}
+      </ContentOfControl>
+      <Fieldset>
+        <Legend className={hasValue ? 'active' : ''}>
+          {placeholder && <span>{placeholder}</span>}
+        </Legend>
+      </Fieldset>
+      <Title className={hasValue ? 'active' : ''}>{placeholder}</Title>
+    </Wrapper>
+  );
+};
+
+type SelectType = RefForwardingComponent<typeof ReactSelect, IProps>;
+
+export const BaseSelect = React.forwardRef<SelectType, IProps>((props, ref) => {
+  const { as = ReactSelect, ...other } = props;
+
+  const Component = as;
+
+  return <Component ref={ref} {...other} />;
+});
+
+export const Select = React.forwardRef<ReactSelect, IProps>((props) => {
   const {
     width,
     styles = {
@@ -24,5 +142,15 @@ export const Select = React.forwardRef<ReactSelect, IProps>((props, ref) => {
     ...other
   } = props;
 
-  return <ReactSelect ref={ref} styles={styles} {...other} />;
+  // @ts-ignore
+  return (
+    <BaseSelect
+      components={{
+        Control,
+        Placeholder: () => null,
+      }}
+      styles={styles}
+      {...other}
+    />
+  );
 });

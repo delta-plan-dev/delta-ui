@@ -9,9 +9,9 @@ export interface IProps {
 }
 
 const sizeMap = {
-  small: 4,
-  medium: 6,
-  large: 9,
+  small: '10px',
+  medium: '12px',
+  large: '16px',
 };
 
 const StyledSpinner = styled('span')<IProps>`
@@ -24,18 +24,18 @@ const StyledSpinner = styled('span')<IProps>`
   display: inline-block;
 
   border: ${(props: IProps) => {
-  const beam = props.beam;
-  const sizeUnit = typeof beam == 'number' ? `${beam}px` : beam;
-  return `${sizeUnit} solid;  border-right: ${sizeUnit} solid transparent;`;
-}}
+    const beam = props.beam;
+    const sizeUnit = typeof beam == 'number' ? `${beam}px` : beam;
+    return `${sizeUnit} solid;  border-right: ${sizeUnit} solid transparent;`;
+  }}
     
   border-radius: 50%;
   animation: spinner-border 0.75s linear infinite;
   ${(props: IProps) => {
     const size = props.size;
-    const _sizeMap = sizeMap[size ?? ''] 
-    const sizeUnit = typeof size == 'number' ? `${size}px` : 
-                                        (_sizeMap ? `${_sizeMap}px` : size);
+    const _sizeMap = sizeMap[size ?? ''];
+    const sizeUnit =
+      typeof size == 'number' ? `${size}px` : _sizeMap ? _sizeMap : size;
     return `width: ${sizeUnit}; height: ${sizeUnit}`;
   }}
 `;

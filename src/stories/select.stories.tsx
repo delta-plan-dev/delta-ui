@@ -15,19 +15,34 @@ export default {
   args: {
     options: [
       {
-        label: '1',
+        label: '1 уааа',
         value: 1,
       },
       {
-        label: '2',
+        label: '2 авы',
         value: 2,
       },
       {
-        label: '3',
+        label: '3 оооо',
         value: 3,
       },
+      {
+        label: '4 Тест',
+        value: 4,
+      },
+      {
+        label: '5 текст',
+        value: 5,
+      },
+      {
+        label: '5 storez',
+        value: 6,
+      },
     ],
+    placeholder: 'Test select',
     width: 300,
     isClearable: true,
+    isMulti: true,
+    defaultOptions: true,
   },
 };

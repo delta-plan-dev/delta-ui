@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react';
 import { Button } from '../components/button';
 
-const Template: Story = (args) => <Button {...args}>BUTTON</Button>;
+const Template: Story = (args) => <Button {...args}>{args?.text}</Button>;
 
 export const Default = Template.bind({});
 Default.args = {};
@@ -42,6 +42,12 @@ export default {
   title: 'Button',
   component: Button,
   argTypes: {
+    text: {
+      defaultValue: 'BUTTON',
+      control: {
+        type: 'text',
+      },
+    },
     variant: {
       control: {
         type: 'select',

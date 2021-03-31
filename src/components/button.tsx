@@ -33,7 +33,10 @@ export const BaseButton = React.forwardRef<ButtonType, ButtonProps>(
 );
 
 export const Component = styled(BaseButton)`
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+
   box-sizing: border-box;
 
   margin: 0;
@@ -50,15 +53,15 @@ export const Component = styled(BaseButton)`
 
   &.small-button {
     font-size: 10px;
-    line-height: 12px;
+    min-height: 30px;
   }
   &.medium-button {
     font-size: 12px;
-    line-height: 14px;
+    min-height: 40px;
   }
   &.large-button {
     font-size: 16px;
-    line-height: 18px;
+    min-height: 50px;
   }
 
   &.primary-button {

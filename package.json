@@ -6,15 +6,15 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
     "name": "kawaii-snafy"
   },
   "scripts": {
-    "pre-build": "rimraf dist/assets",
-    "post-build": "copyfiles -u 1 src/assets/**/** dist && copyfiles -u 1 src/declarations/**/* dist",
+    "pre-build": "shx rm -r dist/assets && shx rm -r dist/declarations",
+    "post-build": "shx cp -R src/assets dist && shx cp -R src/declarations dist",
     "build": "npm run pre-build && tsc --jsx react && npm run post-build",
     "build-and-publish": "npm run build && npm publish",
     "just-build-and-publish": "tsc --jsx react && npm publish",
@@ -48,7 +48,6 @@
     "@types/react-input-mask": "^3.0.0",
     "@types/react-select": "^4.0.4",
     "@types/styled-components": "^5.1.7",
-    "copyfiles": "^2.4.1",
     "fork-ts-checker-webpack-plugin": "^6.0.8",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
@@ -58,9 +57,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-select": "^4.0.2",
-    "rimraf": "^3.0.2",
     "styled-components": "^5.2.1",
     "ts-loader": "^8.0.12",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "shx": "^0.3.3"
   }
 }

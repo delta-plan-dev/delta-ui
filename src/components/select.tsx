@@ -33,20 +33,20 @@ const Fieldset = styled.fieldset`
   border-width: 2px;
   border-radius: 8px;
   border-color: ${(props) =>
-    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+  props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
 
   ${ContentOfControl}:focus ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.primary?.main ??
-      lightTheme.colors.primary.main} !important;
+  props.theme?.colors?.primary?.main ??
+  lightTheme.colors.primary.main} !important;
   }
 
   ${ContentOfControl}:hover ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+  props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
 `;
 
@@ -86,7 +86,7 @@ const Title = styled.div`
   transform: translate(10px, -50%) scale(1);
   font: normal bold 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   cursor: text;
 
   ${ContentOfControl}:focus ~ &, &.active {
@@ -137,6 +137,12 @@ export const Select = React.forwardRef<ReactSelect, IProps>((props) => {
         }
 
         return { ...provided };
+      },
+      valueContainer: (base: React.CSSProperties): React.CSSProperties => {
+        return {
+          ...base,
+          padding: '0 15px',
+        };
       },
     },
     ...other

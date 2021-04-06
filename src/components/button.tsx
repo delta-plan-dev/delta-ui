@@ -53,15 +53,15 @@ export const Component = styled(BaseButton)`
 
   &.small-button {
     font-size: 10px;
-    min-height: 30px;
+    height: 28px;
   }
   &.medium-button {
     font-size: 12px;
-    min-height: 40px;
+    height: 36px;
   }
   &.large-button {
-    font-size: 16px;
-    min-height: 50px;
+    font-size: 15px;
+    height: 44px;
   }
 
   &.primary-button {

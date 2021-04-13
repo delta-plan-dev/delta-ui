@@ -29,7 +29,7 @@ export const BaseButton = React.forwardRef<ButtonType, ButtonProps>(
     const Component = as;
 
     return <Component ref={ref} {...other} />;
-  },
+  }
 );
 
 export const Component = styled(BaseButton)`
@@ -241,7 +241,7 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
       .join(' ');
 
     const onClickHandler = (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
       if (onClick && !disabled && !loading) {
         onClick(event);
@@ -259,5 +259,5 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
         {children}
       </Component>
     );
-  },
+  }
 );

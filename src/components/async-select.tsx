@@ -10,5 +10,5 @@ export interface IProps extends Props<any, any> {
 export const AsyncSelect = React.forwardRef<Async<Props<any, any>>, IProps>(
   (props) => {
     return <Select as={Async} {...props} />;
-  },
+  }
 );

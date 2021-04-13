@@ -8,7 +8,7 @@ export interface IProps {
   beam?: string | number;
 }
 
-const sizeMap = {
+const sizeMap: any = {
   small: '10px',
   medium: '12px',
   large: '16px',
@@ -33,7 +33,7 @@ const StyledSpinner = styled('span')<IProps>`
   animation: spinner-border 0.75s linear infinite;
   ${(props: IProps) => {
     const size = props.size;
-    const _sizeMap = sizeMap[size ?? ''];
+    const _sizeMap = sizeMap[size || ''];
     const sizeUnit =
       typeof size == 'number' ? `${size}px` : _sizeMap ? _sizeMap : size;
     return `width: ${sizeUnit}; height: ${sizeUnit}`;

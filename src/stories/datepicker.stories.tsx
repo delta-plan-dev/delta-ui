@@ -47,7 +47,7 @@ const RangeTemplate: Story<ComponentProps<typeof DatePicker>> = (args) => {
 };
 
 export const Range = RangeTemplate.bind({});
-Range.args = {};
+Range.args = { disabled: false };
 
 export default {
   title: 'DatePicker',

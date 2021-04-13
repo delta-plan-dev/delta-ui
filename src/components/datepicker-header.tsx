@@ -36,16 +36,22 @@ const Day = styled.div`
 
 interface IProps {
   date: Date;
-  changeYear(year: number): void;
-  changeMonth(month: number): void;
-  decreaseMonth(): void;
-  increaseMonth(): void;
   prevMonthButtonDisabled: boolean;
   nextMonthButtonDisabled: boolean;
-  decreaseYear(): void;
-  increaseYear(): void;
   prevYearButtonDisabled: boolean;
   nextYearButtonDisabled: boolean;
+
+  changeYear(year: number): void;
+
+  changeMonth(month: number): void;
+
+  decreaseMonth(): void;
+
+  increaseMonth(): void;
+
+  decreaseYear(): void;
+
+  increaseYear(): void;
 }
 
 export const DatePickerHeader: React.FC<IProps> = (props) => {

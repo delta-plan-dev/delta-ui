@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 import InputMask, {
   BeforeMaskedStateChangeStates,
   InputState,
 } from 'react-input-mask';
-import { Utils } from '../utils';
 
 // @ts-ignore
 const TextFieldComponent = styled.div<{ width: number | string | null }>`
@@ -18,8 +17,6 @@ const TextFieldComponent = styled.div<{ width: number | string | null }>`
       : ``};
   height: 50px;
 `;
-
-const Label = styled.label``;
 
 const Input = styled.input<{ value: string }>`
   position: absolute;
@@ -65,7 +62,7 @@ const Fieldset = styled.fieldset`
   overflow: hidden;
   position: absolute;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
     props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
@@ -79,7 +76,9 @@ const Fieldset = styled.fieldset`
       lightTheme.colors.primary.main} !important;
   }
 
-  ${Input}:hover ~ &, ${MaskedInput}:hover ~ & {
+  .disabled &,
+  ${Input}:hover ~ &,
+  ${MaskedInput}:hover ~ & {
     border-color: ${(props) =>
       props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
@@ -96,7 +95,8 @@ const Legend = styled.legend`
   box-sizing: inherit;
   transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 
-  ${Input}:focus ~ ${Fieldset} &, ${MaskedInput}:focus ~ ${Fieldset} & {
+  ${Input}:focus ~ ${Fieldset} &, 
+  ${MaskedInput}:focus ~ ${Fieldset} & {
     max-width: 1000px;
     transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
   }
@@ -109,32 +109,33 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal bold 14px Montserrat, sans-serif;
+    font: normal calc(14px * 0.8) Montserrat, sans-serif;
   }
 `;
 
 const Title = styled.div`
   position: absolute;
-  left: 5px;
+  left: 0;
   top: 50%;
   transition-duration: 100ms;
   transform: translate(10px, -50%) scale(1);
-  font: normal bold 14px Montserrat, sans-serif;
+  transform-origin: 0 0;
+  font: normal 14px Montserrat, sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   cursor: text;
 
-  &.active {
-    transform: translate(10px, -33px) scale(0.75);
-  }
-
-  ${Input}:focus ~ &, ${MaskedInput}:focus ~ & {
-    transform: translate(10px, -33px) scale(0.75);
+  &.active,
+  ${Input}:focus ~ &,
+  ${MaskedInput}:focus ~ & {
+    transform: translate(15px, -50%) scale(0.8);
+    top: 0;
   }
 `;
 
 export interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  disabled?: boolean;
 }
 
 export interface IMaskedProps {
@@ -143,38 +144,71 @@ export interface IMaskedProps {
   // maskChar?: string | null; // на версии 3 - maskPlaceholder
   alwaysShowMask?: boolean;
   beforeMaskedStateChange?: (
-    states: BeforeMaskedStateChangeStates,
+    states: BeforeMaskedStateChangeStates
   ) => InputState;
 }
 
 export interface TextFieldProps extends IProps, IMaskedProps {}
 
+const tryParse = (value: any): string | number | null => {
+  if (value == null) {
+    return null;
+  }
+
+  const number = Number(value);
+
+  if (!isNaN(number)) {
+    return number;
+  }
+
+  return value?.toString();
+};
+
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
-    const { label, width, value, mask, ...other } = props;
+    const {
+      disabled = false,
+      label,
+      width,
+      value,
+      mask,
+      children,
+      ...other
+    } = props;
     const validValue = !!value ? String(value) : '';
+    const [isFocused, setIsFocused] = useState<boolean>(false);
+
+    const isUsing = useMemo<boolean>(() => !!value || isFocused, [
+      value,
+      isFocused,
+    ]);
 
     return (
-      <TextFieldComponent width={Utils.tryParse(width)}>
-        <Label>
-          {!!mask ? (
-            <MaskedInput
-              value={validValue}
-              mask={mask}
-              inputRef={ref}
-              {...other}
-            />
-          ) : (
-            <Input {...other} ref={ref} value={validValue} />
-          )}
-          <Fieldset>
-            <Legend className={!!value ? 'active' : ''}>
-              {label && <span>{label}</span>}
-            </Legend>
-          </Fieldset>
-          <Title className={!!value ? 'active' : ''}>{label}</Title>
-        </Label>
+      <TextFieldComponent
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        className={disabled ? 'disabled' : ''}
+        width={tryParse(width)}
+      >
+        {!!mask ? (
+          <MaskedInput
+            disabled={disabled}
+            value={validValue}
+            mask={mask}
+            inputRef={ref}
+            {...other}
+          />
+        ) : (
+          <Input disabled={disabled} {...other} ref={ref} value={validValue} />
+        )}
+        {children}
+        <Fieldset>
+          <Legend className={isUsing ? 'active' : ''}>
+            {label && <span>{label}</span>}
+          </Legend>
+        </Fieldset>
+        <Title className={isUsing ? 'active' : ''}>{label}</Title>
       </TextFieldComponent>
     );
-  },
+  }
 );

@@ -3,7 +3,7 @@ import { Story } from '@storybook/react';
 import { Switch } from '../components/switch';
 
 const Template: Story<ComponentProps<typeof Switch> & { theme: number }> = (
-  args,
+  args
 ) => {
   const [value, setValue] = useState<boolean>(args.value);
 

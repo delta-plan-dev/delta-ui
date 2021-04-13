@@ -41,7 +41,7 @@ export const RadioGroup: React.FC<IProps> = (props) => {
   const { options, direction = 'vertical', onClick = () => {} } = props;
 
   const [checkList, setCheckList] = useState<boolean[]>(
-    options.map(() => false),
+    options.map(() => false)
   );
 
   return (

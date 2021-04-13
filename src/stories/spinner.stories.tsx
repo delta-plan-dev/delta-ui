@@ -2,7 +2,6 @@ import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
 import { Spinner } from '../components/spinner';
 
-
 const Template: Story<ComponentProps<typeof Spinner>> = (props) => {
   return (
     <>

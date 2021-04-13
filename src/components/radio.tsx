@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
 interface IRadio {
-  size: 'small' | 'medium' | 'large';
-  disabled: boolean;
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
 }
+
 const RadioComponent = styled.label<IRadio>`
   display: flex;
   cursor: pointer;
@@ -62,6 +63,9 @@ export const Radio: React.FC<IProps> = (props) => {
       size={size}
       disabled={disabled}
       onClick={() => {
+        if (disabled) {
+          return;
+        }
         onClick(option);
       }}
       style={style}

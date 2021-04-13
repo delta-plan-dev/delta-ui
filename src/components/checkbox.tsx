@@ -5,11 +5,14 @@ import imgSelected from '../assets/images/select.svg';
 
 interface ICheckBox {
   size: 'small' | 'medium' | 'large';
-  isDisable: boolean;
 }
+
 const CheckBoxComponent = styled.label<ICheckBox>`
   display: inline-flex;
   cursor: pointer;
+  &.disabled {
+    cursor: no-drop;
+  }
 `;
 
 const CheckBoxComponentValue = styled.div`
@@ -39,7 +42,9 @@ const CheckBoxComponentLabel = styled.div`
 export interface IProps {
   label?: string;
   size?: 'small' | 'medium' | 'large';
+  /** @deprecated */
   isDisable?: boolean;
+  disabled?: boolean;
   value: boolean;
   onClick: () => void;
   style?: CSSProperties;
@@ -49,7 +54,7 @@ export const CheckBox: React.FC<IProps> = (props) => {
   const {
     label,
     size = 'medium',
-    isDisable = false,
+    disabled = false,
     value = false,
     onClick,
     ...other
@@ -58,14 +63,18 @@ export const CheckBox: React.FC<IProps> = (props) => {
   const [checked, setChecked] = useState<boolean>(value);
 
   const handleChange = () => {
+    if (disabled) {
+      return;
+    }
+
     setChecked(!checked);
     onClick();
   };
 
   return (
     <CheckBoxComponent
+      className={disabled ? 'disabled' : ''}
       size={size}
-      isDisable={isDisable}
       onClick={handleChange}
       {...other}
     >

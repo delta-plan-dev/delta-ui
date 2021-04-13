@@ -8,10 +8,16 @@ export interface IProps extends Props {
   as?: React.ElementType;
   label?: string;
   width?: number;
+  disabled?: boolean;
 }
 
 const Wrapper = styled.div`
   width: 100%;
+
+  .disabled & {
+    cursor: no-drop;
+    pointer-events: auto;
+  }
 `;
 const ContentOfControl = styled.div`
   display: flex;
@@ -30,23 +36,24 @@ const Fieldset = styled.fieldset`
   overflow: hidden;
   position: absolute;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
-  props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
 
   ${ContentOfControl}:focus ~ & {
     border-color: ${(props) =>
-  props.theme?.colors?.primary?.main ??
-  lightTheme.colors.primary.main} !important;
+      props.theme?.colors?.primary?.main ??
+      lightTheme.colors.primary.main} !important;
   }
 
+  .disabled &,
   ${ContentOfControl}:hover ~ & {
     border-color: ${(props) =>
-  props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
 `;
 
@@ -74,23 +81,25 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal bold 14px Montserrat, sans-serif;
+    font: normal calc(14px * 0.8) Montserrat, sans-serif;
   }
 `;
 
 const Title = styled.div`
   position: absolute;
-  left: 5px;
+  left: 0;
   top: 50%;
   transition-duration: 100ms;
   transform: translate(10px, -50%) scale(1);
-  font: normal bold 14px Montserrat, sans-serif;
+  transform-origin: 0 0;
+  font: normal 14px Montserrat, sans-serif;
   color: ${(props) =>
-  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   cursor: text;
 
-  ${ContentOfControl}:focus ~ &, &.active {
-    transform: translate(10px, -50%) scale(0.75);
+  &.active,
+  ${ContentOfControl}:focus ~ & {
+    transform: translate(15px, -50%) scale(0.8);
     top: 0;
   }
 `;
@@ -98,18 +107,18 @@ const Title = styled.div`
 const Control: React.FC<ControlProps<any, any>> = ({ ...props }) => {
   const { children, hasValue, innerProps, innerRef } = props;
   const { placeholder } = props.selectProps;
-
+  let isActive = hasValue || props.isFocused;
   return (
     <Wrapper>
       <ContentOfControl ref={innerRef} {...innerProps}>
         {children}
       </ContentOfControl>
       <Fieldset>
-        <Legend className={hasValue ? 'active' : ''}>
+        <Legend className={isActive ? 'active' : ''}>
           {placeholder && <span>{placeholder}</span>}
         </Legend>
       </Fieldset>
-      <Title className={hasValue ? 'active' : ''}>{placeholder}</Title>
+      <Title className={isActive ? 'active' : ''}>{placeholder}</Title>
     </Wrapper>
   );
 };
@@ -127,6 +136,8 @@ export const BaseSelect = React.forwardRef<SelectType, IProps>((props, ref) => {
 export const Select = React.forwardRef<ReactSelect, IProps>((props) => {
   const {
     width,
+    isDisabled,
+    disabled = isDisabled,
     styles = {
       container: (provided) => {
         if (!!width) {
@@ -151,6 +162,9 @@ export const Select = React.forwardRef<ReactSelect, IProps>((props) => {
   // @ts-ignore
   return (
     <BaseSelect
+      className={disabled && 'disabled'}
+      isDisabled={disabled}
+      menuPortalTarget={document.body}
       components={{
         Control,
         Placeholder: () => null,

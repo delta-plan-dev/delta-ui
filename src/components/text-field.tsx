@@ -1,4 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, {
+  forwardRef,
+  InputHTMLAttributes,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 import InputMask, {
@@ -6,7 +12,6 @@ import InputMask, {
   InputState,
 } from 'react-input-mask';
 
-// @ts-ignore
 const TextFieldComponent = styled.div<{ width: number | string | null }>`
   position: relative;
   ${(props) =>
@@ -133,7 +138,21 @@ const Title = styled.div`
   }
 `;
 
-export interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
+const tryParse = (value: any): string | number | null => {
+  if (value == null) {
+    return null;
+  }
+
+  const number = Number(value);
+
+  if (!isNaN(number)) {
+    return number;
+  }
+
+  return value?.toString();
+};
+
+export interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   disabled?: boolean;
 }
@@ -150,21 +169,7 @@ export interface IMaskedProps {
 
 export interface TextFieldProps extends IProps, IMaskedProps {}
 
-const tryParse = (value: any): string | number | null => {
-  if (value == null) {
-    return null;
-  }
-
-  const number = Number(value);
-
-  if (!isNaN(number)) {
-    return number;
-  }
-
-  return value?.toString();
-};
-
-export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {
       disabled = false,
@@ -175,13 +180,27 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       children,
       ...other
     } = props;
+
+    const inputRef = useRef(null);
+
+    // hook for using outer ref of this component
+    useLayoutEffect(() => {
+      if (!ref || !inputRef) {
+        return;
+      }
+
+      if (typeof ref === 'function') {
+        ref(inputRef.current);
+        return;
+      }
+
+      ref.current = inputRef.current;
+    }, [inputRef]);
+
     const validValue = !!value ? String(value) : '';
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
-    const isUsing = useMemo<boolean>(() => !!value || isFocused, [
-      value,
-      isFocused,
-    ]);
+    const isUsing = !!value || isFocused;
 
     return (
       <TextFieldComponent
@@ -195,11 +214,16 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             disabled={disabled}
             value={validValue}
             mask={mask}
-            inputRef={ref}
+            ref={inputRef}
             {...other}
           />
         ) : (
-          <Input disabled={disabled} {...other} ref={ref} value={validValue} />
+          <Input
+            disabled={disabled}
+            value={validValue}
+            ref={inputRef}
+            {...other}
+          />
         )}
         {children}
         <Fieldset>
@@ -207,7 +231,20 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             {label && <span>{label}</span>}
           </Legend>
         </Fieldset>
-        <Title className={isUsing ? 'active' : ''}>{label}</Title>
+        <Title
+          className={isUsing ? 'active' : ''}
+          onClick={() => {
+            if (disabled) {
+              return;
+            }
+            setIsFocused(true);
+
+            const currentInput: any = inputRef?.current;
+            currentInput?.focus();
+          }}
+        >
+          {label}
+        </Title>
       </TextFieldComponent>
     );
   }

@@ -44,6 +44,7 @@ const Fieldset = styled.fieldset`
   box-sizing: inherit;
   transition-duration: 100ms;
 
+  &.focused,
   ${ContentOfControl}:focus ~ & {
     border-color: ${(props) =>
       props.theme?.colors?.primary?.main ??
@@ -73,7 +74,7 @@ const Legend = styled.legend`
     transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
   }
 
-  &.active {
+  .active & {
     max-width: 1000px;
   }
 
@@ -105,20 +106,25 @@ const Title = styled.div`
 `;
 
 const Control: React.FC<ControlProps<any, any>> = ({ ...props }) => {
-  const { children, hasValue, innerProps, innerRef } = props;
+  const { children, hasValue, innerProps, innerRef, isFocused } = props;
   const { placeholder } = props.selectProps;
-  let isActive = hasValue || props.isFocused;
+
+  const controlClasses = [
+    (hasValue || isFocused) && 'active',
+    isFocused && 'focused',
+  ]
+    .filter((el) => el)
+    .join(' ');
+
   return (
     <Wrapper>
       <ContentOfControl ref={innerRef} {...innerProps}>
         {children}
       </ContentOfControl>
-      <Fieldset>
-        <Legend className={isActive ? 'active' : ''}>
-          {placeholder && <span>{placeholder}</span>}
-        </Legend>
+      <Fieldset className={controlClasses}>
+        <Legend>{placeholder && <span>{placeholder}</span>}</Legend>
       </Fieldset>
-      <Title className={isActive ? 'active' : ''}>{placeholder}</Title>
+      <Title className={controlClasses}>{placeholder}</Title>
     </Wrapper>
   );
 };
@@ -159,7 +165,6 @@ export const Select = React.forwardRef<ReactSelect, IProps>((props) => {
     ...other
   } = props;
 
-  // @ts-ignore
   return (
     <BaseSelect
       className={disabled && 'disabled'}

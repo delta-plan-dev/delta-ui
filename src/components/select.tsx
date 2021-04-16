@@ -39,7 +39,7 @@ const Fieldset = styled.fieldset`
   border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
-    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+  props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
@@ -47,14 +47,14 @@ const Fieldset = styled.fieldset`
   &.focused,
   ${ContentOfControl}:focus ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.primary?.main ??
-      lightTheme.colors.primary.main} !important;
+  props.theme?.colors?.primary?.main ??
+  lightTheme.colors.primary.main} !important;
   }
 
   .disabled &,
   ${ContentOfControl}:hover ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+  props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
 `;
 
@@ -95,8 +95,8 @@ const Title = styled.div`
   transform-origin: 0 0;
   font: normal 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
-  cursor: text;
+  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  pointer-events: none;
 
   &.active,
   ${ContentOfControl}:focus ~ & {
@@ -124,7 +124,7 @@ const Control: React.FC<ControlProps<any, any>> = ({ ...props }) => {
       <Fieldset className={controlClasses}>
         <Legend>{placeholder && <span>{placeholder}</span>}</Legend>
       </Fieldset>
-      <Title className={controlClasses}>{placeholder}</Title>
+      <Title className={controlClasses} >{placeholder}</Title>
     </Wrapper>
   );
 };

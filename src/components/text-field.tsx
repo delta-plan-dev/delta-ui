@@ -3,7 +3,6 @@ import React, {
   InputHTMLAttributes,
   useLayoutEffect,
   useRef,
-  useState,
 } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
@@ -15,11 +14,11 @@ import InputMask, {
 const TextFieldComponent = styled.div<{ width: number | string | null }>`
   position: relative;
   ${(props) =>
-    typeof props.width == 'number'
-      ? `width: ${props.width}px`
-      : typeof props.width == 'string'
-      ? `width: ${props.width}`
-      : ``};
+  typeof props.width == 'number'
+    ? `width: ${props.width}px`
+    : typeof props.width == 'string'
+    ? `width: ${props.width}`
+    : ``};
   height: 50px;
 `;
 
@@ -37,7 +36,7 @@ const Input = styled.input<{ value: string }>`
   box-sizing: border-box;
   font: normal 400 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
 `;
 
 const MaskedInput = styled(InputMask)`
@@ -54,7 +53,7 @@ const MaskedInput = styled(InputMask)`
   box-sizing: border-box;
   font: normal 400 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
 `;
 
 const Fieldset = styled.fieldset`
@@ -70,22 +69,22 @@ const Fieldset = styled.fieldset`
   border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
-    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+  props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
 
   ${Input}:focus ~ &, ${MaskedInput}:focus ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.primary?.main ??
-      lightTheme.colors.primary.main} !important;
+  props.theme?.colors?.primary?.main ??
+  lightTheme.colors.primary.main} !important;
   }
 
   .disabled &,
   ${Input}:hover ~ &,
   ${MaskedInput}:hover ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+  props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
 `;
 
@@ -127,8 +126,8 @@ const Title = styled.div`
   transform-origin: 0 0;
   font: normal 14px Montserrat, sans-serif;
   color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
-  cursor: text;
+  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  pointer-events: none;
 
   &.active,
   ${Input}:focus ~ &,
@@ -163,11 +162,12 @@ export interface IMaskedProps {
   // maskChar?: string | null; // на версии 3 - maskPlaceholder
   alwaysShowMask?: boolean;
   beforeMaskedStateChange?: (
-    states: BeforeMaskedStateChangeStates
+    states: BeforeMaskedStateChangeStates,
   ) => InputState;
 }
 
-export interface TextFieldProps extends IProps, IMaskedProps {}
+export interface TextFieldProps extends IProps, IMaskedProps {
+}
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
@@ -198,17 +198,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }, [inputRef]);
 
     const validValue = !!value ? String(value) : '';
-    const [isFocused, setIsFocused] = useState<boolean>(false);
-
-    const isUsing = !!value || isFocused;
+    const isUsing = !!value;
 
     return (
       <TextFieldComponent
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
         className={disabled ? 'disabled' : ''}
         width={tryParse(width)}
       >
+        {children}
         {!!mask ? (
           <MaskedInput
             disabled={disabled}
@@ -225,7 +222,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             {...other}
           />
         )}
-        {children}
         <Fieldset>
           <Legend className={isUsing ? 'active' : ''}>
             {label && <span>{label}</span>}
@@ -233,19 +229,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         </Fieldset>
         <Title
           className={isUsing ? 'active' : ''}
-          onClick={() => {
-            if (disabled) {
-              return;
-            }
-            setIsFocused(true);
-
-            const currentInput: any = inputRef?.current;
-            currentInput?.focus();
-          }}
         >
           {label}
         </Title>
       </TextFieldComponent>
     );
-  }
+  },
 );

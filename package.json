@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -28,7 +28,7 @@
   ],
   "peerDependencies": {
     "react-datepicker": ">=3",
-    "react-input-mask": ">=3",
+    "react-input-mask": ">=3.0.0-alpha.2",
     "react-select": ">=4",
     "styled-components": ">=5"
   },

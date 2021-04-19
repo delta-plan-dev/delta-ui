@@ -12,7 +12,11 @@ import { DatePickerHeader } from './datepicker-header';
 
 registerLocale('ru', ru);
 
-const Component = styled.div`
+const Component = styled.div<{ width: string }>`
+  & .react-datepicker-wrapper {
+    width: ${(props) => props.width};
+  }
+
   & .react-datepicker {
     background-color: ${() => lightTheme.colors.main.main};
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
@@ -114,17 +118,17 @@ export const DatePicker = React.forwardRef<
     label = 'Label',
     locale = 'ru',
     dateFormat = 'dd.MM.yyyy',
-    width = 300,
+    width,
     isDisabled = false,
     customInput = (
-      <TextField disabled={isDisabled} width={width} label={label} />
+      <TextField disabled={isDisabled} width={width ?? '100%'} label={label} />
     ),
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
     ...other
   } = props;
 
   return (
-    <Component>
+    <Component width={!!width ? `${width}px` : '100%'}>
       <ReactDatePicker
         ref={ref}
         locale={locale}

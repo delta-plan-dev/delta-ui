@@ -103,7 +103,7 @@ const Component = styled.div`
 export interface IProps {
   label?: string;
   width?: number;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 export const DatePicker = React.forwardRef<
@@ -115,8 +115,10 @@ export const DatePicker = React.forwardRef<
     locale = 'ru',
     dateFormat = 'dd.MM.yyyy',
     width = 300,
-    disabled = false,
-    customInput = <TextField disabled={disabled} width={width} label={label} />,
+    isDisabled = false,
+    customInput = (
+      <TextField disabled={isDisabled} width={width} label={label} />
+    ),
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
     ...other
   } = props;
@@ -129,7 +131,7 @@ export const DatePicker = React.forwardRef<
         dateFormat={dateFormat}
         customInput={customInput}
         renderCustomHeader={renderCustomHeader}
-        disabled={disabled}
+        disabled={isDisabled}
         {...other}
       />
     </Component>

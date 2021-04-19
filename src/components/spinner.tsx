@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 type sizes = 'small' | 'medium' | 'large';
 
-export interface IProps {
+export interface ISpinnerComponent {
   size?: sizes | string | number;
   beam?: string | number;
 }
@@ -14,7 +14,7 @@ const sizeMap: any = {
   large: '16px',
 };
 
-const StyledSpinner = styled('span')<IProps>`
+const StyledSpinner = styled('span')<ISpinnerComponent>`
   @keyframes spinner-border {
     to {
       transform: rotate(1turn);
@@ -23,7 +23,7 @@ const StyledSpinner = styled('span')<IProps>`
 
   display: inline-block;
 
-  border: ${(props: IProps) => {
+  border: ${(props: ISpinnerComponent) => {
     const beam = props.beam;
     const sizeUnit = typeof beam == 'number' ? `${beam}px` : beam;
     return `${sizeUnit} solid;  border-right: ${sizeUnit} solid transparent;`;
@@ -31,7 +31,7 @@ const StyledSpinner = styled('span')<IProps>`
     
   border-radius: 50%;
   animation: spinner-border 0.75s linear infinite;
-  ${(props: IProps) => {
+  ${(props: ISpinnerComponent) => {
     const size = props.size;
     const _sizeMap = sizeMap[size || ''];
     const sizeUnit =
@@ -40,10 +40,8 @@ const StyledSpinner = styled('span')<IProps>`
   }}
 `;
 
-const SpinnerComponent: React.FC<IProps> = (props) => {
+export const Spinner: React.FC<ISpinnerComponent> = (props) => {
   let { size = 'large', beam = 4 } = props;
 
   return <StyledSpinner size={size} beam={beam} {...props} />;
 };
-
-export const Spinner = React.memo(SpinnerComponent);

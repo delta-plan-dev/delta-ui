@@ -44,7 +44,7 @@ export interface IProps {
   size?: 'small' | 'medium' | 'large';
   /** @deprecated */
   isDisable?: boolean;
-  disabled?: boolean;
+  isDisabled?: boolean;
   value: boolean;
   onClick: () => void;
   style?: CSSProperties;
@@ -54,7 +54,7 @@ export const CheckBox: React.FC<IProps> = (props) => {
   const {
     label,
     size = 'medium',
-    disabled = false,
+    isDisabled = false,
     value = false,
     onClick,
     ...other
@@ -63,7 +63,7 @@ export const CheckBox: React.FC<IProps> = (props) => {
   const [checked, setChecked] = useState<boolean>(value);
 
   const handleChange = () => {
-    if (disabled) {
+    if (isDisabled) {
       return;
     }
 
@@ -73,7 +73,7 @@ export const CheckBox: React.FC<IProps> = (props) => {
 
   return (
     <CheckBoxComponent
-      className={disabled ? 'disabled' : ''}
+      className={isDisabled ? 'disabled' : ''}
       size={size}
       onClick={handleChange}
       {...other}

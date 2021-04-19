@@ -14,11 +14,11 @@ import InputMask, {
 const TextFieldComponent = styled.div<{ width: number | string | null }>`
   position: relative;
   ${(props) =>
-  typeof props.width == 'number'
-    ? `width: ${props.width}px`
-    : typeof props.width == 'string'
-    ? `width: ${props.width}`
-    : ``};
+    typeof props.width == 'number'
+      ? `width: ${props.width}px`
+      : typeof props.width == 'string'
+      ? `width: ${props.width}`
+      : ``};
   height: 50px;
 `;
 
@@ -36,7 +36,7 @@ const Input = styled.input<{ value: string }>`
   box-sizing: border-box;
   font: normal 400 14px Montserrat, sans-serif;
   color: ${(props) =>
-  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
 `;
 
 const MaskedInput = styled(InputMask)`
@@ -53,7 +53,7 @@ const MaskedInput = styled(InputMask)`
   box-sizing: border-box;
   font: normal 400 14px Montserrat, sans-serif;
   color: ${(props) =>
-  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
 `;
 
 const Fieldset = styled.fieldset`
@@ -69,29 +69,29 @@ const Fieldset = styled.fieldset`
   border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
-  props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
 
   ${Input}:focus ~ &, ${MaskedInput}:focus ~ & {
     border-color: ${(props) =>
-  props.theme?.colors?.primary?.main ??
-  lightTheme.colors.primary.main} !important;
+      props.theme?.colors?.primary?.main ??
+      lightTheme.colors.primary.main} !important;
   }
 
   .disabled &,
   ${Input}:hover ~ &,
   ${MaskedInput}:hover ~ & {
     border-color: ${(props) =>
-  props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
 `;
 
 const Legend = styled.legend`
   width: auto;
   max-width: 0.01px;
-  height: 11px;
+  height: 10px;
   display: block;
   padding: 0;
   visibility: hidden;
@@ -113,7 +113,7 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal calc(14px * 0.8) Montserrat, sans-serif;
+    font: normal calc(15px * 0.8) Montserrat, sans-serif;
   }
 `;
 
@@ -126,7 +126,7 @@ const Title = styled.div`
   transform-origin: 0 0;
   font: normal 14px Montserrat, sans-serif;
   color: ${(props) =>
-  props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   pointer-events: none;
 
   &.active,
@@ -153,7 +153,7 @@ const tryParse = (value: any): string | number | null => {
 
 export interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 export interface IMaskedProps {
@@ -162,17 +162,16 @@ export interface IMaskedProps {
   // maskChar?: string | null; // на версии 3 - maskPlaceholder
   alwaysShowMask?: boolean;
   beforeMaskedStateChange?: (
-    states: BeforeMaskedStateChangeStates,
+    states: BeforeMaskedStateChangeStates
   ) => InputState;
 }
 
-export interface TextFieldProps extends IProps, IMaskedProps {
-}
+export interface TextFieldProps extends IProps, IMaskedProps {}
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {
-      disabled = false,
+      isDisabled = false,
       label,
       width,
       value,
@@ -202,13 +201,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <TextFieldComponent
-        className={disabled ? 'disabled' : ''}
+        className={isDisabled ? 'disabled' : ''}
         width={tryParse(width)}
       >
         {children}
         {!!mask ? (
           <MaskedInput
-            disabled={disabled}
+            disabled={isDisabled}
             value={validValue}
             mask={mask}
             ref={inputRef}
@@ -216,7 +215,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           />
         ) : (
           <Input
-            disabled={disabled}
+            disabled={isDisabled}
             value={validValue}
             ref={inputRef}
             {...other}
@@ -227,12 +226,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             {label && <span>{label}</span>}
           </Legend>
         </Fieldset>
-        <Title
-          className={isUsing ? 'active' : ''}
-        >
-          {label}
-        </Title>
+        <Title className={isUsing ? 'active' : ''}>{label}</Title>
       </TextFieldComponent>
     );
-  },
+  }
 );

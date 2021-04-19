@@ -1,56 +1,27 @@
+import React, { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react';
-import React, { ComponentProps } from 'react';
 import { Select } from '../components/select';
-import { AsyncSelect } from '../components/async-select';
+import { Option } from 'react-select/src/filters';
 
-const TemplateSelect: Story<ComponentProps<typeof Select>> = (args) => (
-  <Select {...args} />
-);
+const TemplateDefaultSelect: Story<ComponentProps<typeof Select>> = (args) => {
+  const [value, setValue] = useState<Option[] | null>([]);
 
-export const DefaultSelect = TemplateSelect.bind({});
-DefaultSelect.args = {};
+  return (
+    <Select
+      {...args}
+      value={value}
+      onChange={(option) => {
+        if (Array.isArray(option)) setValue(option);
+      }}
+    />
+  );
+};
 
-const TemplateAsyncSelect: Story<ComponentProps<typeof AsyncSelect>> = (
-  args
-) => (
-  <AsyncSelect
-    defaultOptions
-    isMulti={false}
-    loadOptions={(inputValue) =>
-      Promise.resolve(
-        [
-          {
-            label: '1 уааа',
-            value: 1,
-          },
-          {
-            label: '2 авы',
-            value: 2,
-          },
-          {
-            label: '3 оооо',
-            value: 3,
-          },
-          {
-            label: '4 Тест',
-            value: 4,
-          },
-          {
-            label: '5 текст',
-            value: 5,
-          },
-          {
-            label: '5 storez',
-            value: 6,
-          },
-        ].filter((value) => value.label.includes(inputValue))
-      )
-    }
-    {...args}
-  />
-);
-export const DefaultAsyncSelect = TemplateAsyncSelect.bind({});
-DefaultAsyncSelect.args = {};
+export const DefaultSelect = TemplateDefaultSelect.bind({});
+DefaultSelect.args = {
+  isMulti: true,
+  isClearable: true,
+};
 
 export default {
   title: 'Select',
@@ -58,35 +29,28 @@ export default {
   args: {
     options: [
       {
-        label: '1 уааа',
+        label: '1',
         value: 1,
       },
       {
-        label: '2 авы',
+        label: '2',
         value: 2,
       },
       {
-        label: '3 оооо',
+        label: '3',
         value: 3,
       },
       {
-        label: '4 Тест',
+        label: '4',
         value: 4,
       },
       {
-        label: '5 текст',
+        label: '5',
         value: 5,
       },
-      {
-        label: '5 storez',
-        value: 6,
-      },
     ],
-    placeholder: 'Test select',
+    label: 'Label',
     width: 300,
-    isClearable: true,
-    isMulti: true,
-    defaultOptions: true,
-    disabled: false,
+    isDisabled: false,
   },
 };

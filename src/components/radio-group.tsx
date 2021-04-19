@@ -32,7 +32,7 @@ const Component = styled.div`
 `;
 
 export interface IProps {
-  options: { value: any; label: any }[];
+  options: { value: any; label: any; isDisabled?: boolean }[];
   direction?: 'vertical' | 'horizontal';
   onClick?: (option: { value: any; label: any }) => void;
 }
@@ -51,6 +51,7 @@ export const RadioGroup: React.FC<IProps> = (props) => {
           key={`radio-${index}`}
           option={option}
           checked={checkList[index]}
+          isDisabled={options[index]?.isDisabled}
           onClick={(value) => {
             setCheckList(options.map((_, opIndex) => index === opIndex));
             onClick(value);

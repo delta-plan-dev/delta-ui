@@ -7,7 +7,9 @@ const Template: Story<ComponentProps<typeof CheckBox>> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  isDisabled: false,
+};
 
 export default {
   title: 'Checkbox',

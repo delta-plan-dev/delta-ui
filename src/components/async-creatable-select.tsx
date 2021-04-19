@@ -1,5 +1,6 @@
 import React, { ComponentProps } from 'react';
-import ReactSelect, { ControlProps, GroupTypeBase } from 'react-select';
+import ReactSelect from 'react-select/async-creatable';
+import { ControlProps, GroupTypeBase } from 'react-select';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
@@ -126,7 +127,7 @@ const Control: React.FC<ControlProps<any, any, GroupTypeBase<any>>> = (
 
 export interface ISelect extends ComponentProps<typeof ReactSelect> {}
 
-export const Select: React.FC<ISelect> = (props) => {
+export const AsyncCreatableSelect: React.FC<ISelect> = (props) => {
   const { label, width, isDisabled, styles, components, ...other } = props;
 
   return (

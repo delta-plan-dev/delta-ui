@@ -16,7 +16,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: variants;
   size?: sizes;
   as?: React.ElementType;
-  disabled?: boolean;
+  isDisabled?: boolean;
   loading?: boolean;
 }
 
@@ -223,7 +223,7 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
       loading = false,
       variant = 'primary',
       size = 'medium',
-      disabled = false,
+      isDisabled = false,
       onClick,
       className,
       children,
@@ -232,7 +232,7 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
 
     const classes = [
       className,
-      disabled ? 'disabled' : null,
+      isDisabled ? 'disabled' : null,
       loading ? 'loading' : null,
       variant ? `${variant}-button` : null,
       size ? `${size}-button` : null,
@@ -243,7 +243,7 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
     const onClickHandler = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
-      if (onClick && !disabled && !loading) {
+      if (onClick && !isDisabled && !loading) {
         onClick(event);
       }
     };

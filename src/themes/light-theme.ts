@@ -48,8 +48,8 @@ export const lightTheme: ITheme = {
       active: '000000',
     },
     gray: {
-      main: '#797979',
-      hover: '#A8A8A8',
+      main: '#A8A8A8',
+      hover: '#797979',
       active: '#4D4D4D',
     },
   },

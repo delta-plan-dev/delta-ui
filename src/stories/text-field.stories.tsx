@@ -27,7 +27,7 @@ Default.argTypes = {
   },
 };
 Default.args = {
-  width: '50%',
+  width: 300,
   label: 'Label',
   value: 'Test',
   maxLength: 10,

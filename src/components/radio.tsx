@@ -4,7 +4,7 @@ import { lightTheme } from '../themes/light-theme';
 
 interface IRadio {
   size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 const RadioComponent = styled.label<IRadio>`
@@ -41,7 +41,7 @@ export interface IProps {
   option: { value: any; label: any };
   onClick?: (option: { value: any; label: any }) => void;
   size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
+  isDisabled?: boolean;
   checked?: boolean;
   style?: CSSProperties;
 }
@@ -51,7 +51,7 @@ export const Radio: React.FC<IProps> = (props) => {
     option,
     checked = false,
     size = 'medium',
-    disabled = false,
+    isDisabled = false,
     onClick = () => {},
     style,
     ...other
@@ -61,9 +61,9 @@ export const Radio: React.FC<IProps> = (props) => {
     <RadioComponent
       className={'radio-button'}
       size={size}
-      disabled={disabled}
+      isDisabled={isDisabled}
       onClick={() => {
-        if (disabled) {
+        if (isDisabled) {
           return;
         }
         onClick(option);

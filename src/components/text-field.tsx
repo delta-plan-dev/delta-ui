@@ -113,7 +113,7 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal calc(15px * 0.8) Montserrat, sans-serif;
+    font: normal calc(14px * 0.75) Montserrat, sans-serif;
   }
 `;
 
@@ -122,7 +122,7 @@ const Title = styled.div`
   left: 0;
   top: 50%;
   transition-duration: 100ms;
-  transform: translate(10px, -50%) scale(1);
+  transform: translate(10px, -50%);
   transform-origin: 0 0;
   font: normal 14px Montserrat, sans-serif;
   color: ${(props) =>
@@ -132,7 +132,8 @@ const Title = styled.div`
   &.active,
   ${Input}:focus ~ &,
   ${MaskedInput}:focus ~ & {
-    transform: translate(15px, -50%) scale(0.8);
+    font: normal calc(14px * 0.75) Montserrat, sans-serif;
+    transform: translate(15px, -50%);
     top: 0;
   }
 `;

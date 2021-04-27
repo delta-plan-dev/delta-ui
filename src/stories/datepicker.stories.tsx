@@ -8,6 +8,7 @@ const Template: Story<ComponentProps<typeof DatePicker>> = (args) => {
   return (
     <DatePicker
       {...args}
+      portalId={'root'}
       selected={startDate}
       onChange={(date) => {
         if (date && !Array.isArray(date)) {
@@ -40,6 +41,8 @@ const RangeTemplate: Story<ComponentProps<typeof DatePicker>> = (args) => {
       }}
       startDate={startDate}
       endDate={endDate}
+      maxDate={endDate}
+
       selectsRange
       // inline
     />

@@ -1,7 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
-import imgSelected from '../assets/images/select.svg';
+import { lightTheme } from 'src/themes/light-theme';
+import imgSelected from 'src/assets/images/select.svg';
 
 interface ICheckBox {
   size: 'small' | 'medium' | 'large';

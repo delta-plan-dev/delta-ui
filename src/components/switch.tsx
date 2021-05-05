@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+import { lightTheme } from 'src/themes/light-theme';
 
 const SwitchComponent = styled.div`
   display: inline-flex;

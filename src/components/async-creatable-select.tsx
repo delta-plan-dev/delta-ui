@@ -2,7 +2,7 @@ import React, { ComponentProps } from 'react';
 import ReactSelect from 'react-select/async-creatable';
 import { ControlProps, GroupTypeBase } from 'react-select';
 import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+import { lightTheme } from 'src/themes/light-theme';
 
 const Wrapper = styled.div`
   width: 100%;

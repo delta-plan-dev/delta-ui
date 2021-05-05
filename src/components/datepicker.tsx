@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ru from 'date-fns/locale/ru';
 import { TextField } from './text-field';
 import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+import { lightTheme } from 'src/themes/light-theme';
 import { DatePickerHeader } from './datepicker-header';
 
 registerLocale('ru', ru);
@@ -16,10 +16,9 @@ const DatePickerInputWrapper = styled.div<{ width: string }>`
   & .react-datepicker-wrapper {
     width: ${(props) => props.width};
   }
-  `;
+`;
 
 const DatePickerWrapper = styled.div`
-
   & .react-datepicker {
     background-color: ${() => lightTheme.colors.main.main};
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
@@ -57,20 +56,18 @@ const DatePickerWrapper = styled.div`
   & .react-datepicker__time-name {
     color: ${() => lightTheme.colors.primary.active};
   }
-  
-  
+
   & .react-datepicker__day--outside-month {
     color: ${() => lightTheme.colors.secondary.main};
   }
   & .react-datepicker__day.react-datepicker__day--disabled {
-      color: ${() => lightTheme.colors.gray.main};
+    color: ${() => lightTheme.colors.gray.main};
   }
 
-   
-  & .react-datepicker__day.react-datepicker__day--disabled:not(.react-datepicker__day--outside-month) {
-      color: ${() => lightTheme.colors.primary.hover};
+  &
+    .react-datepicker__day.react-datepicker__day--disabled:not(.react-datepicker__day--outside-month) {
+    color: ${() => lightTheme.colors.primary.hover};
   }
-
 
   & .react-datepicker__day:hover {
     background-color: ${() => lightTheme.colors.primary.hover};
@@ -115,7 +112,6 @@ const DatePickerWrapper = styled.div`
     background-color: ${() => lightTheme.colors.primary.hover};
     color: ${() => lightTheme.colors.white.main};
   }
-
 `;
 
 export interface IProps {
@@ -124,8 +120,10 @@ export interface IProps {
   isDisabled?: boolean;
 }
 
-export const DatePicker = React.forwardRef<ReactDatePicker,
-  ReactDatePickerProps & IProps>((props, ref) => {
+export const DatePicker = React.forwardRef<
+  ReactDatePicker,
+  ReactDatePickerProps & IProps
+>((props, ref) => {
   const {
     label = 'Label',
     locale = 'ru',
@@ -135,12 +133,15 @@ export const DatePicker = React.forwardRef<ReactDatePicker,
     disabled = isDisabled,
     popperContainer,
     customInput = (
-      <TextField isDisabled={isDisabled} width={width ?? '100%'} label={label} />
+      <TextField
+        isDisabled={isDisabled}
+        width={width ?? '100%'}
+        label={label}
+      />
     ),
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
     ...other
   } = props;
-
 
   return (
     <DatePickerInputWrapper width={!!width ? `${width}px` : '100%'}>
@@ -151,7 +152,9 @@ export const DatePicker = React.forwardRef<ReactDatePicker,
         customInput={customInput}
         renderCustomHeader={renderCustomHeader}
         disabled={isDisabled}
-        popperContainer={({ children }) => <DatePickerWrapper>{popperContainer || children}</DatePickerWrapper>}
+        popperContainer={({ children }) => (
+          <DatePickerWrapper>{popperContainer || children}</DatePickerWrapper>
+        )}
         {...other}
       />
     </DatePickerInputWrapper>

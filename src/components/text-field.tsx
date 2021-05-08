@@ -5,13 +5,9 @@ import React, {
   useRef,
 } from 'react';
 import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
-import InputMask, {
-  BeforeMaskedStateChangeStates,
-  InputState,
-} from 'react-input-mask';
+import { lightTheme } from 'src/themes/light-theme';
 
-const TextFieldComponent = styled.div<{ width: number | string | null }>`
+const TextFieldComponent = styled.div<{ width: number | string }>`
   position: relative;
   ${(props) =>
     typeof props.width == 'number'
@@ -20,40 +16,24 @@ const TextFieldComponent = styled.div<{ width: number | string | null }>`
       ? `width: ${props.width}`
       : ``};
   height: 50px;
-`;
 
-const Input = styled.input<{ value: string }>`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0 15px;
-  border: 0;
-  outline: 0;
-  background: none;
-  box-sizing: border-box;
-  font: normal 400 14px Montserrat, sans-serif;
-  color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
-`;
-
-const MaskedInput = styled(InputMask)`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0 15px;
-  border: 0;
-  outline: 0;
-  background: none;
-  box-sizing: border-box;
-  font: normal 400 14px Montserrat, sans-serif;
-  color: ${(props) =>
-    props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
+  & input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 15px;
+    border: 0;
+    outline: 0;
+    background: none;
+    box-sizing: border-box;
+    font: normal 400 14px Montserrat, sans-serif;
+    color: ${(props) =>
+      props.theme?.colors?.secondary?.main ??
+      lightTheme?.colors?.secondary.main};
+  }
 `;
 
 const Fieldset = styled.fieldset`
@@ -74,15 +54,14 @@ const Fieldset = styled.fieldset`
   box-sizing: inherit;
   transition-duration: 100ms;
 
-  ${Input}:focus ~ &, ${MaskedInput}:focus ~ & {
+  input:focus ~ & {
     border-color: ${(props) =>
       props.theme?.colors?.primary?.main ??
       lightTheme.colors.primary.main} !important;
   }
 
   .disabled &,
-  ${Input}:hover ~ &,
-  ${MaskedInput}:hover ~ & {
+  input:hover ~ & {
     border-color: ${(props) =>
       props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
   }
@@ -99,8 +78,7 @@ const Legend = styled.legend`
   box-sizing: inherit;
   transition: max-width 50ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 
-  ${Input}:focus ~ ${Fieldset} &, 
-  ${MaskedInput}:focus ~ ${Fieldset} & {
+  input:focus ~ ${Fieldset} & {
     max-width: 1000px;
     transition: max-width 100ms cubic-bezier(0, 0, 0.2, 1) 50ms;
   }
@@ -130,55 +108,47 @@ const Title = styled.div`
   pointer-events: none;
 
   &.active,
-  ${Input}:focus ~ &,
-  ${MaskedInput}:focus ~ & {
+  input:focus ~ & {
     font: normal calc(14px * 0.75) Montserrat, sans-serif;
     transform: translate(15px, -50%);
     top: 0;
   }
 `;
 
-const tryParse = (value: any): string | number | null => {
-  if (value == null) {
-    return null;
-  }
-
-  const number = Number(value);
-
-  if (!isNaN(number)) {
-    return number;
-  }
-
-  return value?.toString();
-};
-
-export interface IProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ITextFiledProps<InputElementProps>
+  extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   isDisabled?: boolean;
+  inputElement?: (
+    props: Omit<
+      ITextFiledProps<InputElementProps> & InputElementProps,
+      'inputElement'
+    >,
+    ref: { current: any }
+  ) => React.ReactNode | null;
 }
 
+// TODO: удалить со след версии
+/** @deprecated need change to TextFieldMask*/
 export interface IMaskedProps {
+  /** @deprecated need change to TextFieldMask */
   mask?: string | Array<string | RegExp> | null;
-  maskPlaceholder?: string | null;
-  // maskChar?: string | null; // на версии 3 - maskPlaceholder
-  alwaysShowMask?: boolean;
-  beforeMaskedStateChange?: (
-    states: BeforeMaskedStateChangeStates
-  ) => InputState;
 }
 
-export interface TextFieldProps extends IProps, IMaskedProps {}
-
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+export const TextField = forwardRef<HTMLInputElement, ITextFiledProps<any>>(
   (props, ref) => {
     const {
       isDisabled = false,
       label,
       width,
       value,
-      mask,
       children,
-      ...other
+      inputElement = ({ isDisabled, value, ...other }, ref) => {
+        return (
+          <input {...other} disabled={isDisabled} value={value} ref={ref} />
+        );
+      },
+      ...otherProps
     } = props;
 
     const inputRef = useRef(null);
@@ -197,31 +167,26 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ref.current = inputRef.current;
     }, [inputRef]);
 
-    const validValue = !!value ? String(value) : '';
     const isUsing = !!value;
 
     return (
       <TextFieldComponent
         className={isDisabled ? 'disabled' : ''}
-        width={tryParse(width)}
+        width={width || ''}
       >
         {children}
-        {!!mask ? (
-          <MaskedInput
-            disabled={isDisabled}
-            value={validValue}
-            mask={mask}
-            ref={inputRef}
-            {...other}
-          />
-        ) : (
-          <Input
-            disabled={isDisabled}
-            value={validValue}
-            ref={inputRef}
-            {...other}
-          />
-        )}
+        {!!inputElement &&
+          inputElement(
+            {
+              ...otherProps,
+              width: width,
+              label: label,
+              children: children,
+              value: !!value ? String(value) : '',
+              isDisabled: isDisabled,
+            },
+            inputRef
+          )}
         <Fieldset>
           <Legend className={isUsing ? 'active' : ''}>
             {label && <span>{label}</span>}

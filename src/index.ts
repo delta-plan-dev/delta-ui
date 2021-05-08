@@ -11,7 +11,8 @@ export { GlobalStyle } from './components/global-style';
 // Components
 export { Button } from './components/button';
 export { TextField } from './components/text-field';
-export { TextFieldMasked } from './components/text-field-masked';
+export { TextFieldMask } from './components/text-field-mask';
+export { TextFieldNumber } from './components/text-field-number';
 export { DatePicker } from './components/datepicker';
 export { Select } from './components/select';
 export { CreatableSelect } from './components/creatable-select';

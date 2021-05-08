@@ -12,11 +12,6 @@ const SwitchComponent = styled.div`
   }
 `;
 
-interface IButton {
-  active?: boolean;
-  size: 'small' | 'medium' | 'large';
-}
-
 const Title = styled.div<IButton>`
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme.colors.secondary.main};
@@ -81,7 +76,8 @@ const ButtonWrapper = styled.div<IButton>`
         return '0';
     }
   }};
-  background-color: ${(props) => (props.active ? '#3fd200' : '#e0e0e0')};
+  background-color: ${(props) =>
+    props.active && !props.disableActiveColor ? '#3fd200' : '#e0e0e0'};
   transition-duration: 0.2s;
 `;
 
@@ -132,7 +128,14 @@ const Button = styled.div<IButton>`
   transition-duration: 0.2s;
 `;
 
-export interface IProps {
+interface IButton {
+  // do not use it
+  active?: boolean;
+  size: 'small' | 'medium' | 'large';
+  disableActiveColor?: boolean;
+}
+
+export interface IProps extends IButton {
   title?: string;
   titleLeft?: string;
   titleRight?: string;
@@ -140,7 +143,6 @@ export interface IProps {
   value: boolean;
   disabled?: boolean;
   onChange: (value: boolean) => void;
-  size?: 'small' | 'medium' | 'large';
   style?: CSSProperties;
 }
 
@@ -152,6 +154,7 @@ export const Switch: React.FC<IProps> = (props) => {
     titleRight,
     value = false,
     disabled = false,
+    disableActiveColor = false,
     onChange,
     size = 'medium',
     ...other
@@ -173,7 +176,11 @@ export const Switch: React.FC<IProps> = (props) => {
           {titleLeft || title}
         </Title>
       )}
-      <ButtonWrapper active={value} size={size}>
+      <ButtonWrapper
+        active={value}
+        disableActiveColor={disableActiveColor}
+        size={size}
+      >
         <Button active={value} size={size} />
       </ButtonWrapper>
       {((title && titleSide === 'right') || titleRight) && (

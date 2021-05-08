@@ -18,6 +18,7 @@ Default.args = {
   titleSide: 'right',
   value: false,
   size: 'medium',
+  disableActiveColor: false,
 };
 
 export default {

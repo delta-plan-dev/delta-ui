@@ -1,6 +1,6 @@
 import React, { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react';
-import { TextField } from 'src/components/text-field';
+import { TextField } from '../components/text-field';
 
 const DefaultTemplate: Story<ComponentProps<typeof TextField>> = (args) => {
   const [value, setValue] = useState(args.value);

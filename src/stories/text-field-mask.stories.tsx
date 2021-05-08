@@ -1,6 +1,6 @@
 import React, { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react';
-import { TextFieldMask } from 'src/components/text-field-mask';
+import { TextFieldMask } from '../components/text-field-mask';
 
 const MaskedTemplate: Story<ComponentProps<typeof TextFieldMask>> = ({
   mask,

@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
@@ -12,7 +12,7 @@ const SwitchComponent = styled.div`
   }
 `;
 
-const Title = styled.div<IButton>`
+const Title = styled.div<IButtonProps>`
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme.colors.secondary.main};
 
@@ -38,7 +38,7 @@ const Title = styled.div<IButton>`
   }
 `;
 
-const ButtonWrapper = styled.div<IButton>`
+const ButtonWrapper = styled.div<IButtonProps>`
   display: inline-block;
   width: ${(props) => {
     switch (props.size) {
@@ -77,11 +77,11 @@ const ButtonWrapper = styled.div<IButton>`
     }
   }};
   background-color: ${(props) =>
-    props.active && !props.disableActiveColor ? '#3fd200' : '#e0e0e0'};
+    props.value && !props.disableActiveColor ? '#3fd200' : '#e0e0e0'};
   transition-duration: 0.2s;
 `;
 
-const Button = styled.div<IButton>`
+const Button = styled.div<IButtonProps>`
   width: ${(props) => {
     switch (props.size) {
       case 'small':
@@ -111,11 +111,11 @@ const Button = styled.div<IButton>`
     ${(props) => {
       switch (props.size) {
         case 'small':
-          return props.active ? '12px' : '0';
+          return props.value ? '12px' : '0';
         case 'medium':
-          return props.active ? '16px' : '0';
+          return props.value ? '16px' : '0';
         case 'large':
-          return props.active ? '20px' : '0';
+          return props.value ? '20px' : '0';
         default:
           return '0';
       }
@@ -128,25 +128,22 @@ const Button = styled.div<IButton>`
   transition-duration: 0.2s;
 `;
 
-interface IButton {
-  // do not use it
-  active?: boolean;
+interface IButtonProps {
+  value: boolean;
   size: 'small' | 'medium' | 'large';
   disableActiveColor?: boolean;
 }
 
-export interface IProps extends IButton {
+export interface ISwitchProps extends IButtonProps {
   title?: string;
   titleLeft?: string;
   titleRight?: string;
   titleSide?: 'left' | 'right';
-  value: boolean;
   disabled?: boolean;
   onChange: (value: boolean) => void;
-  style?: CSSProperties;
 }
 
-export const Switch: React.FC<IProps> = (props) => {
+export const Switch: React.FC<ISwitchProps> = (props) => {
   const {
     title,
     titleSide = 'right',
@@ -172,19 +169,19 @@ export const Switch: React.FC<IProps> = (props) => {
       {...other}
     >
       {((title && titleSide === 'left') || titleLeft) && (
-        <Title size={size} className="switch-title-left">
+        <Title value={value} size={size} className="switch-title-left">
           {titleLeft || title}
         </Title>
       )}
       <ButtonWrapper
-        active={value}
+        value={value}
         disableActiveColor={disableActiveColor}
         size={size}
       >
-        <Button active={value} size={size} />
+        <Button value={value} size={size} />
       </ButtonWrapper>
       {((title && titleSide === 'right') || titleRight) && (
-        <Title size={size} className="switch-title-right">
+        <Title value={value} size={size} className="switch-title-right">
           {titleRight || title}
         </Title>
       )}

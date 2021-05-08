@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from 'react';
 import styled from 'styled-components';
-import { lightTheme } from 'src/themes/light-theme';
+import { lightTheme } from '../themes/light-theme';
 
 const TextFieldComponent = styled.div<{ width: number | string }>`
   position: relative;

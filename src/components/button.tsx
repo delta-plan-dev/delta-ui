@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RefForwardingComponent } from 'src/helpers';
-import { lightTheme } from 'src/themes/light-theme';
+import { RefForwardingComponent } from '../helpers';
+import { lightTheme } from '../themes/light-theme';
 import { Spinner } from './spinner';
 
 type variants =

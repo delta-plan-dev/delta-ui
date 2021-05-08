@@ -1,6 +1,6 @@
 import { createGlobalStyle, ThemeProps } from 'styled-components';
-import { ITheme } from 'src/types/theme';
-import { lightTheme } from 'src/themes/light-theme';
+import { ITheme } from '../types/theme';
+import { lightTheme } from '../themes/light-theme';
 
 export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
   body {

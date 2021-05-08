@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import ReactSelect, { ControlProps, GroupTypeBase } from 'react-select';
 import styled from 'styled-components';
-import { lightTheme } from 'src/themes/light-theme';
+import { lightTheme } from '../themes/light-theme';
 
 const Wrapper = styled.div`
   width: 100%;

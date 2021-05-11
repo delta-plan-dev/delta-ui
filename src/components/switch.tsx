@@ -12,7 +12,7 @@ const SwitchComponent = styled.div`
   }
 `;
 
-const Title = styled.div<IButtonProps>`
+const Title = styled.div<ISwitchProps>`
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme.colors.secondary.main};
 
@@ -38,7 +38,7 @@ const Title = styled.div<IButtonProps>`
   }
 `;
 
-const ButtonWrapper = styled.div<IButtonProps>`
+const ButtonWrapper = styled.div<ISwitchProps>`
   display: inline-block;
   width: ${(props) => {
     switch (props.size) {
@@ -81,7 +81,7 @@ const ButtonWrapper = styled.div<IButtonProps>`
   transition-duration: 0.2s;
 `;
 
-const Button = styled.div<IButtonProps>`
+const Button = styled.div<ISwitchProps>`
   width: ${(props) => {
     switch (props.size) {
       case 'small':
@@ -128,19 +128,25 @@ const Button = styled.div<IButtonProps>`
   transition-duration: 0.2s;
 `;
 
-interface IButtonProps {
-  value: boolean;
-  size: 'small' | 'medium' | 'large';
+export interface ISwitchProps {
+  value?: boolean;
+  size?: 'small' | 'medium' | 'large';
   disableActiveColor?: boolean;
-}
 
-export interface ISwitchProps extends IButtonProps {
+  /** @deprecated */
   title?: string;
+
   titleLeft?: string;
   titleRight?: string;
+
+  /** @deprecated */
   titleSide?: 'left' | 'right';
+
+  /** @deprecated */
   disabled?: boolean;
-  onChange: (value: boolean) => void;
+
+  isDisabled?: boolean;
+  onChange?: (value: boolean) => void;
 }
 
 export const Switch: React.FC<ISwitchProps> = (props) => {
@@ -151,6 +157,7 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
     titleRight,
     value = false,
     disabled = false,
+    isDisabled = disabled,
     disableActiveColor = false,
     onChange,
     size = 'medium',
@@ -160,12 +167,15 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
   return (
     <SwitchComponent
       onClick={() => {
-        if (disabled) {
+        if (isDisabled) {
+          return;
+        }
+        if (!onChange) {
           return;
         }
         onChange(!value);
       }}
-      className={disabled ? 'disabled' : ''}
+      className={isDisabled ? 'disabled' : ''}
       {...other}
     >
       {((title && titleSide === 'left') || titleLeft) && (

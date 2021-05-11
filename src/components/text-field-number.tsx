@@ -5,16 +5,28 @@ import { ITextFiledProps, TextField } from './text-field';
 export const TextFieldNumber: React.FC<
   ITextFiledProps<NumberFormatProps> & NumberFormatProps
 > = (props) => {
+  const {
+    decimalScale = 2,
+    thousandSeparator = ' ',
+    decimalSeparator = ',',
+    onValueChange,
+    ...mainProps
+  } = props;
   return (
     <TextField
-      {...props}
+      {...mainProps}
       inputElement={({ isDisabled, value, ...other }, ref) => {
         return (
           <NumberFormat
             {...other}
-            disabled={isDisabled}
-            value={value?.toString()}
+            isNumericString
             ref={ref}
+            disabled={isDisabled}
+            value={value}
+            decimalScale={decimalScale}
+            decimalSeparator={decimalSeparator}
+            thousandSeparator={thousandSeparator}
+            onValueChange={onValueChange}
           />
         );
       }}

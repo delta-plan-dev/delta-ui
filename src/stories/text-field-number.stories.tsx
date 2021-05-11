@@ -11,8 +11,9 @@ const NumberTemplate: Story<ComponentProps<typeof TextFieldNumber>> = (
     <TextFieldNumber
       {...args}
       value={value}
-      onChange={(event) => {
-        setValue(event.target.value ?? '');
+      onValueChange={({ value }) => {
+        console.log('Test value case:', value);
+        setValue(value);
       }}
     />
   );

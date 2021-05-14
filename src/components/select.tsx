@@ -52,6 +52,7 @@ const Fieldset = styled.fieldset`
 `;
 
 const Legend = styled.legend`
+  float: initial;
   width: auto;
   max-width: 0.01px;
   height: 10px;
@@ -99,7 +100,7 @@ const Title = styled.div`
   }
 `;
 
-const Control: React.FC<ControlProps<any, any, GroupTypeBase<any>>> = (
+export const Control: React.FC<ControlProps<any, any, GroupTypeBase<any>>> = (
   props
 ) => {
   const { children, hasValue, innerProps, innerRef, isFocused } = props;

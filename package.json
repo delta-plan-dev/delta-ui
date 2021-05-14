@@ -6,7 +6,7 @@
     "url": "https://github.com/kawaii-snafy/delta-ui"
   },
   "license": "MIT",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "private": false,
   "author": {
     "email": "ya.shirokov@icloud.com",
@@ -49,6 +49,10 @@
     "@types/react-input-mask": "^3.0.0",
     "@types/react-select": "^4.0.15",
     "@types/styled-components": "^5.1.7",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
     "fork-ts-checker-webpack-plugin": "^6.0.8",
     "prettier": "^2.2.1",
     "react": "^16.14.0",

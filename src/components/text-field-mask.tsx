@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import InputMask, { Props } from 'react-input-mask';
-import { ITextFiledProps, TextField } from './text-field';
+import { baseTextFieldElement, IBaseProps } from './text-field-base';
 
-export const TextFieldMask: React.FC<ITextFiledProps<Props> & Props> = (
-  props
-) => {
+type IProps = IBaseProps<Props> & Props & InputHTMLAttributes<HTMLInputElement>;
+const TextFiledElement = baseTextFieldElement<HTMLInputElement, IProps>();
+
+export const TextFieldMask: React.FC<IProps> = (props) => {
   return (
-    <TextField
+    <TextFiledElement
       {...props}
       inputElement={({ isDisabled, value, mask, ...other }, ref) => {
         return (

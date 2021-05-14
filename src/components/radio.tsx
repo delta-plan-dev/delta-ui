@@ -15,6 +15,8 @@ const RadioComponent = styled.label<IRadio>`
 const RadioComponentValueWrapper = styled.div`
   border-radius: 50%;
   border: 1px solid ${(props) => props.theme.colors.gray.main};
+  height: fit-content;
+  width: fit-content;
 `;
 
 const RadioComponentValue = styled.div`

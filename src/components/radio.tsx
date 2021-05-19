@@ -2,12 +2,19 @@ import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
-interface IRadio {
+interface IRadioComponent {
   size?: 'small' | 'medium' | 'large';
   isDisabled?: boolean;
 }
 
-const RadioComponent = styled.label<IRadio>`
+export interface IRadioOption extends IRadioComponent {
+  value: any;
+  label: string | React.ReactElement;
+  checked?: boolean;
+  isDisabled?: boolean;
+}
+
+const RadioComponent = styled.label<IRadioComponent>`
   display: flex;
   cursor: pointer;
 `;
@@ -39,11 +46,9 @@ const RadioComponentLabel = styled.div`
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;
 
-export interface IProps {
-  option: { value: any; label: any };
-  onClick?: (option: { value: any; label: any }) => void;
-  size?: 'small' | 'medium' | 'large';
-  isDisabled?: boolean;
+export interface IProps extends IRadioComponent {
+  option: IRadioOption;
+  onClick?: (option: IRadioOption) => void;
   checked?: boolean;
   style?: CSSProperties;
 }
@@ -51,9 +56,9 @@ export interface IProps {
 export const Radio: React.FC<IProps> = (props) => {
   const {
     option,
-    checked = false,
+    checked = option.checked || false,
+    isDisabled = option.isDisabled || false,
     size = 'medium',
-    isDisabled = false,
     onClick = () => {},
     style,
     ...other

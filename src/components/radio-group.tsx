@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Radio } from './radio';
+import React, { useEffect, useState } from 'react';
+import { IRadioOption, Radio } from './radio';
 import styled from 'styled-components';
 
 const Component = styled.div`
@@ -32,28 +32,38 @@ const Component = styled.div`
 `;
 
 export interface IProps {
-  options: { value: any; label: any; isDisabled?: boolean }[];
+  options: IRadioOption[];
   direction?: 'vertical' | 'horizontal';
-  onClick?: (option: { value: any; label: any }) => void;
+  onClick?: (option: IRadioOption) => void;
 }
 
 export const RadioGroup: React.FC<IProps> = (props) => {
   const { options, direction = 'vertical', onClick = () => {} } = props;
 
-  const [checkList, setCheckList] = useState<boolean[]>(
-    options.map(() => false)
-  );
+  const [radioList, setRadioList] = useState<IRadioOption[]>(options);
+
+  useEffect(() => {
+    if (options.filter((value) => value.checked).length >= 2) {
+      //throw Error
+      console.warn('Cannot use more 2 true checked options in RadioGroup');
+    }
+
+    setRadioList(options);
+  }, [options]);
 
   return (
     <Component className={`radio-group ${direction}`}>
-      {options.map((option, index) => (
+      {radioList.map((option, elementIndex) => (
         <Radio
-          key={`radio-${index}`}
+          key={`radio-${elementIndex}-${option.value.toString()}`}
           option={option}
-          checked={checkList[index]}
-          isDisabled={options[index]?.isDisabled}
           onClick={(value) => {
-            setCheckList(options.map((_, opIndex) => index === opIndex));
+            setRadioList(
+              options.map((value, optionIndex) => ({
+                ...value,
+                checked: optionIndex == elementIndex,
+              }))
+            );
             onClick(value);
           }}
         />

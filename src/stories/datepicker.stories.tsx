@@ -20,7 +20,7 @@ const Template: Story<ComponentProps<typeof DatePicker>> = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { width: 300 };
 
 const RangeTemplate: Story<ComponentProps<typeof DatePicker>> = (args) => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -42,7 +42,6 @@ const RangeTemplate: Story<ComponentProps<typeof DatePicker>> = (args) => {
       startDate={startDate}
       endDate={endDate}
       maxDate={endDate}
-
       selectsRange
       // inline
     />
@@ -50,7 +49,7 @@ const RangeTemplate: Story<ComponentProps<typeof DatePicker>> = (args) => {
 };
 
 export const Range = RangeTemplate.bind({});
-Range.args = { disabled: false };
+Range.args = { disabled: false, width: 300 };
 
 export default {
   title: 'DatePicker',

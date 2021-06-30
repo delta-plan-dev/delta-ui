@@ -1,14 +1,14 @@
 import React, { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react';
-import { Switch } from '../components/switch';
+import { Toggle } from '../components/toggle';
 
-const Template: Story<ComponentProps<typeof Switch> & { theme: number }> = (
+const Template: Story<ComponentProps<typeof Toggle> & { theme: number }> = (
   args
 ) => {
   const [value, setValue] = useState<boolean>(args.value);
 
   return (
-    <Switch {...args} value={value} onChange={(value) => setValue(value)} />
+    <Toggle {...args} value={value} onChange={(value) => setValue(value)} />
   );
 };
 
@@ -22,6 +22,6 @@ Default.args = {
 };
 
 export default {
-  title: 'Switch',
-  component: Switch,
+  title: 'Toggle',
+  component: Toggle,
 };

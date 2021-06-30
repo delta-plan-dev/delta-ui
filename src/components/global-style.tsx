@@ -25,31 +25,31 @@ export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
   }
 
   h1 {
-    font: normal bold 38px/42px Montserrat, sans-serif;
+    font: normal bold 38px/42px OpenSans;
     color: ${(props) =>
-      props.theme.colors.secondary.main ?? lightTheme.colors.secondary.main};
+      props.theme.colors.dark.main ?? lightTheme.colors.dark.main};
   }
 
   h2 {
-    font: normal bold 24px/32px Montserrat, sans-serif;
+    font: normal bold 24px/32px OpenSans;
     color: ${(props) =>
-      props.theme.colors.secondary.main ?? lightTheme.colors.secondary.main};
+      props.theme.colors.dark.main ?? lightTheme.colors.dark.main};
   }
 
   h3 {
-    font: normal bold 16px/20px Montserrat, sans-serif;
+    font: normal bold 16px/20px OpenSans;
     color: ${(props) =>
-      props.theme.colors.secondary.main ?? lightTheme.colors.secondary.main};
+      props.theme.colors.dark.main ?? lightTheme.colors.dark.main};
   }
 
   body {
-    font: normal normal 16px/20px Montserrat, sans-serif;
+    font: normal normal 16px/20px OpenSans;
     color: ${(props) =>
-      props.theme.colors.secondary.main ?? lightTheme.colors.secondary.main};
+      props.theme.colors.dark.main ?? lightTheme.colors.dark.main};
   }
 
   a {
-    font: normal normal 16px/20px Montserrat, sans-serif;
+    font: normal normal 16px/20px OpenSans;
     color: ${(props) =>
       props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
     text-decoration-line: underline;

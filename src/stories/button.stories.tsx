@@ -27,17 +27,6 @@ OutlineNegative.args = {
   variant: 'outline-negative',
 };
 
-const TemplateLink: Story = (args) => (
-  <Button as={'a'} href={'http://google.com/'} target={'_blank'} {...args}>
-    BUTTON TO BACK
-  </Button>
-);
-
-export const LinkQ = TemplateLink.bind({});
-LinkQ.args = {
-  variant: 'link',
-};
-
 export default {
   title: 'Button',
   component: Button,
@@ -67,7 +56,7 @@ export default {
         options: ['small', 'medium', 'large'],
       },
     },
-    disabled: {
+    isDisabled: {
       defaultValue: false,
       type: 'boolean',
     },

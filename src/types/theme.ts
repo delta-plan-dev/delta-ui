@@ -1,4 +1,4 @@
-import StatusColorType from './status.color';
+import StatusColorType from './status-color';
 
 export interface ITheme {
   colors: {
@@ -9,14 +9,13 @@ export interface ITheme {
     // Status colors
     primary: StatusColorType;
     success: StatusColorType;
+    danger: StatusColorType;
     warning: StatusColorType;
-    error: StatusColorType;
     info: StatusColorType;
 
     // Other colors
-    white: StatusColorType;
-    black: StatusColorType;
-    gray: StatusColorType;
+    dark: StatusColorType;
+    light: StatusColorType;
   };
 }
 

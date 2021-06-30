@@ -1,7 +1,7 @@
 type StatusColorType = {
+  hover: string; // Светлей
   main: string;
-  hover: string;
-  active: string;
+  active: string; // Темней
 };
 
 export default StatusColorType;

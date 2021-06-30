@@ -31,23 +31,22 @@ const Fieldset = styled.fieldset`
   border-style: solid;
   border-width: 1px;
   border-radius: 8px;
-  border-color: ${(props) =>
-    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+  border-color: ${({ theme }) =>
+    theme.colors.secondary.main ?? lightTheme.colors.secondary.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
 
   &.focused,
   ${ContentOfControl}:focus ~ & {
-    border-color: ${(props) =>
-      props.theme?.colors?.primary?.main ??
-      lightTheme.colors.primary.main} !important;
+    border-color: ${({ theme }) =>
+      theme.colors.primary.main ?? lightTheme.colors.primary.main} !important;
   }
 
   .disabled &,
   ${ContentOfControl}:hover ~ & {
-    border-color: ${(props) =>
-      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+    border-color: ${({ theme }) =>
+      theme.colors.secondary.hover ?? lightTheme.colors.secondary.hover};
   }
 `;
 
@@ -75,7 +74,7 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal calc(14px * 0.75) Montserrat, sans-serif;
+    font: normal calc(14px * 0.75) OpenSans;
   }
 `;
 
@@ -86,14 +85,14 @@ const Title = styled.div`
   transition-duration: 100ms;
   transform: translate(10px, -50%);
   transform-origin: 0 0;
-  font: normal 14px Montserrat, sans-serif;
+  font: normal 14px OpenSans;
   color: ${(props) =>
     props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   pointer-events: none;
 
   &.active,
   ${ContentOfControl}:focus ~ & {
-    font: normal calc(14px * 0.75) Montserrat, sans-serif;
+    font: normal calc(14px * 0.75) OpenSans;
     transform: translate(15px, -50%);
     top: 0;
   }

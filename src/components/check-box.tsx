@@ -19,12 +19,12 @@ const CheckBoxComponentValue = styled.div`
   box-sizing: border-box !important;
   width: 21px;
   height: 21px;
-  border: 1px solid ${(props) => props.theme.colors.gray.main};
+  border: 1px solid ${(props) => props.theme.colors.secondary.main};
   border-radius: 4px;
-  background-color: ${(props) => props.theme.colors.white.main};
+  background-color: ${(props) => props.theme.colors.light.main};
 
   &.active {
-    border: 0 solid ${(props) => props.theme.colors.gray.main};
+    border: 0 solid ${(props) => props.theme.colors.secondary.main};
     background-image: url(${imgSelected});
     background-size: cover;
     background-repeat: no-repeat;
@@ -34,7 +34,7 @@ const CheckBoxComponentValue = styled.div`
 
 const CheckBoxComponentLabel = styled.div`
   margin-left: 5px;
-  font: normal normal 13px/20px Montserrat, sans-serif;
+  font: normal normal 13px/20px OpenSans;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;

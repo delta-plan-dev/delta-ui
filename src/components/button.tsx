@@ -2,22 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { RefForwardingComponent } from '../helpers';
 import { lightTheme } from '../themes/light-theme';
-import { Spinner } from './spinner';
 
 type variants =
   | 'primary'
-  | 'negative'
   | 'outline-primary'
+  | 'negative'
   | 'outline-negative'
+  | 'success'
+  | 'outline-success'
   | 'link';
 type sizes = 'small' | 'medium' | 'large';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  as?: React.ElementType;
   variant?: variants;
   size?: sizes;
-  as?: React.ElementType;
   isDisabled?: boolean;
-  loading?: boolean;
 }
 
 type ButtonType = RefForwardingComponent<'button', ButtonProps>;
@@ -33,229 +33,90 @@ export const BaseButton = React.forwardRef<ButtonType, ButtonProps>(
 );
 
 export const Component = styled(BaseButton)`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-
   box-sizing: border-box;
+
+  display: inline-block;
 
   margin: 0;
   outline: 0;
-  padding: 8px 16px;
+  padding: 0 12px;
 
-  border-radius: 30px;
+  border: 2px solid;
+  border-radius: 8px;
 
-  font-family: Montserrat, sans-serif;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: OpenSans;
+  font-variant-caps: normal;
+  text-indent: 0;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-spacing: normal;
 
   cursor: pointer;
 
+  // Sizes
   &.small-button {
-    font-size: 10px;
-    height: 28px;
+    font-size: 12px;
+    height: 30px;
   }
   &.medium-button {
-    font-size: 12px;
+    font-size: 14px;
     height: 36px;
   }
   &.large-button {
-    font-size: 15px;
-    height: 44px;
+    font-size: 16px;
+    height: 42px;
   }
 
+  // Variants
   &.primary-button {
-    background-color: ${(props) =>
-      props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
-    color: ${(props) =>
-      props.theme.colors.white.main ?? lightTheme.colors.white.main};
-    text-decoration: none !important;
+    color: ${({ theme }) =>
+      theme.colors.light.main ?? lightTheme.colors.light.main};
+    background-color: ${({ theme }) =>
+      theme.colors.primary.main ?? lightTheme.colors.primary.main};
+    border-color: ${({ theme }) =>
+      theme.colors.primary.main ?? lightTheme.colors.primary.main};
   }
   &.primary-button:hover {
-    background-color: ${(props) =>
-      props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
-    text-decoration: none !important;
+    background-color: ${({ theme }) =>
+      theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
+    border-color: ${({ theme }) =>
+      theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
   }
   &.primary-button:active {
-    background-color: ${(props) =>
-      props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
-    text-decoration: none !important;
+    background-color: ${({ theme }) =>
+      theme.colors.primary.active ?? lightTheme.colors.primary.active};
+    border-color: ${({ theme }) =>
+      theme.colors.primary.active ?? lightTheme.colors.primary.active};
   }
-
-  &.negative-button {
-    background-color: ${(props) =>
-      props.theme.colors.error.main ?? lightTheme.colors.error.main};
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.error.main ?? lightTheme.colors.error.main};
-    color: ${(props) =>
-      props.theme.colors.white.main ?? lightTheme.colors.white.main};
-    text-decoration: none !important;
-  }
-  &.negative-button:hover {
-    background-color: ${(props) =>
-      props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
-    text-decoration: none !important;
-  }
-  &.negative-button:active {
-    background-color: ${(props) =>
-      props.theme.colors.error.active ?? lightTheme.colors.error.active};
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.error.active ?? lightTheme.colors.error.active};
-    text-decoration: none !important;
-  }
-
-  &.outline-primary-button {
-    background: none;
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
-    color: ${(props) =>
-      props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
-    text-decoration: none !important;
-  }
-  &.outline-primary-button:hover {
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
-    color: ${(props) =>
-      props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
-    text-decoration: none !important;
-  }
-  &.outline-primary-button:active {
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
-    color: ${(props) =>
-      props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
-    text-decoration: none !important;
-  }
-
-  &.outline-negative-button {
-    background: none;
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.error.main ?? lightTheme.colors.error.main};
-    color: ${(props) =>
-      props.theme.colors.error.main ?? lightTheme.colors.error.main};
-    text-decoration: none !important;
-  }
-  &.outline-negative-button:hover {
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
-    color: ${(props) =>
-      props.theme.colors.error.hover ?? lightTheme.colors.error.hover};
-    text-decoration: none !important;
-  }
-  &.outline-negative-button:active {
-    border: 2px solid
-      ${(props) =>
-        props.theme.colors.error.active ?? lightTheme.colors.error.active};
-    color: ${(props) =>
-      props.theme.colors.error.active ?? lightTheme.colors.error.active};
-    text-decoration: none !important;
-  }
-
-  &.link-button {
-    background: none;
-    padding: 10px 18px;
-    border: none;
-    color: ${(props) =>
-      props.theme.colors.primary.main ?? lightTheme.colors.primary.main};
-    text-decoration: underline !important;
-  }
-  &.link-button:hover {
-    color: ${(props) =>
-      props.theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
-    text-decoration: none !important;
-  }
-  &.link-button:active {
-    color: ${(props) =>
-      props.theme.colors.primary.active ?? lightTheme.colors.primary.active};
-    text-decoration: none !important;
-  }
-
-  &.disabled,
-  &.disabled:active {
-    color: #ffffff !important;
-    background-color: #cfd8dc;
-    border-color: #cfd8dc !important;
-  }
-  &.disabled:hover {
-    color: #ffffff !important;
-    background-color: #bdbdbd;
-    border-color: #bdbdbd !important;
-    cursor: no-drop;
-  }
-
-  &.loading:hover {
-    cursor: progress;
-  }
-
-  &.outline-primary-button.disabled,
-  &.outline-negative-button.disabled {
-    background: none !important;
-  }
-`;
-
-const Loading = styled(Spinner)`
-  margin-right: 5px;
-  vertical-align: top;
 `;
 
 export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
   (props, ref) => {
     const {
-      loading = false,
       variant = 'primary',
       size = 'medium',
       isDisabled = false,
-      onClick,
-      className,
+      className = '',
       children,
       ...other
     } = props;
 
     const classes = [
       className,
-      isDisabled ? 'disabled' : null,
-      loading ? 'loading' : null,
-      variant ? `${variant}-button` : null,
-      size ? `${size}-button` : null,
+      `${variant}-button`,
+      `${size}-button`,
+      isDisabled ? 'disabled' : '',
     ]
-      .filter((value) => value)
+      .filter((el) => !!el)
       .join(' ');
 
-    const onClickHandler = (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      if (onClick && !isDisabled && !loading) {
-        onClick(event);
-      }
-    };
+    console.log(classes);
 
     return (
-      <Component
-        ref={ref}
-        className={classes}
-        onClick={onClickHandler}
-        {...other}
-      >
-        {loading && <Loading beam={'3.5px'} size={size} />}
+      <Component ref={ref} className={classes} {...other}>
         {children}
       </Component>
     );

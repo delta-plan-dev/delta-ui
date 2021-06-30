@@ -6,7 +6,6 @@ const Template: Story<ComponentProps<typeof Spinner>> = (props) => {
   return (
     <>
       <Spinner {...props} />
-      <Spinner />
     </>
   );
 };

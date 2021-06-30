@@ -14,15 +14,15 @@ const RadioComponent = styled.label<IRadio>`
 
 const RadioComponentValueWrapper = styled.div`
   border-radius: 50%;
-  border: 1px solid ${(props) => props.theme.colors.gray.main};
+  border: 1px solid ${(props) => props.theme.colors.secondary.main};
 `;
 
 const RadioComponentValue = styled.div`
   width: 11px;
   height: 11px;
-  background-color: ${(props) => props.theme.colors.white.main};
+  background-color: ${(props) => props.theme.colors.light.main};
   border-radius: 50%;
-  border: 4px solid ${(props) => props.theme.colors.white.main};
+  border: 4px solid ${(props) => props.theme.colors.light.main};
   box-sizing: initial;
 
   &.active {
@@ -32,7 +32,7 @@ const RadioComponentValue = styled.div`
 
 const RadioComponentLabel = styled.div`
   margin-left: 5px;
-  font: normal normal 13px/20px Montserrat, sans-serif;
+  font: normal normal 13px/20px OpenSans;
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme?.colors?.secondary.main};
 `;

@@ -33,7 +33,7 @@ const Fieldset = styled.fieldset`
   border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
-    props.theme?.colors?.gray?.main ?? lightTheme.colors.gray.main};
+    props.theme?.colors?.gray?.main ?? lightTheme.colors.secondary.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
@@ -48,7 +48,7 @@ const Fieldset = styled.fieldset`
   .disabled &,
   ${ContentOfControl}:hover ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.gray?.hover ?? lightTheme.colors.gray.hover};
+      props.theme?.colors?.gray?.hover ?? lightTheme.colors.secondary.hover};
   }
 `;
 
@@ -76,7 +76,7 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal calc(14px * 0.75) Montserrat, sans-serif;
+    font: normal calc(14px * 0.75) OpenSans;
   }
 `;
 
@@ -87,14 +87,14 @@ const Title = styled.div`
   transition-duration: 100ms;
   transform: translate(10px, -50%);
   transform-origin: 0 0;
-  font: normal 14px Montserrat, sans-serif;
+  font: normal 14px OpenSans;
   color: ${(props) =>
     props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   pointer-events: none;
 
   &.active,
   ${ContentOfControl}:focus ~ & {
-    font: normal calc(14px * 0.75) Montserrat, sans-serif;
+    font: normal calc(14px * 0.75) OpenSans;
     transform: translate(15px, -50%);
     top: 0;
   }

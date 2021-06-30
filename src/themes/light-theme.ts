@@ -3,54 +3,49 @@ import { ITheme } from '../types/theme';
 export const lightTheme: ITheme = {
   colors: {
     main: {
-      main: '#FAFAFA',
-      hover: '#FFFFFF',
-      active: '#C7C7C7',
+      main: '#F8F9FA',
+      hover: '#F9FAFB',
+      active: '#F9FAFB',
     },
     secondary: {
-      main: '#333333',
-      hover: '#5C5C5C',
-      active: '0C0C0C',
+      main: '#6C757D',
+      hover: '#5C636A',
+      active: '#565E64',
     },
     primary: {
-      main: '#137FE2',
-      hover: '#65AEFF',
-      active: '#0054AF',
+      main: '#0D6EFD',
+      hover: '#0B5ED7',
+      active: '#0A58CA',
     },
     success: {
-      main: '#219653',
-      hover: '#5BC880',
-      active: '#006729',
+      main: '#198754',
+      hover: '#157347',
+      active: '#146C43',
+    },
+    danger: {
+      main: '#DC3545',
+      hover: '#BB2D3B',
+      active: '#B02A37',
     },
     warning: {
-      main: '#F2994A',
-      hover: '#FFCA79',
-      active: '#BB6A1B',
-    },
-    error: {
-      main: '#EB5757',
-      hover: '#FF8984',
-      active: '#B3202E',
+      main: '#FFC107',
+      hover: '#FFCA2C',
+      active: '#FFCD39',
     },
     info: {
-      main: '#F6F8FF',
-      hover: '#FFFFFF',
-      active: '#C3C5CC',
+      main: '#0DCAF0',
+      hover: '#31D2F2',
+      active: '#3DD5F3',
     },
-    white: {
-      main: '#FAFAFA',
-      hover: '#FFFFFF',
-      active: '#C7C7C7',
+    light: {
+      main: '#F8F9FA',
+      hover: '#F9FAFB',
+      active: '#F9FAFB',
     },
-    black: {
-      main: '#212121',
-      hover: '#484848',
-      active: '000000',
-    },
-    gray: {
-      main: '#A8A8A8',
-      hover: '#797979',
-      active: '#4D4D4D',
+    dark: {
+      main: '#212529',
+      hover: '#1C1F23',
+      active: '#1A1E21',
     },
   },
 };

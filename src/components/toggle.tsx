@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { lightTheme } from '../themes/light-theme';
 
-const SwitchComponent = styled.div`
+const ToggleComponent = styled.div`
   display: inline-flex;
   justify-content: center;
   cursor: pointer;
@@ -12,7 +12,7 @@ const SwitchComponent = styled.div`
   }
 `;
 
-const Title = styled.div<ISwitchProps>`
+const Title = styled.div<IToggleProps>`
   color: ${(props) =>
     props.theme?.colors?.secondary.main ?? lightTheme.colors.secondary.main};
 
@@ -29,16 +29,16 @@ const Title = styled.div<ISwitchProps>`
     }
   }};
 
-  &.switch-title-left {
+  &.toggle-title-left {
     margin-right: 5px;
   }
 
-  &.switch-title-right {
+  &.toggle-title-right {
     margin-left: 5px;
   }
 `;
 
-const ButtonWrapper = styled.div<ISwitchProps>`
+const ButtonWrapper = styled.div<IToggleProps>`
   display: inline-block;
   width: ${(props) => {
     switch (props.size) {
@@ -81,7 +81,7 @@ const ButtonWrapper = styled.div<ISwitchProps>`
   transition-duration: 0.2s;
 `;
 
-const Button = styled.div<ISwitchProps>`
+const Button = styled.div<IToggleProps>`
   width: ${(props) => {
     switch (props.size) {
       case 'small':
@@ -123,12 +123,12 @@ const Button = styled.div<ISwitchProps>`
   );
   border-radius: 50%;
   background-color: ${(props) =>
-    props.theme?.colors?.white.main ?? lightTheme.colors.white.main};
+    props.theme?.colors?.light.main ?? lightTheme.colors.light.main};
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   transition-duration: 0.2s;
 `;
 
-export interface ISwitchProps {
+export interface IToggleProps {
   value?: boolean;
   size?: 'small' | 'medium' | 'large';
   disableActiveColor?: boolean;
@@ -149,7 +149,7 @@ export interface ISwitchProps {
   onChange?: (value: boolean) => void;
 }
 
-export const Switch: React.FC<ISwitchProps> = (props) => {
+export const Toggle: React.FC<IToggleProps> = (props) => {
   const {
     title,
     titleSide = 'right',
@@ -165,7 +165,7 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
   } = props;
 
   return (
-    <SwitchComponent
+    <ToggleComponent
       onClick={() => {
         if (isDisabled) {
           return;
@@ -179,7 +179,7 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
       {...other}
     >
       {((title && titleSide === 'left') || titleLeft) && (
-        <Title value={value} size={size} className="switch-title-left">
+        <Title value={value} size={size} className="toggle-title-left">
           {titleLeft || title}
         </Title>
       )}
@@ -191,10 +191,10 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
         <Button value={value} size={size} />
       </ButtonWrapper>
       {((title && titleSide === 'right') || titleRight) && (
-        <Title value={value} size={size} className="switch-title-right">
+        <Title value={value} size={size} className="toggle-title-right">
           {titleRight || title}
         </Title>
       )}
-    </SwitchComponent>
+    </ToggleComponent>
   );
 };

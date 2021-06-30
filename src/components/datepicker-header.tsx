@@ -24,14 +24,14 @@ const Button = styled.button`
 `;
 const Value = styled.div`
   flex-grow: 1;
-  font: normal normal 13px/18px Montserrat, sans-serif;
-  color: ${lightTheme.colors.black.main};
+  font: normal normal 13px/18px OpenSans;
+  color: ${lightTheme.colors.dark.main};
 `;
 const Day = styled.div`
   flex-grow: 1;
   margin: 0 3px;
-  font: normal normal 13px/16px Montserrat, sans-serif;
-  color: ${lightTheme.colors.black.main};
+  font: normal normal 13px/16px OpenSans;
+  color: ${lightTheme.colors.dark.main};
 `;
 
 interface IProps {

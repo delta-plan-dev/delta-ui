@@ -3,5 +3,5 @@ import { themes } from '@storybook/theming';
 
 export default create({
   ...themes.dark,
-  brandTitle: 'Delta-UI',
+  brandTitle: 'DeltaUI',
 });

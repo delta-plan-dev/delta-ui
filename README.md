@@ -1,4 +1,4 @@
-# Delta-plan user interface library
+# Deltaplan Group UI library
 
 ## Install
 

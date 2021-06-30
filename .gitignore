@@ -6,6 +6,7 @@ package-lock.json
 
 # production
 dist
+storybook-static
 
 # misc
 .DS_Store

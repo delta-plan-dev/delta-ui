@@ -1,9 +1,9 @@
 {
   "name": "delta-ui",
-  "description": "Delta-plan user interface library",
+  "description": "Deltaplan Group UI library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kawaii-snafy/delta-ui"
+    "url": "https://github.com/delta-plan-dev/delta-ui"
   },
   "license": "MIT",
   "version": "0.9.19",
@@ -28,8 +28,6 @@
   ],
   "peerDependencies": {
     "react-datepicker": ">=3",
-    "react-input-mask": ">=3.0.0-alpha.2",
-    "react-number-format": ">=4",
     "react-select": ">=4",
     "styled-components": ">=5"
   },
@@ -46,22 +44,16 @@
     "@types/react": "^16.14.2",
     "@types/react-datepicker": "^3.1.3",
     "@types/react-dom": "^16.9.12",
-    "@types/react-input-mask": "^3.0.0",
     "@types/react-select": "^4.0.15",
     "@types/styled-components": "^5.1.7",
-    "fork-ts-checker-webpack-plugin": "^6.0.8",
     "prettier": "^2.2.1",
     "react": "^16.14.0",
     "react-datepicker": "^3.4.1",
     "react-dom": "^16.14.0",
-    "react-input-mask": "^3.0.0-alpha.2",
-    "react-number-format": "^4.5.5",
-    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-select": "^4.3.0",
     "shx": "^0.3.3",
     "styled-components": "^5.2.1",
-    "ts-loader": "^8.0.12",
     "typescript": "^4.2.4"
   }
 }

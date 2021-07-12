@@ -191,7 +191,7 @@ export const GlobalStyle = createGlobalStyle<ThemeProps<ITheme>>`
   }
   
   code {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
    
   h1, h2, h3, h4, h5, h6 {

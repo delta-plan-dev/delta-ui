@@ -1,28 +1,18 @@
-import React, { ComponentProps, useState } from 'react';
-import { Story } from '@storybook/react';
-import { TextField } from '../components/text-field';
-
-const DefaultTemplate: Story<ComponentProps<typeof TextField>> = (args) => {
-  const [value, setValue] = useState(args.value);
-
-  return (
-    <TextField
-      {...args}
-      value={value}
-      onChange={(event) => setValue(event.target.value ?? '')}
-    />
-  );
-};
-
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  width: 300,
-  label: 'Label',
-  value: 'Test',
-  maxLength: 10,
-};
+import React, { ComponentProps } from 'react'
+import { Meta, Story } from '@storybook/react'
+import { TextField } from '../components/text-field'
 
 export default {
-  title: 'TextField',
+  title: 'Components/Fields/TextField',
   component: TextField,
-};
+  decorators: [(Story) => <div style={{ margin: '10px' }}>{Story()}</div>],
+  argTypes: {},
+  args: {},
+} as Meta<ComponentProps<typeof TextField>>
+
+const DefaultTemplate: Story<ComponentProps<typeof TextField>> = (args) => (
+  <TextField {...args} />
+)
+
+export const Default = DefaultTemplate.bind({})
+Default.args = {}

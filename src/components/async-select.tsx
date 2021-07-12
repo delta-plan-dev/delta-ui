@@ -1,8 +1,8 @@
-import React, { ComponentProps } from 'react';
-import ReactSelect from 'react-select/async';
-import { ControlProps, GroupTypeBase } from 'react-select';
-import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+import React, { ComponentProps } from 'react'
+import ReactSelect from 'react-select/async'
+import { ControlProps, GroupTypeBase } from 'react-select'
+import styled from 'styled-components'
+import { lightTheme } from '../themes/light-theme'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,14 +11,14 @@ const Wrapper = styled.div`
     cursor: no-drop;
     pointer-events: auto;
   }
-`;
+`
 
 const ContentOfControl = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 7px 0;
-`;
+`
 
 const Fieldset = styled.fieldset`
   top: -5px;
@@ -33,7 +33,7 @@ const Fieldset = styled.fieldset`
   border-width: 1px;
   border-radius: 8px;
   border-color: ${(props) =>
-    props.theme?.colors?.gray?.main ?? lightTheme.colors.secondary.main};
+    props.theme?.colors?.secondary?.main ?? lightTheme.colors.secondary.main};
   pointer-events: none;
   box-sizing: inherit;
   transition-duration: 100ms;
@@ -48,9 +48,10 @@ const Fieldset = styled.fieldset`
   .disabled &,
   ${ContentOfControl}:hover ~ & {
     border-color: ${(props) =>
-      props.theme?.colors?.gray?.hover ?? lightTheme.colors.secondary.hover};
+      props.theme?.colors?.secondary?.hover ??
+      lightTheme.colors.secondary.hover};
   }
-`;
+`
 
 const Legend = styled.legend`
   width: auto;
@@ -76,9 +77,9 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal calc(14px * 0.75) OpenSans;
+    font: normal calc(14px * 0.75) 'Roboto', sans-serif;
   }
-`;
+`
 
 const Title = styled.div`
   position: absolute;
@@ -87,31 +88,31 @@ const Title = styled.div`
   transition-duration: 100ms;
   transform: translate(10px, -50%);
   transform-origin: 0 0;
-  font: normal 14px OpenSans;
+  font: normal 14px 'Roboto', sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   pointer-events: none;
 
   &.active,
   ${ContentOfControl}:focus ~ & {
-    font: normal calc(14px * 0.75) OpenSans;
+    font: normal calc(14px * 0.75) 'Roboto', sans-serif;
     transform: translate(15px, -50%);
     top: 0;
   }
-`;
+`
 
 const Control: React.FC<ControlProps<any, any, GroupTypeBase<any>>> = (
   props
 ) => {
-  const { children, hasValue, innerProps, innerRef, isFocused } = props;
-  const { placeholder } = props.selectProps;
+  const { children, hasValue, innerProps, innerRef, isFocused } = props
+  const { placeholder } = props.selectProps
 
   const controlClasses = [
     (hasValue || isFocused) && 'active',
     isFocused && 'focused',
   ]
     .filter((el) => el)
-    .join(' ');
+    .join(' ')
 
   return (
     <Wrapper>
@@ -123,13 +124,13 @@ const Control: React.FC<ControlProps<any, any, GroupTypeBase<any>>> = (
       </Fieldset>
       <Title className={controlClasses}>{placeholder}</Title>
     </Wrapper>
-  );
-};
+  )
+}
 
 export interface ISelect extends ComponentProps<typeof ReactSelect> {}
 
 export const AsyncSelect: React.FC<ISelect> = (props) => {
-  const { label, width, isDisabled, styles, components, ...other } = props;
+  const { label, width, isDisabled, styles, components, ...other } = props
 
   return (
     <ReactSelect
@@ -142,10 +143,10 @@ export const AsyncSelect: React.FC<ISelect> = (props) => {
             return {
               ...base,
               width: `${width}px`,
-            };
+            }
           }
 
-          return { ...base };
+          return { ...base }
         },
         valueContainer: (base) => ({
           ...base,
@@ -160,5 +161,5 @@ export const AsyncSelect: React.FC<ISelect> = (props) => {
       placeholder={label ?? null}
       {...other}
     />
-  );
-};
+  )
+}

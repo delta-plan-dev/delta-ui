@@ -1,36 +1,31 @@
-import { ITheme } from '../types/theme';
+import { ITheme } from '../types/theme'
 
 export const lightTheme: ITheme = {
   colors: {
-    main: {
-      main: '#F8F9FA',
-      hover: '#F9FAFB',
-      active: '#F9FAFB',
+    primary: {
+      main: '#0D6EFD',
+      hover: '#0B5ED7',
+      active: '#0A58CA',
     },
     secondary: {
       main: '#6C757D',
       hover: '#5C636A',
       active: '#565E64',
     },
-    primary: {
-      main: '#0D6EFD',
-      hover: '#0B5ED7',
-      active: '#0A58CA',
-    },
     success: {
       main: '#198754',
       hover: '#157347',
       active: '#146C43',
     },
-    danger: {
-      main: '#DC3545',
-      hover: '#BB2D3B',
-      active: '#B02A37',
-    },
     warning: {
       main: '#FFC107',
       hover: '#FFCA2C',
       active: '#FFCD39',
+    },
+    danger: {
+      main: '#DC3545',
+      hover: '#BB2D3B',
+      active: '#B02A37',
     },
     info: {
       main: '#0DCAF0',
@@ -48,4 +43,4 @@ export const lightTheme: ITheme = {
       active: '#1A1E21',
     },
   },
-};
+}

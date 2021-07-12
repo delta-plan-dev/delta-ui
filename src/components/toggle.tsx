@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+import React from 'react'
+import styled from 'styled-components'
+import { lightTheme } from '../themes/light-theme'
 
 const ToggleComponent = styled.div`
   display: inline-flex;
@@ -10,7 +10,7 @@ const ToggleComponent = styled.div`
   &.disabled {
     cursor: no-drop;
   }
-`;
+`
 
 const Title = styled.div<IToggleProps>`
   color: ${(props) =>
@@ -19,13 +19,13 @@ const Title = styled.div<IToggleProps>`
   font-size: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '12px';
+        return '12px'
       case 'medium':
-        return '18px';
+        return '18px'
       case 'large':
-        return '24px';
+        return '24px'
       default:
-        return '0';
+        return '0'
     }
   }};
 
@@ -36,74 +36,74 @@ const Title = styled.div<IToggleProps>`
   &.toggle-title-right {
     margin-left: 5px;
   }
-`;
+`
 
 const ButtonWrapper = styled.div<IToggleProps>`
   display: inline-block;
   width: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '30px';
+        return '30px'
       case 'medium':
-        return '40px';
+        return '40px'
       case 'large':
-        return '50px';
+        return '50px'
       default:
-        return '0';
+        return '0'
     }
   }};
   height: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '18px';
+        return '18px'
       case 'medium':
-        return '24px';
+        return '24px'
       case 'large':
-        return '30px';
+        return '30px'
       default:
-        return '0';
+        return '0'
     }
   }};
   border-radius: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '9px';
+        return '9px'
       case 'medium':
-        return '12px';
+        return '12px'
       case 'large':
-        return '15px';
+        return '15px'
       default:
-        return '0';
+        return '0'
     }
   }};
   background-color: ${(props) =>
     props.value && !props.disableActiveColor ? '#3fd200' : '#e0e0e0'};
   transition-duration: 0.2s;
-`;
+`
 
 const Button = styled.div<IToggleProps>`
   width: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '12px';
+        return '12px'
       case 'medium':
-        return '18px';
+        return '18px'
       case 'large':
-        return '24px';
+        return '24px'
       default:
-        return '0';
+        return '0'
     }
   }};
   height: ${(props) => {
     switch (props.size) {
       case 'small':
-        return '12px';
+        return '12px'
       case 'medium':
-        return '18px';
+        return '18px'
       case 'large':
-        return '24px';
+        return '24px'
       default:
-        return '0';
+        return '0'
     }
   }};
   margin: 3px;
@@ -111,13 +111,13 @@ const Button = styled.div<IToggleProps>`
     ${(props) => {
       switch (props.size) {
         case 'small':
-          return props.value ? '12px' : '0';
+          return props.value ? '12px' : '0'
         case 'medium':
-          return props.value ? '16px' : '0';
+          return props.value ? '16px' : '0'
         case 'large':
-          return props.value ? '20px' : '0';
+          return props.value ? '20px' : '0'
         default:
-          return '0';
+          return '0'
       }
     }}
   );
@@ -126,27 +126,27 @@ const Button = styled.div<IToggleProps>`
     props.theme?.colors?.light.main ?? lightTheme.colors.light.main};
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   transition-duration: 0.2s;
-`;
+`
 
 export interface IToggleProps {
-  value?: boolean;
-  size?: 'small' | 'medium' | 'large';
-  disableActiveColor?: boolean;
+  value?: boolean
+  size?: 'small' | 'medium' | 'large'
+  disableActiveColor?: boolean
 
   /** @deprecated */
-  title?: string;
+  title?: string
 
-  titleLeft?: string;
-  titleRight?: string;
-
-  /** @deprecated */
-  titleSide?: 'left' | 'right';
+  titleLeft?: string
+  titleRight?: string
 
   /** @deprecated */
-  disabled?: boolean;
+  titleSide?: 'left' | 'right'
 
-  isDisabled?: boolean;
-  onChange?: (value: boolean) => void;
+  /** @deprecated */
+  disabled?: boolean
+
+  isDisabled?: boolean
+  onChange?: (value: boolean) => void
 }
 
 export const Toggle: React.FC<IToggleProps> = (props) => {
@@ -162,18 +162,18 @@ export const Toggle: React.FC<IToggleProps> = (props) => {
     onChange,
     size = 'medium',
     ...other
-  } = props;
+  } = props
 
   return (
     <ToggleComponent
       onClick={() => {
         if (isDisabled) {
-          return;
+          return
         }
         if (!onChange) {
-          return;
+          return
         }
-        onChange(!value);
+        onChange(!value)
       }}
       className={isDisabled ? 'disabled' : ''}
       {...other}
@@ -196,5 +196,5 @@ export const Toggle: React.FC<IToggleProps> = (props) => {
         </Title>
       )}
     </ToggleComponent>
-  );
-};
+  )
+}

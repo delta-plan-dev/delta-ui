@@ -1,22 +1,16 @@
-import StatusColorType from './status-color';
+import Color from './color'
 
 export interface ITheme {
   colors: {
-    // Main colors
-    main: StatusColorType;
-    secondary: StatusColorType;
-
-    // Status colors
-    primary: StatusColorType;
-    success: StatusColorType;
-    danger: StatusColorType;
-    warning: StatusColorType;
-    info: StatusColorType;
-
-    // Other colors
-    dark: StatusColorType;
-    light: StatusColorType;
-  };
+    primary: Color
+    secondary: Color
+    success: Color
+    warning: Color
+    danger: Color
+    info: Color
+    light: Color
+    dark: Color
+  }
 }
 
 declare module 'styled-components' {

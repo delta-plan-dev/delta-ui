@@ -1,16 +1,18 @@
-import React, { ComponentProps } from 'react';
-import { Story } from '@storybook/react';
-import { Spinner } from '../components/spinner';
+import React, { ComponentProps } from 'react'
+import { Meta, Story } from '@storybook/react'
+import { Spinner } from '../components/spinner'
 
-const Template: Story<ComponentProps<typeof Spinner>> = (props) => {
-  return (
-    <>
-      <Spinner {...props} />
-    </>
-  );
-};
+export default {
+  title: 'Components/Spinner',
+  component: Spinner,
+  decorators: [(Story) => <div style={{ margin: '10px' }}>{Story()}</div>],
+  argTypes: {},
+  args: {},
+} as Meta<ComponentProps<typeof Spinner>>
 
-export const Default = Template.bind({});
-Default.args = { size: 'large', beam: 4 };
+const Template: Story<ComponentProps<typeof Spinner>> = (props) => (
+  <Spinner {...props} />
+)
 
-export default { title: 'Spinner', component: Spinner };
+export const Default = Template.bind({})
+Default.args = {}

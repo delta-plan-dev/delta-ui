@@ -1,36 +1,46 @@
-import React from 'react';
-import styled from 'styled-components';
-import { RefForwardingComponent } from '../helpers';
-import { lightTheme } from '../themes/light-theme';
+import React from 'react'
+import styled from 'styled-components'
+import { RefForwardingComponent } from '../helpers'
+import { lightTheme } from '../themes/light-theme'
 
 type variants =
   | 'primary'
   | 'outline-primary'
-  | 'negative'
-  | 'outline-negative'
+  | 'secondary'
+  | 'outline-secondary'
   | 'success'
   | 'outline-success'
-  | 'link';
-type sizes = 'small' | 'medium' | 'large';
+  | 'warning'
+  | 'outline-warning'
+  | 'danger'
+  | 'outline-danger'
+  | 'info'
+  | 'outline-info'
+  | 'light'
+  | 'outline-light'
+  | 'dark'
+  | 'outline-dark'
+  | 'link'
+type sizes = 'small' | 'medium' | 'large'
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  as?: React.ElementType;
-  variant?: variants;
-  size?: sizes;
-  isDisabled?: boolean;
+  as?: React.ElementType
+  variant?: variants
+  size?: sizes
+  isDisabled?: boolean
 }
 
-type ButtonType = RefForwardingComponent<'button', ButtonProps>;
+type ButtonType = RefForwardingComponent<'button', ButtonProps>
 
 export const BaseButton = React.forwardRef<ButtonType, ButtonProps>(
   (props, ref) => {
-    const { as = 'button', ...other } = props;
+    const { as = 'button', ...other } = props
 
-    const Component = as;
+    const Component = as
 
-    return <Component ref={ref} {...other} />;
+    return <Component ref={ref} {...other} />
   }
-);
+)
 
 export const Component = styled(BaseButton)`
   box-sizing: border-box;
@@ -46,7 +56,8 @@ export const Component = styled(BaseButton)`
 
   font-style: normal;
   font-weight: 400;
-  font-family: OpenSans;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-variant-caps: normal;
   text-indent: 0;
   text-shadow: none;
@@ -57,21 +68,21 @@ export const Component = styled(BaseButton)`
   cursor: pointer;
 
   // Sizes
-  &.small-button {
+  &.small-btn {
     font-size: 12px;
     height: 30px;
   }
-  &.medium-button {
+  &.medium-btn {
     font-size: 14px;
     height: 36px;
   }
-  &.large-button {
+  &.large-btn {
     font-size: 16px;
     height: 42px;
   }
 
   // Variants
-  &.primary-button {
+  &.primary-btn {
     color: ${({ theme }) =>
       theme.colors.light.main ?? lightTheme.colors.light.main};
     background-color: ${({ theme }) =>
@@ -79,19 +90,19 @@ export const Component = styled(BaseButton)`
     border-color: ${({ theme }) =>
       theme.colors.primary.main ?? lightTheme.colors.primary.main};
   }
-  &.primary-button:hover {
+  &.primary-btn:hover {
     background-color: ${({ theme }) =>
       theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
     border-color: ${({ theme }) =>
       theme.colors.primary.hover ?? lightTheme.colors.primary.hover};
   }
-  &.primary-button:active {
+  &.primary-btn:active {
     background-color: ${({ theme }) =>
       theme.colors.primary.active ?? lightTheme.colors.primary.active};
     border-color: ${({ theme }) =>
       theme.colors.primary.active ?? lightTheme.colors.primary.active};
   }
-`;
+`
 
 export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
   (props, ref) => {
@@ -102,23 +113,21 @@ export const Button: ButtonType = React.forwardRef<ButtonType, ButtonProps>(
       className = '',
       children,
       ...other
-    } = props;
+    } = props
 
     const classes = [
       className,
-      `${variant}-button`,
-      `${size}-button`,
-      isDisabled ? 'disabled' : '',
+      `${variant}-btn`,
+      `${size}-btn`,
+      isDisabled && 'disabled-btn',
     ]
       .filter((el) => !!el)
-      .join(' ');
-
-    console.log(classes);
+      .join(' ')
 
     return (
       <Component ref={ref} className={classes} {...other}>
         {children}
       </Component>
-    );
+    )
   }
-);
+)

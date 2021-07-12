@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+import React from 'react'
+import styled from 'styled-components'
+import { lightTheme } from '../themes/light-theme'
 
 const Header = styled.div`
   margin: 0.4rem;
-`;
+`
 const HeaderRow = styled.div`
   display: flex;
   margin: 5px 0;
-`;
+`
 const Button = styled.button`
   padding: 0;
   margin: 0 10px;
@@ -21,37 +21,37 @@ const Button = styled.button`
   &:focus {
     outline: unset;
   }
-`;
+`
 const Value = styled.div`
   flex-grow: 1;
-  font: normal normal 13px/18px OpenSans;
+  font: normal normal 13px/18px 'Roboto', sans-serif;
   color: ${lightTheme.colors.dark.main};
-`;
+`
 const Day = styled.div`
   flex-grow: 1;
   margin: 0 3px;
-  font: normal normal 13px/16px OpenSans;
+  font: normal normal 13px/16px 'Roboto', sans-serif;
   color: ${lightTheme.colors.dark.main};
-`;
+`
 
 interface IProps {
-  date: Date;
-  prevMonthButtonDisabled: boolean;
-  nextMonthButtonDisabled: boolean;
-  prevYearButtonDisabled: boolean;
-  nextYearButtonDisabled: boolean;
+  date: Date
+  prevMonthButtonDisabled: boolean
+  nextMonthButtonDisabled: boolean
+  prevYearButtonDisabled: boolean
+  nextYearButtonDisabled: boolean
 
-  changeYear(year: number): void;
+  changeYear(year: number): void
 
-  changeMonth(month: number): void;
+  changeMonth(month: number): void
 
-  decreaseMonth(): void;
+  decreaseMonth(): void
 
-  increaseMonth(): void;
+  increaseMonth(): void
 
-  decreaseYear(): void;
+  decreaseYear(): void
 
-  increaseYear(): void;
+  increaseYear(): void
 }
 
 export const DatePickerHeader: React.FC<IProps> = (props) => {
@@ -63,7 +63,7 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
     changeMonth,
     prevMonthButtonDisabled,
     nextMonthButtonDisabled,
-  } = props;
+  } = props
 
   const months = [
     'Январь',
@@ -78,7 +78,7 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
     'Октябрь',
     'Ноябрь',
     'Декабрь',
-  ];
+  ]
 
   return (
     <Header>
@@ -86,7 +86,7 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
         <Button
           disabled={prevYearButtonDisabled}
           onClick={() => {
-            changeYear(date.getFullYear() - 1);
+            changeYear(date.getFullYear() - 1)
           }}
         >
           <svg
@@ -108,7 +108,7 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
         <Button
           disabled={nextYearButtonDisabled}
           onClick={() => {
-            changeYear(date.getFullYear() + 1);
+            changeYear(date.getFullYear() + 1)
           }}
         >
           <svg
@@ -131,7 +131,7 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
         <Button
           disabled={prevMonthButtonDisabled}
           onClick={() => {
-            changeMonth(date.getMonth() - 1);
+            changeMonth(date.getMonth() - 1)
           }}
         >
           <svg
@@ -153,7 +153,7 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
         <Button
           disabled={nextMonthButtonDisabled}
           onClick={() => {
-            changeMonth(date.getMonth() + 1);
+            changeMonth(date.getMonth() + 1)
           }}
         >
           <svg
@@ -182,5 +182,5 @@ export const DatePickerHeader: React.FC<IProps> = (props) => {
         <Day>вс</Day>
       </HeaderRow>
     </Header>
-  );
-};
+  )
+}

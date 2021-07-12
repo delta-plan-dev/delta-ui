@@ -1,64 +1,48 @@
-import React from 'react';
-import { Story } from '@storybook/react';
-import { Button } from '../components/button';
-
-const Template: Story = (args) => <Button {...args}>{args?.text}</Button>;
-
-export const Default = Template.bind({});
-Default.args = {};
-
-export const Primary = Template.bind({});
-Primary.args = {
-  variant: 'primary',
-};
-
-export const Negative = Template.bind({});
-Negative.args = {
-  variant: 'negative',
-};
-
-export const OutlinePrimary = Template.bind({});
-OutlinePrimary.args = {
-  variant: 'outline-primary',
-};
-
-export const OutlineNegative = Template.bind({});
-OutlineNegative.args = {
-  variant: 'outline-negative',
-};
+import React, { ComponentProps } from 'react'
+import { Meta, Story } from '@storybook/react'
+import { Button } from '../components/button'
 
 export default {
-  title: 'Button',
+  title: 'Components/Buttons',
   component: Button,
+  decorators: [(Story) => <div style={{ margin: '10px' }}>{Story()}</div>],
   argTypes: {
-    text: {
-      defaultValue: 'BUTTON',
-      control: {
-        type: 'text',
-      },
-    },
-    variant: {
+    as: {
       control: {
         type: 'select',
-        options: [
-          'primary',
-          'negative',
-          'outline-primary',
-          'outline-negative',
-          'link',
-        ],
+        labels: {
+          button: 'Кнопка',
+          a: 'Ссылка',
+        },
       },
-    },
-    size: {
-      defaultValue: 'medium',
-      control: {
-        type: 'select',
-        options: ['small', 'medium', 'large'],
-      },
+      options: ['button', 'a'],
     },
     isDisabled: {
-      defaultValue: false,
       type: 'boolean',
     },
   },
-};
+  args: {
+    children: 'BUTTON',
+    as: 'button',
+    isDisabled: false,
+  },
+} as Meta<ComponentProps<typeof Button>>
+
+const Template: Story<ComponentProps<typeof Button>> = (args) => (
+  <Button {...args} />
+)
+
+export const Default = Template.bind({})
+Default.args = {}
+
+export const Primary = Template.bind({})
+Primary.args = {
+  ...Default.args,
+  variant: 'primary',
+}
+
+export const Negative = Template.bind({})
+Negative.args = {
+  ...Default.args,
+  variant: 'danger',
+}

@@ -1,26 +1,26 @@
-import React from 'react';
+import React from 'react'
 import ReactDatePicker, {
   ReactDatePickerProps,
   registerLocale,
-} from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import ru from 'date-fns/locale/ru';
-import { TextField } from './text-field';
-import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
-import { DatePickerHeader } from './datepicker-header';
+} from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import ru from 'date-fns/locale/ru'
+import { TextField } from './text-field'
+import styled from 'styled-components'
+import { lightTheme } from '../themes/light-theme'
+import { DatePickerHeader } from './datepicker-header'
 
-registerLocale('ru', ru);
+registerLocale('ru', ru)
 
 const DatePickerInputWrapper = styled.div<{ width: string }>`
   & .react-datepicker-wrapper {
     width: ${(props) => props.width};
   }
-`;
+`
 
 const DatePickerWrapper = styled.div`
   & .react-datepicker {
-    background-color: ${() => lightTheme.colors.main.main};
+    background-color: ${() => lightTheme.colors.light.main};
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     border: unset;
@@ -48,7 +48,7 @@ const DatePickerWrapper = styled.div`
   &
     .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before {
-    border-bottom-color: ${() => lightTheme.colors.main.main};
+    border-bottom-color: ${() => lightTheme.colors.light.main};
   }
 
   & .react-datepicker__day-name,
@@ -112,12 +112,12 @@ const DatePickerWrapper = styled.div`
     background-color: ${() => lightTheme.colors.primary.hover};
     color: ${() => lightTheme.colors.light.main};
   }
-`;
+`
 
 export interface IProps {
-  label?: string;
-  width?: number;
-  isDisabled?: boolean;
+  label?: string
+  width?: number
+  isDisabled?: boolean
 }
 
 export const DatePicker = React.forwardRef<
@@ -141,7 +141,7 @@ export const DatePicker = React.forwardRef<
     ),
     renderCustomHeader = (params) => <DatePickerHeader {...params} />,
     ...other
-  } = props;
+  } = props
 
   return (
     <DatePickerInputWrapper width={!!width ? `${width}px` : '100%'}>
@@ -158,5 +158,5 @@ export const DatePicker = React.forwardRef<
         {...other}
       />
     </DatePickerInputWrapper>
-  );
-});
+  )
+})

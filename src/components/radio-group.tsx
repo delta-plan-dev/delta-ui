@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Radio } from './radio';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import { Radio } from './radio'
+import styled from 'styled-components'
 
 const Component = styled.div`
   display: flex;
@@ -29,20 +29,20 @@ const Component = styled.div`
   &.horizontal .radio-button:last-child {
     margin-right: 0;
   }
-`;
+`
 
 export interface IProps {
-  options: { value: any; label: any; isDisabled?: boolean }[];
-  direction?: 'vertical' | 'horizontal';
-  onClick?: (option: { value: any; label: any }) => void;
+  options: { value: any; label: any; isDisabled?: boolean }[]
+  direction?: 'vertical' | 'horizontal'
+  onClick?: (option: { value: any; label: any }) => void
 }
 
 export const RadioGroup: React.FC<IProps> = (props) => {
-  const { options, direction = 'vertical', onClick = () => {} } = props;
+  const { options, direction = 'vertical', onClick = () => {} } = props
 
   const [checkList, setCheckList] = useState<boolean[]>(
     options.map(() => false)
-  );
+  )
 
   return (
     <Component className={`radio-group ${direction}`}>
@@ -53,11 +53,11 @@ export const RadioGroup: React.FC<IProps> = (props) => {
           checked={checkList[index]}
           isDisabled={options[index]?.isDisabled}
           onClick={(value) => {
-            setCheckList(options.map((_, opIndex) => index === opIndex));
-            onClick(value);
+            setCheckList(options.map((_, opIndex) => index === opIndex))
+            onClick(value)
           }}
         />
       ))}
     </Component>
-  );
-};
+  )
+}

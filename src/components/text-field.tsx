@@ -3,9 +3,9 @@ import React, {
   InputHTMLAttributes,
   useLayoutEffect,
   useRef,
-} from 'react';
-import styled from 'styled-components';
-import { lightTheme } from '../themes/light-theme';
+} from 'react'
+import styled from 'styled-components'
+import { lightTheme } from '../themes/light-theme'
 
 const TextFieldComponent = styled.div<{ width: number | string }>`
   position: relative;
@@ -29,12 +29,12 @@ const TextFieldComponent = styled.div<{ width: number | string }>`
     outline: 0;
     background: none;
     box-sizing: border-box;
-    font: normal 400 14px OpenSans;
+    font: normal 400 14px 'Roboto', sans-serif;
     color: ${(props) =>
       props.theme?.colors?.secondary?.main ??
       lightTheme?.colors?.secondary.main};
   }
-`;
+`
 
 const Fieldset = styled.fieldset`
   top: -5px;
@@ -65,7 +65,7 @@ const Fieldset = styled.fieldset`
     border-color: ${(props) =>
       props.theme?.colors?.dark?.hover ?? lightTheme.colors.dark.hover};
   }
-`;
+`
 
 const Legend = styled.legend`
   width: auto;
@@ -91,9 +91,9 @@ const Legend = styled.legend`
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px;
-    font: normal calc(14px * 0.75) OpenSans;
+    font: normal calc(14px * 0.75) 'Roboto', sans-serif;
   }
-`;
+`
 
 const Title = styled.div`
   position: absolute;
@@ -102,37 +102,30 @@ const Title = styled.div`
   transition-duration: 100ms;
   transform: translate(10px, -50%);
   transform-origin: 0 0;
-  font: normal 14px OpenSans;
+  font: normal 14px 'Roboto', sans-serif;
   color: ${(props) =>
     props.theme?.colors?.secondary?.main ?? lightTheme?.colors?.secondary.main};
   pointer-events: none;
 
   &.active,
   input:focus ~ & {
-    font: normal calc(14px * 0.75) OpenSans;
+    font: normal calc(14px * 0.75) 'Roboto', sans-serif;
     transform: translate(15px, -50%);
     top: 0;
   }
-`;
+`
 
 export interface ITextFiledProps<InputElementProps>
   extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  isDisabled?: boolean;
+  label?: string
+  isDisabled?: boolean
   inputElement?: (
     props: Omit<
       ITextFiledProps<InputElementProps> & InputElementProps,
       'inputElement'
     >,
     ref: { current: any }
-  ) => React.ReactNode | null;
-}
-
-// TODO: удалить со след версии
-/** @deprecated need change to TextFieldMask*/
-export interface IMaskedProps {
-  /** @deprecated need change to TextFieldMask */
-  mask?: string | Array<string | RegExp> | null;
+  ) => React.ReactNode | null
 }
 
 export const TextField = forwardRef<HTMLInputElement, ITextFiledProps<any>>(
@@ -146,28 +139,28 @@ export const TextField = forwardRef<HTMLInputElement, ITextFiledProps<any>>(
       inputElement = ({ isDisabled, value, ...other }, ref) => {
         return (
           <input {...other} disabled={isDisabled} value={value} ref={ref} />
-        );
+        )
       },
       ...otherProps
-    } = props;
+    } = props
 
-    const inputRef = useRef(null);
+    const inputRef = useRef(null)
 
     // hook for using outer ref of this component
     useLayoutEffect(() => {
       if (!ref || !inputRef) {
-        return;
+        return
       }
 
       if (typeof ref === 'function') {
-        ref(inputRef.current);
-        return;
+        ref(inputRef.current)
+        return
       }
 
-      ref.current = inputRef.current;
-    }, [inputRef]);
+      ref.current = inputRef.current
+    }, [inputRef])
 
-    const isUsing = !!value;
+    const isUsing = !!value
 
     return (
       <TextFieldComponent
@@ -194,6 +187,6 @@ export const TextField = forwardRef<HTMLInputElement, ITextFiledProps<any>>(
         </Fieldset>
         <Title className={isUsing ? 'active' : ''}>{label}</Title>
       </TextFieldComponent>
-    );
+    )
   }
-);
+)

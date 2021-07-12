@@ -1,17 +1,12 @@
-import React, { ComponentProps } from 'react';
-import { Story } from '@storybook/react';
-import { RadioGroup } from '../components/radio-group';
-
-const Template: Story<ComponentProps<typeof RadioGroup>> = (args) => (
-  <RadioGroup {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {};
+import React, { ComponentProps } from 'react'
+import { Meta, Story } from '@storybook/react'
+import { RadioGroup } from '../components/radio-group'
 
 export default {
-  title: 'RadioGroup',
+  title: 'Components/Fields/RadioGroup',
   component: RadioGroup,
+  decorators: [(Story) => <div style={{ margin: '10px' }}>{Story()}</div>],
+  argTypes: {},
   args: {
     options: [
       {
@@ -28,4 +23,11 @@ export default {
       },
     ],
   },
-};
+} as Meta<ComponentProps<typeof RadioGroup>>
+
+const Template: Story<ComponentProps<typeof RadioGroup>> = (args) => (
+  <RadioGroup {...args} />
+)
+
+export const Default = Template.bind({})
+Default.args = {}

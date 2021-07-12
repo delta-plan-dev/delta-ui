@@ -1,31 +1,12 @@
-import React, { ComponentProps, useState } from 'react';
-import { Story } from '@storybook/react';
-import { Select } from '../components/select';
-import { Option } from 'react-select/src/filters';
-
-const TemplateDefaultSelect: Story<ComponentProps<typeof Select>> = (args) => {
-  const [value, setValue] = useState<Option[] | null>([]);
-
-  return (
-    <Select
-      {...args}
-      value={value}
-      onChange={(option) => {
-        if (Array.isArray(option)) setValue(option);
-      }}
-    />
-  );
-};
-
-export const DefaultSelect = TemplateDefaultSelect.bind({});
-DefaultSelect.args = {
-  isMulti: true,
-  isClearable: true,
-};
+import React, { ComponentProps } from 'react'
+import { Meta, Story } from '@storybook/react'
+import { Select } from '../components/select'
 
 export default {
-  title: 'Select',
+  title: 'Components/Fields/Select',
   component: Select,
+  decorators: [(Story) => <div style={{ margin: '10px' }}>{Story()}</div>],
+  argTypes: {},
   args: {
     options: [
       {
@@ -53,4 +34,11 @@ export default {
     width: 300,
     isDisabled: false,
   },
-};
+} as Meta<ComponentProps<typeof Select>>
+
+const TemplateDefaultSelect: Story<ComponentProps<typeof Select>> = (args) => (
+  <Select {...args} />
+)
+
+export const DefaultSelect = TemplateDefaultSelect.bind({})
+DefaultSelect.args = {}

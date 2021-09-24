@@ -1,60 +1,63 @@
 {
   "name": "delta-ui",
-  "description": "Deltaplan Group UI library",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/delta-plan-dev/delta-ui"
-  },
-  "license": "MIT",
-  "version": "0.9.19",
-  "private": false,
-  "author": {
-    "email": "ya.shirokov@icloud.com",
-    "name": "kawaii-snafy"
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.26",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.4.3",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "pre-build": "shx rm -rf dist/assets && shx rm -rf dist/declarations",
-    "post-build": "shx cp -R src/assets dist && shx cp -R src/declarations dist",
-    "build": "npm run pre-build && tsc --jsx react && npm run post-build",
-    "build-and-publish": "npm run build && npm publish",
-    "just-build-and-publish": "tsc --jsx react && npm publish",
-    "storybook": "start-storybook -p 3000",
-    "build-storybook": "build-storybook"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
-  "peerDependencies": {
-    "react-datepicker": ">=3",
-    "react-select": ">=4",
-    "styled-components": ">=5"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.2.8",
-    "@storybook/addon-docs": "^6.3.1",
-    "@storybook/addon-essentials": "^6.2.8",
-    "@storybook/addon-links": "^6.2.8",
-    "@storybook/addons": "^6.2.8",
-    "@storybook/node-logger": "^6.2.8",
-    "@storybook/preset-create-react-app": "^3.1.7",
-    "@storybook/preset-typescript": "^3.0.0",
-    "@storybook/react": "^6.2.8",
-    "@storybook/theming": "^6.2.8",
-    "@types/react": "^16.14.2",
-    "@types/react-datepicker": "^3.1.3",
-    "@types/react-dom": "^16.9.12",
-    "@types/react-select": "^4.0.15",
-    "@types/styled-components": "^5.1.7",
-    "prettier": "^2.2.1",
-    "react": "^16.14.0",
-    "react-datepicker": "3.4.1",
-    "react-dom": "^16.14.0",
-    "react-scripts": "^4.0.3",
-    "react-select": "4.3.0",
-    "shx": "^0.3.3",
-    "styled-components": "5.2.1",
-    "typescript": "^4.2.4"
+    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-essentials": "^6.3.8",
+    "@storybook/addon-links": "^6.3.8",
+    "@storybook/node-logger": "^6.3.8",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.8"
   }
 }

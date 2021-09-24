@@ -1,22 +1,23 @@
-.idea
-*.iml
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules
-package-lock.json
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
 
 # production
-dist
-storybook-static
+/build
 
 # misc
 .DS_Store
-.env
-.env.development
-.env.production
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-codegen.json
-.graphqlconfig
-*.graphql
-!/src/**/*.graphql
-
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
